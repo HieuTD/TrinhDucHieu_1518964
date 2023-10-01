@@ -9,8 +9,9 @@ namespace WebApi.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int? CateId { get; set; }
-        [ForeignKey("CateId")]
+
+        public int? CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
         public virtual ICollection<ProductDetail> ProductDetails { get; set; }
     }
