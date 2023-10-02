@@ -10,9 +10,11 @@ namespace WebApi.Models
         public int Id { get; set; }
         public int Amonut { get; set; }
         public decimal TotalPrice { get; set; }
+
         public int? ReceiptId { get; set; }
         [ForeignKey("ReceiptId")]
         public virtual Receipt Receipt { get; set; }
+
         public int? ProdDetailId { get; set; }
         [ForeignKey("ProdDetailId")]
         public virtual ProductDetail ProductDetail { get; set; }

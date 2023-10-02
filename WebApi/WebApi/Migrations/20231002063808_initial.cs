@@ -501,7 +501,6 @@ namespace WebApi.Migrations
                     ProdId = table.Column<int>(type: "int", nullable: true),
                     ColorId = table.Column<int>(type: "int", nullable: true),
                     SizeId = table.Column<int>(type: "int", nullable: true),
-                    ProductDetailId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -517,12 +516,6 @@ namespace WebApi.Migrations
                         name: "FK_ProductDetails_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_ProductDetails_ProductDetailId",
-                        column: x => x.ProductDetailId,
-                        principalTable: "ProductDetails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -646,7 +639,7 @@ namespace WebApi.Migrations
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ProdID = table.Column<int>(type: "int", nullable: true),
+                    ProdId = table.Column<int>(type: "int", nullable: true),
                     ProdDetailId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -672,8 +665,8 @@ namespace WebApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Carts_Products_ProdID",
-                        column: x => x.ProdID,
+                        name: "FK_Carts_Products_ProdId",
+                        column: x => x.ProdId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -819,9 +812,9 @@ namespace WebApi.Migrations
                 column: "ProdDetailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carts_ProdID",
+                name: "IX_Carts_ProdId",
                 table: "Carts",
-                column: "ProdID");
+                column: "ProdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
@@ -862,11 +855,6 @@ namespace WebApi.Migrations
                 name: "IX_ProductDetails_ProdId",
                 table: "ProductDetails",
                 column: "ProdId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_ProductDetailId",
-                table: "ProductDetails",
-                column: "ProductDetailId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductDetails_SizeId",

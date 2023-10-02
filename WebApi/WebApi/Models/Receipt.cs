@@ -22,6 +22,7 @@ namespace WebApi.Models
         public int SupplierId { get; set; }
         [ForeignKey("SupplierId")]
         public virtual Supplier Supplier { get; set; }
+
         public virtual ICollection<ReceiptDetail> ReceiptDetails { get; set; }
     }
 }

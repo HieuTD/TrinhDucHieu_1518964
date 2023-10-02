@@ -14,6 +14,7 @@ namespace WebApi.Models
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual AppUser AppUser { get; set; }
+
         public int? ProdId { get; set; }
         [ForeignKey("ProdId")]
         public virtual Product Product { get; set; }

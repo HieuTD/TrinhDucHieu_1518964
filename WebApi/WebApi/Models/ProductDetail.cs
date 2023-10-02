@@ -24,7 +24,7 @@ namespace WebApi.Models
         public virtual Size Size { get; set; }
 
         public ICollection<Cart> Carts { get; set; }
-        public ICollection<ProductDetail> ProductDetails { get; set; }
+        public ICollection<ReceiptDetail> ReceiptDetails { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

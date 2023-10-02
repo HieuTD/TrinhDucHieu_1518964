@@ -13,6 +13,8 @@ namespace WebApi.Models
         public string PhoneNumber { get; set; }
         public  ICollection<AuthHistory> AuthHistorys{ get; set; }
         public  ICollection<Blog> Blogs{ get; set; }
+        public  ICollection<Cart> Carts { get; set; }
+        public  ICollection<Order> Orders { get; set; }
         public  ICollection<Receipt> Receipts{ get; set; }
         public  ICollection<ProductLike> ProductLikes{ get; set; }
     }

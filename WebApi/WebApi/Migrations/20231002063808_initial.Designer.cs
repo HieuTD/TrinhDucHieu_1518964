@@ -10,7 +10,7 @@ using WebApi.EF;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DBcontext))]
-    [Migration("20231002034132_initial")]
+    [Migration("20231002063808_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -413,7 +413,7 @@ namespace WebApi.Migrations
                     b.Property<int?>("ProdDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProdID")
+                    b.Property<int?>("ProdId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -435,7 +435,7 @@ namespace WebApi.Migrations
 
                     b.HasIndex("ProdDetailId");
 
-                    b.HasIndex("ProdID");
+                    b.HasIndex("ProdId");
 
                     b.HasIndex("UserId");
 
@@ -774,9 +774,6 @@ namespace WebApi.Migrations
                     b.Property<int?>("ProdId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductDetailId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SizeId")
                         .HasColumnType("int");
 
@@ -794,8 +791,6 @@ namespace WebApi.Migrations
                     b.HasIndex("ColorId");
 
                     b.HasIndex("ProdId");
-
-                    b.HasIndex("ProductDetailId");
 
                     b.HasIndex("SizeId");
 
@@ -1230,10 +1225,10 @@ namespace WebApi.Migrations
 
                     b.HasOne("WebApi.Models.Product", "Product")
                         .WithMany("Carts")
-                        .HasForeignKey("ProdID");
+                        .HasForeignKey("ProdId");
 
                     b.HasOne("WebApi.Models.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Carts")
                         .HasForeignKey("UserId");
 
                     b.Navigation("AppUser");
@@ -1255,7 +1250,7 @@ namespace WebApi.Migrations
             modelBuilder.Entity("WebApi.Models.Order", b =>
                 {
                     b.HasOne("WebApi.Models.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId");
 
                     b.Navigation("AppUser");
@@ -1319,10 +1314,6 @@ namespace WebApi.Migrations
                         .WithMany("ProductDetails")
                         .HasForeignKey("ProdId");
 
-                    b.HasOne("WebApi.Models.ProductDetail", null)
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("ProductDetailId");
-
                     b.HasOne("WebApi.Models.Size", "Size")
                         .WithMany("ProductDetails")
                         .HasForeignKey("SizeId");
@@ -1378,7 +1369,7 @@ namespace WebApi.Migrations
             modelBuilder.Entity("WebApi.Models.ReceiptDetail", b =>
                 {
                     b.HasOne("WebApi.Models.ProductDetail", "ProductDetail")
-                        .WithMany()
+                        .WithMany("ReceiptDetails")
                         .HasForeignKey("ProdDetailId");
 
                     b.HasOne("WebApi.Models.Receipt", "Receipt")
@@ -1458,7 +1449,7 @@ namespace WebApi.Migrations
 
                     b.Navigation("OrderDetails");
 
-                    b.Navigation("ProductDetails");
+                    b.Navigation("ReceiptDetails");
                 });
 
             modelBuilder.Entity("WebApi.Models.Receipt", b =>
@@ -1483,6 +1474,10 @@ namespace WebApi.Migrations
                     b.Navigation("AuthHistorys");
 
                     b.Navigation("Blogs");
+
+                    b.Navigation("Carts");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("ProductLikes");
 
