@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class ReceiptDetail
+    public class ReceiptDetail : BaseModel
     {
         [Key]
         public int Id { get; set; }

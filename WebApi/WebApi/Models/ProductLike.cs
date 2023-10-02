@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class ProductLike
+    public class ProductLike : BaseModel
     {
         [Key]
         public int Id { get; set; }
@@ -13,7 +14,7 @@ namespace WebApi.Models
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual AppUser AppUser { get; set; }
-        public string? ProdId { get; set; }
+        public int? ProdId { get; set; }
         [ForeignKey("ProdId")]
         public virtual Product Product { get; set; }
     }

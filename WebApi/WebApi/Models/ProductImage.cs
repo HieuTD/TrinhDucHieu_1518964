@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class ProductImage
+    public class ProductImage : BaseModel
     {
         [Key]
         public int? Id { get; set; }

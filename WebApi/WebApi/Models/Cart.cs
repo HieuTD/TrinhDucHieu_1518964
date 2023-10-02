@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class Cart
+    public class Cart : BaseModel
     {
         [Key]
         public int Id { get; set; }
@@ -16,11 +17,11 @@ namespace WebApi.Models
         [ForeignKey("UserId")]
         public virtual AppUser AppUser { get; set; }
 
-        public string? ProdID { get; set; }
+        public int? ProdID { get; set; }
         [ForeignKey("ProdID")]
         public virtual Product Product { get; set; }
 
-        public string? ProdDetailId { get; set; }
+        public int? ProdDetailId { get; set; }
         [ForeignKey("ProdDetailId")]
         public virtual ProductDetail ProductDetail { get; set; }
     }

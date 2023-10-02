@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class Category
+    public class Category : BaseModel
     {
         [Key]
         public int Id { get; set; }

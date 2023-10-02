@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class OrderDetail
+    public class OrderDetail : BaseModel
     {
         [Key]
         public int Id { get; set; }
@@ -13,15 +14,15 @@ namespace WebApi.Models
         public string Color { get; set; }
         public string Size { get; set; }
 
-        public string? OrderId { get; set; }
+        public int? OrderId { get; set; }
         [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
 
-        public string? ProdId { get; set; }
+        public int? ProdId { get; set; }
         [ForeignKey("ProdId")]
         public virtual Product Product { get; set; }
 
-        public string? ProdDetailId { get; set; }
+        public int? ProdDetailId { get; set; }
         [ForeignKey("ProdDetailId")]
         public virtual ProductDetail ProductDetail { get; set; }
     }

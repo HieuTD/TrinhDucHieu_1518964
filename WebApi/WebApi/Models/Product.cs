@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class Product
+    public class Product : BaseModel
     {
         [Key]
         public int Id { get; set; }
@@ -19,15 +20,15 @@ namespace WebApi.Models
         public bool IsFeatured { get; set; }
         public int Gender { get; set; }
 
-        public string BrandId { get; set; }
+        public int BrandId { get; set; }
         [ForeignKey("BrandId")]
         public virtual Brand Brand { get; set; }
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        public string SupplierId { get; set; }
+        public int SupplierId { get; set; }
         [ForeignKey("SupplierId")]
         public virtual Supplier Supplier { get; set; }
 
