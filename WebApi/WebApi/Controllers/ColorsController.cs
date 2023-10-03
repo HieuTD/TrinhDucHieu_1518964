@@ -75,13 +75,13 @@ namespace WebApi.Controllers
             _context.Colors.Add(color);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
-            return Ok();
+            return Ok(color);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateColor(int id, [FromForm] ColorCreateRequest request)
         {
-            Color color = await _context.Colors.FindAsync(id);
+            var color = await _context.Colors.FindAsync(id);
             color.Name = request.ColorName;
             color.CategoryId = request.CategoryId;
             _context.Colors.Update(color);
@@ -91,23 +91,9 @@ namespace WebApi.Controllers
             //    TranType = "Edit"
             //};
             //_context.Notifications.Add(notification);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ColorExistById(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
-            return Ok();
+            return Ok(color);
         }
 
         [HttpDelete("{id}")]
@@ -128,11 +114,6 @@ namespace WebApi.Controllers
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
-        }
-
-        private bool ColorExistById(int id)
-        {
-            return _context.Colors.Any(e => e.Id == id);
         }
     }
 }
