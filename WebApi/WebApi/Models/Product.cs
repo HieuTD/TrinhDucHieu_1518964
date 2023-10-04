@@ -35,5 +35,6 @@ namespace WebApi.Models
         public ICollection<Cart> Carts { get; set; }
         public ICollection<ProductDetail> ProductDetails { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
     }
 }
