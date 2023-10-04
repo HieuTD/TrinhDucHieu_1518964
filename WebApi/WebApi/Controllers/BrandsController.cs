@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BrandViewModel>>> GetThuongHieus()
+        public async Task<ActionResult<IEnumerable<BrandViewModel>>> GetAllBrands()
         {
             return await _context.Brands
                 .Select(i => new BrandViewModel()

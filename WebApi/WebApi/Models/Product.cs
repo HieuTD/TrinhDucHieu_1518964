@@ -16,8 +16,8 @@ namespace WebApi.Models
         public decimal? Discount { get; set; }
         public string Tag { get; set; }
         public string Material { get; set; }
-        public string Status { get; set; }
-        public bool IsFeatured { get; set; }
+        public string Status { get; set; } //Trạng thái sản phẩm: mới, cũ ...
+        public bool IsFeatured { get; set; } //Ẩn hiện
         public int Gender { get; set; }
 
         public int BrandId { get; set; }
