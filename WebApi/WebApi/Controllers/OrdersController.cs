@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.DTOs.Orders;
 using WebApi.EF;
-using System.Linq
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Models;
 using Microsoft.AspNetCore.SignalR;
