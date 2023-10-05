@@ -79,37 +79,37 @@ namespace WebApi.Controllers
         public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductCreateRequest request)
         {
             var listImage = new List<ProductImage>();
-            Product sanpham = await _context.Products.FirstOrDefaultAsync(s => s.Id == id);
-            sanpham.Name = request.Name;
-            sanpham.UpdatedAt = DateTime.Now;
-            sanpham.Description = request.Description;
-            sanpham.Price = request.Price;
-            sanpham.Tag = request.Tag;
-            sanpham.Gender = request.Gender;
-            sanpham.OriginalPrice = request.OriginalPrice;
-            sanpham.Discount = request.Discount;
-            sanpham.Material = request.Material;
-            sanpham.Status = request.Status;
-            sanpham.IsFeatured = request.IsFeatured;
+            Product product = await _context.Products.FirstOrDefaultAsync(s => s.Id == id);
+            product.Name = request.Name;
+            product.UpdatedAt = DateTime.Now;
+            product.Description = request.Description;
+            product.Price = request.Price;
+            product.Tag = request.Tag;
+            product.Gender = request.Gender;
+            product.OriginalPrice = request.OriginalPrice;
+            product.Discount = request.Discount;
+            product.Material = request.Material;
+            product.Status = request.Status;
+            product.IsFeatured = request.IsFeatured;
             if (request.BrandId == null)
             {
-                sanpham.BrandId = sanpham.BrandId;
+                product.BrandId = product.BrandId;
             }
             else
             {
-                sanpham.BrandId = request.BrandId;
+                product.BrandId = (int)request.BrandId;
             }
             if (request.CategoryId == null)
             {
-                sanpham.CategoryId = sanpham.CategoryId;
+                product.CategoryId = product.CategoryId;
             }
             else
             {
-                sanpham.CategoryId = request.CategoryId;
+                product.CategoryId = (int)request.CategoryId;
             }
             if (request.SupplierId == null)
             {
-                sanpham.SupplierId = sanpham.SupplierId;
+                product.SupplierId = product.SupplierId;
             }
             //Notification notification = new Notification()
             //{
@@ -135,7 +135,7 @@ namespace WebApi.Controllers
                         listImage.Add(new ProductImage()
                         {
                             Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i),
-                            ProdId = sanpham.Id,
+                            ProdId = product.Id,
                         });
                     }
                 }
@@ -148,56 +148,56 @@ namespace WebApi.Controllers
                     listImage.Add(new ProductImage()
                     {
                         Name = img.Name,
-                        ProdId = sanpham.Id,
+                        ProdId = product.Id,
                     }); ;
             };
-            sanpham.ProductImages = listImage;
-            _context.Products.Update(sanpham);
+            product.ProductImages = listImage;
+            _context.Products.Update(product);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> AddProduct([FromForm] ProductCreateRequest upload)
+        public async Task<ActionResult<Product>> AddProduct([FromForm] ProductCreateRequest request)
         {
             var listImage = new List<ProductImage>();
-            Product sanpham = new Product()
+            Product product = new Product()
             {
-                Name = upload.Name,
+                Name = request.Name,
                 CreatedAt = DateTime.Now,
-                Description = upload.Description,
-                Material = upload.Material,
-                IsFeatured = upload.IsFeatured,
-                Status = upload.Status,
-                Price = upload.Price,
-                Gender = upload.Gender,
-                OriginalPrice = upload.OriginalPrice,
-                Tag = upload.Tag,
-                Discount = upload.Discount,
-                CategoryId = upload.CategoryId,
-                BrandId = upload.BrandId,
-                SupplierId = upload.SupplierId,
+                Description = request.Description,
+                Material = request.Material,
+                IsFeatured = request.IsFeatured,
+                Status = request.Status,
+                Price = request.Price,
+                Gender = request.Gender,
+                OriginalPrice = request.OriginalPrice,
+                Tag = request.Tag,
+                Discount = request.Discount,
+                CategoryId = (int)request.CategoryId,
+                BrandId = (int)request.BrandId,
+                SupplierId = (int)request.SupplierId,
             };
             //Notification notification = new Notification()
             //{
-            //    TenSanPham = upload.Ten,
+            //    TenSanPham = request.Ten,
             //    TranType = "Add"
             //};
             //_context.Notifications.Add(notification);
-            var file = upload.files.ToArray();
-            _context.Products.Add(sanpham);
+            var file = request.files.ToArray();
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
-            if (upload.files != null)
+            if (request.files != null)
             {
                 for (int i = 0; i < file.Length; i++)
                 {
                     if (file[i].Length > 0 && file[i].Length < 5120)
                     {
-                        var imageSanPham = new ProductImage();
-                        imageSanPham.Name = await FileHelper.UploadImageAndReturnFileNameAsync(upload, null, "product", (IFormFile[])upload.files, i);
-                        imageSanPham.ProdId = sanpham.Id;
-                        _context.ProductImages.Update(imageSanPham);
+                        var productImage = new ProductImage();
+                        productImage.Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i);
+                        productImage.ProdId = product.Id;
+                        _context.ProductImages.Update(productImage);
                         await _context.SaveChangesAsync();
                     }
                 }
@@ -209,8 +209,8 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var imageSanPhams = _context.ProductImages.ToArray().Where(s => s.ProdId == id);
-            foreach (var i in imageSanPhams)
+            var productImages = _context.ProductImages.ToArray().Where(s => s.ProdId == id);
+            foreach (var i in productImages)
             {
                 FileHelper.DeleteFileOnTypeAndNameAsync("product", i.Name);
             }

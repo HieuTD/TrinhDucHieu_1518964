@@ -10,9 +10,9 @@ namespace WebApi.DTOs.Products
         public string? Description { get; set; }
         public string Tag { get; set; }
         public int Gender { get; set; }
-        public int CategoryId { get; set; }
-        public int BrandId { get; set; }
-        public int SupplierId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? BrandId { get; set; }
+        public int? SupplierId { get; set; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { get; set; }
         public string Status { get; set; } //Trạng thái sản phẩm: mới, cũ ...
