@@ -256,7 +256,7 @@ namespace WebApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AuthHistorys");
+                    b.ToTable("AuthHistories");
                 });
 
             modelBuilder.Entity("WebApi.Models.Blog", b =>
@@ -586,6 +586,9 @@ namespace WebApi.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1191,7 +1194,7 @@ namespace WebApi.Migrations
             modelBuilder.Entity("WebApi.Models.AuthHistory", b =>
                 {
                     b.HasOne("WebApi.Models.AppUser", "AppUser")
-                        .WithMany("AuthHistorys")
+                        .WithMany("AuthHistories")
                         .HasForeignKey("UserId");
 
                     b.Navigation("AppUser");
@@ -1326,7 +1329,7 @@ namespace WebApi.Migrations
             modelBuilder.Entity("WebApi.Models.ProductImage", b =>
                 {
                     b.HasOne("WebApi.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProdId");
 
                     b.Navigation("Product");
@@ -1439,6 +1442,8 @@ namespace WebApi.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductDetails");
+
+                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("WebApi.Models.ProductDetail", b =>
@@ -1469,7 +1474,7 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.AppUser", b =>
                 {
-                    b.Navigation("AuthHistorys");
+                    b.Navigation("AuthHistories");
 
                     b.Navigation("Blogs");
 

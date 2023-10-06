@@ -12,7 +12,7 @@ namespace WebApi.EF
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<AuthHistory> AuthHistorys { get; set; }
+        public DbSet<AuthHistory> AuthHistories { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogImage> BlogImages { get; set; }
         public DbSet<Brand> Brands { get; set; }

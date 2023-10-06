@@ -242,7 +242,7 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthHistorys",
+                name: "AuthHistories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -258,9 +258,9 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AuthHistorys", x => x.Id);
+                    table.PrimaryKey("PK_AuthHistories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AuthHistorys_AspNetUsers_UserId",
+                        name: "FK_AuthHistories_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -303,6 +303,7 @@ namespace WebApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -792,8 +793,8 @@ namespace WebApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AuthHistorys_UserId",
-                table: "AuthHistorys",
+                name: "IX_AuthHistories_UserId",
+                table: "AuthHistories",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -945,7 +946,7 @@ namespace WebApi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AuthHistorys");
+                name: "AuthHistories");
 
             migrationBuilder.DropTable(
                 name: "BlogImages");

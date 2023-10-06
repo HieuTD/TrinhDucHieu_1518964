@@ -50,7 +50,7 @@ namespace WebApi.Controllers
         }
 
         //register
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] UserCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -109,7 +109,7 @@ namespace WebApi.Controllers
                         AuthHistory auth = new AuthHistory();
                         auth.UserId = userToVerify.Id;
                         auth.CreatedAt = DateTime.Now;
-                        _context.AuthHistorys.Add(auth);
+                        _context.AuthHistories.Add(auth);
                         await _context.SaveChangesAsync();
                         return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
                     }
