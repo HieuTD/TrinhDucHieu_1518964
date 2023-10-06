@@ -1,10 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using WebApi.DTOs.Users;
 using WebApi.EF;
+using WebApi.Helper.JwtConfigure;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -15,16 +23,99 @@ namespace WebApi.Controllers
     {
         private readonly DBcontext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
+        private readonly JsonSerializerSettings _serializerSettings;
+        private readonly IJwtFactory _jwtFactory;
+        private readonly JwtIssuerOptions _jwtOptions;
 
-        public UsersController(DBcontext context)
+
+
+        public UsersController(DBcontext context, UserManager<AppUser> userManager, IMapper mapper, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
         {
             _context = context;
+            _mapper = mapper;
+            _userManager = userManager;
+            _serializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            };
+            _jwtFactory = jwtFactory;
+            _jwtOptions = jwtOptions.Value;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetAllUSers()
         {
             return await _userManager.Users.ToListAsync();
+        }
+
+        //register
+        [HttpPost]
+        public async Task<IActionResult> Register([FromForm] UserCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userIdentity = _mapper.Map<AppUser>(request);
+            var result = await _userManager.CreateAsync(userIdentity, request.Password);
+            _context.AppUsers.Update(userIdentity);
+            //if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginrequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var identity = await GetClaimsIdentity(request.UserName, request.Password);
+            if (identity == null)
+            {
+                return BadRequest();
+            }
+
+            var userToVerify = await _userManager.FindByNameAsync(request.UserName);
+
+            string id = userToVerify.Id;
+
+            var response = new
+            {
+                id = identity.Claims.Single(c => c.Type == "id").Value,
+                role = _context.AppUsers.FirstOrDefault(s => s.Id == id).Role,
+                fullname = _context.AppUsers.FirstOrDefault(s => s.Id == id).FirstName + " " + _context.AppUsers.FirstOrDefault(s => s.Id == id).LastName,
+                email = _context.AppUsers.FirstOrDefault(s => s.Id == id).Email,
+                auth_token = await _jwtFactory.GenerateEncodedToken(request.UserName, identity),
+                expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
+            };
+            var json = JsonConvert.SerializeObject(response, _serializerSettings);
+            return new OkObjectResult(json);
+        }
+
+        private async Task<ClaimsIdentity> GetClaimsIdentity(string userName, string password)
+        {
+            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+            {
+                // get the user to verifty
+                var userToVerify = await _userManager.FindByNameAsync(userName);
+                if (userToVerify != null)
+                {
+                    // check the credentials  
+                    if (await _userManager.CheckPasswordAsync(userToVerify, password))
+                    {
+                        AuthHistory auth = new AuthHistory();
+                        auth.UserId = userToVerify.Id;
+                        auth.CreatedAt = DateTime.Now;
+                        _context.AuthHistorys.Add(auth);
+                        await _context.SaveChangesAsync();
+                        return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
+                    }
+                }
+            }
+            return await Task.FromResult<ClaimsIdentity>(null);
         }
     }
 }

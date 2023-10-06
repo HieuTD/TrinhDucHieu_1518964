@@ -65,16 +65,17 @@ namespace WebApi.Controllers
             return rs;
         }
 
-        //[HttpPut("capnhattrangthaihoatdong/{id}")]
-        //public async Task<ActionResult> PutSanPhamTrangThaiHoatDong(int id, SanPham sp)
-        //{
-        //    SanPham sanpham = new SanPham();
-        //    sanpham = await _context.SanPhams.FirstOrDefaultAsync(s => s.Id == id);
-        //    sanpham.TrangThaiHoatDong = !sp.TrangThaiHoatDong;
-        //    await _context.SaveChangesAsync();
-        //    await _hubContext.Clients.All.BroadcastMessage();
-        //    return Ok();
-        //}
+        [HttpPut("updateproductfeature/{id}")]
+        public async Task<ActionResult> UpdateProductFeature(int id, Product sp)
+        {
+            Product sanpham = new Product();
+            sanpham = await _context.Products.FirstOrDefaultAsync(s => s.Id == id);
+            sanpham.IsFeatured = !sp.IsFeatured;
+            await _context.SaveChangesAsync();
+            //await _hubContext.Clients.All.BroadcastMessage();
+            return Ok();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductCreateRequest request)
         {
