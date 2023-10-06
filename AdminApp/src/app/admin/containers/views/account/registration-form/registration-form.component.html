@@ -1,0 +1,43 @@
+<div class="main">
+    <div class="container">
+        <header>Đăng ký</header>
+        <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
+            <div class="input-field">
+                <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
+            </div>
+            <div class="input-field">
+                <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="Họ" formControlName="firstName" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="Tên" formControlName="lastName" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="Địa chỉ" formControlName="location" required>
+            </div>
+            <div class="button">
+                <div class="inner">
+                </div>
+                <button type="submit">Đăng ký</button>
+            </div>
+        </form>
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+            <strong>Oops!</strong> {{errors}}
+        </div>
+        <div class="auth">
+            Hoặc đăng nhập bằng</div>
+        <div class="links">
+            <div class="facebook">
+                <i class="fab fa-facebook-square"><span>Facebook</span></i>
+            </div>
+            <div class="google">
+                <i class="fab fa-google-plus-square"><span>Google</span></i>
+            </div>
+        </div>
+        <div class="signup" style="cursor: pointer">
+            Bạn đã có tài khoản? Hãy <a (click)="onLogin()">đăng nhập</a>
+        </div>
+    </div>
+</div>
