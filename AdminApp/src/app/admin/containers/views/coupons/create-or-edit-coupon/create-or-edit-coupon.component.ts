@@ -1,19 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CouponService } from '../coupon.service';
+import { ToastServiceService } from '../../../shared/toast-service.service';
+import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
-import { ToastServiceService } from '../../../shared/toast-service.service';
-import { CategoryService } from '../../categories/category.service';
-import { DiscountCodeService } from '../discount-code.service';
+
 @Component({
-  selector: 'app-discout-code',
-  templateUrl: './discout-code.component.html',
-  styleUrls: ['./discout-code.component.scss']
+  selector: 'app-create-or-edit-coupon',
+  templateUrl: './create-or-edit-coupon.component.html',
+  styleUrls: ['./create-or-edit-coupon.component.scss']
 })
-export class DiscoutCodeComponent implements OnInit {
-  constructor(public service: DiscountCodeService,
+export class CreateOrEditCouponComponent implements OnInit {
+  constructor(public service: CouponService,
     public toastService: ToastServiceService,
-   private http: HttpClient,
+    private http: HttpClient,
   ) {
   }
   get SoTienGiam() { return this.newFormGroup.get('SoTienGiam'); }
@@ -29,8 +29,9 @@ export class DiscoutCodeComponent implements OnInit {
   onSubmit = (data) => {
     if (this.service.magiamgia.id == 0) {
       const formData = new FormData()
-      formData.append('SoTienGiam', data.SoTienGiam);
-      this.http.post(environment.URL_API + 'magiamgias',formData)
+      formData.append('Discount', data.SoTienGiam);
+      // this.http.post(environment.URL_API + 'magiamgias',formData)
+      this.http.post("https://localhost:44391/api/" + 'coupons', formData)
         .subscribe(res => {
           this.toastService.showToastThemThanhCong();
           this.service.getAllMaGiamGias()
@@ -42,8 +43,9 @@ export class DiscoutCodeComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      formData.append('SoTienGiam', data.SoTienGiam);
-      this.http.put(environment.URL_API + 'magiamgias/' + `${this.service.magiamgia.id}`, formData)
+      formData.append('Discount', data.SoTienGiam);
+      // this.http.put(environment.URL_API + 'magiamgias/' + `${this.service.magiamgia.id}`, formData)
+      this.http.put("https://localhost:44391/api/" + 'coupons/' + `${this.service.magiamgia.id}`, formData)
         .subscribe(res => {
           this.toastService.showToastSuaThanhCong();
           this.service.getAllMaGiamGias()

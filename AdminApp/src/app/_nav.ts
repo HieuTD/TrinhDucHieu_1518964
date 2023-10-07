@@ -67,7 +67,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Mã giảm giá',
-        url: '/admin/magiamgias',
+        url: '/admin/coupons',
         icon: 'cil-puzzle',
       },
       {

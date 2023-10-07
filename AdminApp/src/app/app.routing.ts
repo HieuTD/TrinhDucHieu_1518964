@@ -23,7 +23,6 @@ import { UserdetailComponent } from './admin/containers/userdetail/userdetail.co
 import { WidgetsComponent } from './admin/containers/views/widgets/widgets.component';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
 import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
-import { DiscoutCodesComponent } from './admin/containers/views/discout-codes/discout-codes.component';
 import { TaoPhieuNhapsComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhaps.component';
 import { TaoPhieuNhapComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap/tao-phieu-nhap.component';
 import { NhaCungCapsComponent } from './admin/containers/views/nhacungcaps/nhacungcaps.component';
@@ -34,6 +33,7 @@ import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-
 import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
+import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -145,8 +145,8 @@ export const routes: Routes = [
         component: BrandsComponent, canActivate: [AuthGuard],
       },
       {
-        path: 'admin/magiamgias',
-        component: DiscoutCodesComponent, canActivate: [AuthGuard],
+        path: 'admin/coupons',
+        component: CouponsComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/sizes',

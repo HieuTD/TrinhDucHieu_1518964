@@ -72,8 +72,6 @@ import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { FusionChartsModule } from 'angular-fusioncharts';
 import { SelectMonthComponent } from './admin/containers/views/chart-second/select-month/select-month.component';
 import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
-import { DiscoutCodesComponent } from './admin/containers/views/discout-codes/discout-codes.component';
-import { DiscoutCodeComponent } from './admin/containers/views/discout-codes/discout-code/discout-code.component';
 import { TaoPhieuNhapsComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhaps.component';
 import { TaoPhieuNhapComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap/tao-phieu-nhap.component';
 import { NhaCungCapsComponent } from './admin/containers/views/nhacungcaps/nhacungcaps.component';
@@ -95,6 +93,8 @@ import { UsermanagersComponent } from './admin/containers/views/usermanagers/use
 import { CreateOrEditCategoryComponent } from './admin/containers/views/categories/create-or-edit-category/create-or-edit-category.component';
 import { CreateOrEditBrandComponent } from './admin/containers/views/brands/create-or-edit-brand/create-or-edit-brand.component';
 import { CreateOrEditSizeComponent } from './admin/containers/views/sizes/create-or-edit-size/create-or-edit-size.component';
+import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
+import { CreateOrEditCouponComponent } from './admin/containers/views/coupons/create-or-edit-coupon/create-or-edit-coupon.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -183,8 +183,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ChartSecondComponent,
     NhaCungCapComponent,
     NhaCungCapsComponent,
-    DiscoutCodesComponent,
-    DiscoutCodeComponent,
+    CreateOrEditCouponComponent,
+    CouponsComponent,
     TaoPhieuNhapsComponent,
     TaoPhieuNhapComponent,
     TaoPhieuNhapSuccessComponent,

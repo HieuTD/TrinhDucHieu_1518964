@@ -48,11 +48,11 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateCoupon([FromForm] CouponCreateRequest uploadMaGiamGia, int id)
+        public async Task<ActionResult> UpdateCoupon([FromForm] CouponCreateRequest request, int id)
         {
             Coupon coupon = await _context.Coupons.FindAsync(id);
             coupon.Name = StringHelper.RandomString(5);
-            coupon.Discount = uploadMaGiamGia.Discount;
+            coupon.Discount = request.Discount;
             _context.Update(coupon);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
