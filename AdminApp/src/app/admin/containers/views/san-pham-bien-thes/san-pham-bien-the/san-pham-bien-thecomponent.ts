@@ -5,7 +5,6 @@ import { environment } from '../../../../../../environments/environment';
 import { FileToUploadService } from '../../../shared/file-to-upload.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { CategoryService } from '../../categories/category.service';
-import { MauSacService } from '../../mau-sacs/mau-sac.service';
 import { ProductService } from '../../products/product.service';
 import { Size, SizeService } from '../../sizes/size.service';
 import { SanPhamBienTheService } from '../san-pham-bien-the.service';

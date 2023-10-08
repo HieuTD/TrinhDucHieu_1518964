@@ -1,25 +1,24 @@
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ColorService, MauSac } from './color.service';
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastServiceService } from '../../shared/toast-service.service';
-import { MauSac, MauSacService } from './mau-sac.service';
-import { MauSacComponent } from './mau-sac/mau-sac.component';
 import * as signalR from '@microsoft/signalr';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateOrEditColorComponent } from './create-or-edit-color/create-or-edit-color.component';
+
 @Component({
-  selector: 'app-mau-sacs',
-  templateUrl: './mau-sacs.component.html',
-  styleUrls: ['./mau-sacs.component.scss']
+  selector: 'app-colors',
+  templateUrl: './colors.component.html',
+  styleUrls: ['./colors.component.scss']
 })
-export class MauSacsComponent implements OnInit, AfterViewInit {
+export class ColorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
-  constructor(public service:MauSacService,
+  constructor(public service:ColorService,
               public router : Router,
               public http: HttpClient,
               public dialog: MatDialog,
@@ -47,14 +46,14 @@ displayedColumns: string[] = ['id', 'maMau','tenLoai',
   }
   onModalDialog(){
     this.service.mausac = new MauSac()
-    this.dialog.open(MauSacComponent)
+    this.dialog.open(CreateOrEditColorComponent)
   }
  doFilter = (value: string) => {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
 }
   populateForm(selectedRecord:MauSac){
     this.service.mausac = Object.assign({},selectedRecord)
-    this.dialog.open(MauSacComponent)
+    this.dialog.open(CreateOrEditColorComponent)
 }
   clickDelete(id){
   if(confirm('Bạn có chắc chắn xóa bản ghi này không ??'))

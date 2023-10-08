@@ -48,14 +48,12 @@ import { UserdetailComponent } from './admin/containers/userdetail/userdetail.co
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrandsComponent } from './admin/containers/views/brands/brands.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { MauSacsComponent } from './admin/containers/views/mau-sacs/mau-sacs.component';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { ProductComponent } from './admin/containers/views/products/product/product.component';
 import { ImagesmodelComponent } from './admin/containers/views/products/imagesmodel/imagesmodel.component';
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
-import { MauSacComponent } from './admin/containers/views/mau-sacs/mau-sac/mau-sac.component';
 import { AuthGuard } from './admin/containers/views/auth.guard';
 import { ModalComponent } from './admin/containers/modal/modal.component';
 import { SanPhamBienTheComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-the/san-pham-bien-thecomponent';
@@ -95,6 +93,8 @@ import { CreateOrEditBrandComponent } from './admin/containers/views/brands/crea
 import { CreateOrEditSizeComponent } from './admin/containers/views/sizes/create-or-edit-size/create-or-edit-size.component';
 import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
 import { CreateOrEditCouponComponent } from './admin/containers/views/coupons/create-or-edit-coupon/create-or-edit-coupon.component';
+import { ColorsComponent } from './admin/containers/views/colors/colors.component';
+import { CreateOrEditColorComponent } from './admin/containers/views/colors/create-or-edit-color/create-or-edit-color.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -159,8 +159,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     OrdersTableComponent,
     UserdetailComponent,
     BrandsComponent,
-    MauSacsComponent,
-    MauSacComponent,
+    ColorsComponent,
+    CreateOrEditColorComponent,
     SizesComponent,
     CreateOrEditCategoryComponent,
     HoaDonsComponent,
@@ -172,7 +172,6 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ImagesmodelComponent,
     CategoriesComponent,
     CreateOrEditSizeComponent,
-    MauSacComponent,
     SanPhamBienTheComponent,
     SanPhamBienThesComponent,
     ModalComponent,

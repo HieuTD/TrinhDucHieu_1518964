@@ -52,7 +52,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Màu sắc',
-        url: '/admin/mausacs',
+        url: '/admin/colors',
         icon: 'cil-burn',
       },
       {

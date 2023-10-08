@@ -1,19 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MauSacsComponent } from '../mau-sacs.component';
-import { MauSacService } from '../mau-sac.service';
+import { ColorService } from '../color.service';
 import { CategoryService } from '../../categories/category.service';
+import { HttpClient } from '@angular/common/http';
 import { ToastServiceService } from '../../../shared/toast-service.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
+
 @Component({
-  selector: 'app-mau-sac',
-  templateUrl: './mau-sac.component.html',
-  styleUrls: ['./mau-sac.component.scss']
+  selector: 'app-create-or-edit-color',
+  templateUrl: './create-or-edit-color.component.html',
+  styleUrls: ['./create-or-edit-color.component.scss']
 })
-export class MauSacComponent implements OnInit {
+export class CreateOrEditColorComponent implements OnInit {
   categories: any[] = [];
-  constructor(public service: MauSacService,
+  constructor(public service: ColorService,
     public serviceCategory: CategoryService,
     public http: HttpClient,
     public serviceToast: ToastServiceService,
@@ -44,9 +44,10 @@ export class MauSacComponent implements OnInit {
   onSubmit = (data) => {
     if (this.service.mausac.id == 0) {
       const formData = new FormData();
-      formData.append('MaMau', data.MaMau);
-      formData.append('Id_Loai', data.Id_Loai);
-      this.http.post(environment.URL_API + 'mausacs', formData)
+      formData.append('ColorName', data.MaMau);
+      formData.append('CategoryId', data.Id_Loai);
+      // this.http.post(environment.URL_API + 'mausacs', formData)
+      this.http.post("https://localhost:44391/api/" + 'colors', formData)
         .subscribe(res => {
           this.service.getAllMauSacs();
           this.service.mausac.id = 0;
@@ -58,9 +59,10 @@ export class MauSacComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      formData.append('MaMau', data.MaMau);
-      formData.append('Id_Loai', data.Id_Loai);
-      this.http.put(environment.URL_API + 'mausacs/' + `${this.service.mausac.id}`, formData)
+      formData.append('ColorName', data.MaMau);
+      formData.append('CategoryId', data.Id_Loai);
+      // this.http.put(environment.URL_API + 'mausacs/' + `${this.service.mausac.id}`, formData)
+      this.http.put("https://localhost:44391/api/" + 'colors/' + `${this.service.mausac.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
           this.service.getAllMauSacs();

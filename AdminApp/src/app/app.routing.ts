@@ -11,7 +11,6 @@ import { P500Component } from './admin/containers/views/error/500.component';
 import { SanPhamBienThesComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-thes.component';
 import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { LoginComponent } from './admin/containers/views/account/login/login.component';
-import { MauSacsComponent } from './admin/containers/views/mau-sacs/mau-sacs.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
@@ -34,6 +33,7 @@ import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
 import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
+import { ColorsComponent } from './admin/containers/views/colors/colors.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -153,8 +153,8 @@ export const routes: Routes = [
         component: SizesComponent, canActivate: [AuthGuard],
       },
       {
-        path: 'admin/mausacs',
-        component: MauSacsComponent, canActivate: [AuthGuard],
+        path: 'admin/colors',
+        component: ColorsComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/hoadons',
