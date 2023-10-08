@@ -17,7 +17,7 @@ export class ProductVariantService{
     constructor(public http:HttpClient) { }
     delete(id:number):Observable<any>{
     //   return this.http.delete<any>(`${this.url}/${id}`)
-      return this.http.delete<any>(`${"https://localhost:44391/api/"}/${id}`)
+      return this.http.delete<any>(`${"https://localhost:44391/api/"+"productDetails"}/${id}`)
     }
     gethttp():Observable<any>{
       return this.http.get("https://localhost:44391/api/"+"productDetails")
