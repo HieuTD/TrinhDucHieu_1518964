@@ -15,16 +15,20 @@ export class BlogService {
     blog:Blog = new Blog()
     constructor(public http:HttpClient) { }
     get():Observable<any>{
-      return this.http.get(environment.URL_API+"blogs")
+      // return this.http.get(environment.URL_API+"blogs")
+      return this.http.get("https://localhost:44391/api/"+"blogs")
     }
     delete(id:number){
-      return this.http.delete(`${environment.URL_API+"blogs"}/${id}`)
+      // return this.http.delete(`${environment.URL_API+"blogs"}/${id}`)
+      return this.http.delete(`${"https://localhost:44391/api/"+"blogs"}/${id}`)
     }
     post(blog: any): Observable<any> {
-      return this.http.post<any>(environment.URL_API + 'blogs', blog)
+      // return this.http.post<any>(environment.URL_API + 'blogs', blog)
+      return this.http.post<any>("https://localhost:44391/api/" + 'blogs', blog)
     }
     put( id: number,blog: any): Observable<any> {
-      return this.http.put<any>(environment.URL_API + 'blogs/' + id, blog)
+      // return this.http.put<any>(environment.URL_API + 'blogs/' + id, blog)
+      return this.http.put<any>("https://localhost:44391/api/" + 'blogs/' + id, blog)
     }
     getAllBlogs(){
       this.get().subscribe(
