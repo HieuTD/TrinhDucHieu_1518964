@@ -8,17 +8,19 @@ import { environment } from "../../../../../environments/environment";
 @Injectable({
     providedIn: 'root'
   })
-export class NhaCungCapService{
+export class SupplierService{
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<NhaCungCap>();
     nhacungcap:NhaCungCap = new NhaCungCap()
     constructor(public http:HttpClient) { }
     delete(id:number){
-      return this.http.delete(`${environment.URL_API}nhacungcaps/${id}`)
+    //   return this.http.delete(`${environment.URL_API}nhacungcaps/${id}`)
+      return this.http.delete(`${"https://localhost:44391/api/"}suppliers/${id}`)
     }
     gethttp():Observable<any>{
-      return this.http.get(environment.URL_API+"nhacungcaps")
+    //   return this.http.get(environment.URL_API+"nhacungcaps")
+      return this.http.get("https://localhost:44391/api/"+"suppliers")
     }
     getAllNhaCungCaps(){
       this.gethttp().subscribe(
@@ -30,8 +32,8 @@ export class NhaCungCapService{
   }
   export class NhaCungCap{
     id : number = 0
-    ten: string
-    sdt : string 
-    thongTin:string="	Chuyên cung cấp quần áo giày dép các loại, rất hân hạnh được phục vụ quý khách"
-    diaChi:string
+    supplierName: string
+    phoneNumber : string 
+    description:string="	Chuyên cung cấp quần áo giày dép các loại, rất hân hạnh được phục vụ quý khách"
+    address:string
   }

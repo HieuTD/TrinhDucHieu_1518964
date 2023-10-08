@@ -37,7 +37,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Nhà cung cấp',
-        url: '/admin/nhacungcaps',
+        url: '/admin/suppliers',
         icon: 'cil-library-building',
       },
       {

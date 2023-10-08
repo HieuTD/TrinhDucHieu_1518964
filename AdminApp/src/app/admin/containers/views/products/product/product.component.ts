@@ -9,7 +9,7 @@ import { BrandService } from '../../brands/brand.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { environment } from '../../../../../../environments/environment';
 import { __values } from 'tslib';
-import { NhaCungCapService } from '../../nhacungcaps/nhacungcap.service';
+import { SupplierService } from '../../suppliers/supplier.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
     public serviceToast: ToastServiceService,
     public serviceCategory: CategoryService,
     public serviceBrand: BrandService,
-    public serviceNhaCungCap:NhaCungCapService) {
+    public serviceNhaCungCap:SupplierService) {
   }
   onSelectedList() {
     this.router.navigate(['admin/products']);

@@ -1,25 +1,24 @@
-import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { NhaCungCap, SupplierService } from './supplier.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import * as signalR from '@microsoft/signalr';
-import { NhaCungCapComponent } from './nhacungcap/nhacungcap.component';
-import { NhaCungCap, NhaCungCapService } from './nhacungcap.service';
+import { CreateOrEditSupplierComponent } from './create-or-edit-supplier/create-or-edit-supplier.component';
+
 @Component({
-  selector: 'app-nhacungcaps',
-  templateUrl: './nhacungcaps.component.html',
-  styleUrls: ['./nhacungcaps.component.scss']
+  selector: 'app-suppliers',
+  templateUrl: './suppliers.component.html',
+  styleUrls: ['./suppliers.component.scss']
 })
-export class NhaCungCapsComponent implements OnInit, AfterViewInit {
+export class SuppliersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
-  constructor(public service: NhaCungCapService,
+  constructor(public service: SupplierService,
     public router: Router,
     public http: HttpClient,
     public dialog: MatDialog,
@@ -47,14 +46,14 @@ export class NhaCungCapsComponent implements OnInit, AfterViewInit {
   }
   onModalDialog() {
     this.service.nhacungcap = new NhaCungCap()
-    this.dialog.open(NhaCungCapComponent)
+    this.dialog.open(CreateOrEditSupplierComponent)
   }
   doFilter = (value: string) => {
     this.service.dataSource.filter = value.trim().toLocaleLowerCase();
   }
   populateForm(selectedRecord: NhaCungCap) {
     this.service.nhacungcap = Object.assign({}, selectedRecord)
-    this.dialog.open(NhaCungCapComponent)
+    this.dialog.open(CreateOrEditSupplierComponent)
   }
   clickDelete(id) {
     if (confirm('Bạn có chắc chắn xóa bản ghi này không ??')) {

@@ -72,8 +72,6 @@ import { SelectMonthComponent } from './admin/containers/views/chart-second/sele
 import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
 import { TaoPhieuNhapsComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhaps.component';
 import { TaoPhieuNhapComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap/tao-phieu-nhap.component';
-import { NhaCungCapsComponent } from './admin/containers/views/nhacungcaps/nhacungcaps.component';
-import { NhaCungCapComponent } from './admin/containers/views/nhacungcaps/nhacungcap/nhacungcap.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { TaoPhieuNhapSuccessComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-success/tao-phieu-nhap-success.component';
 import { TaoPhieuNhapDetailComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-detail/tao-phieu-nhap-detail.component';
@@ -95,6 +93,8 @@ import { CouponsComponent } from './admin/containers/views/coupons/coupons.compo
 import { CreateOrEditCouponComponent } from './admin/containers/views/coupons/create-or-edit-coupon/create-or-edit-coupon.component';
 import { ColorsComponent } from './admin/containers/views/colors/colors.component';
 import { CreateOrEditColorComponent } from './admin/containers/views/colors/create-or-edit-color/create-or-edit-color.component';
+import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
+import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -180,8 +180,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     DefaultLayoutComponent,
     SelectMonthComponent,
     ChartSecondComponent,
-    NhaCungCapComponent,
-    NhaCungCapsComponent,
+    CreateOrEditSupplierComponent,
+    SuppliersComponent,
     CreateOrEditCouponComponent,
     CouponsComponent,
     TaoPhieuNhapsComponent,

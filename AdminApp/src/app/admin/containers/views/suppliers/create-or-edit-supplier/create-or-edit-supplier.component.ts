@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CategoryService } from '../../categories/category.service';
+import { SupplierService } from '../supplier.service';
+import { HttpClient } from '@angular/common/http';
 import { ToastServiceService } from '../../../shared/toast-service.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
-import { NhaCungCapService } from '../nhacungcap.service';
+
 @Component({
-  selector: 'app-nhacungcap',
-  templateUrl: './nhacungcap.component.html',
-  styleUrls: ['./nhacungcap.component.scss']
+  selector: 'app-create-or-edit-supplier',
+  templateUrl: './create-or-edit-supplier.component.html',
+  styleUrls: ['./create-or-edit-supplier.component.scss']
 })
-export class NhaCungCapComponent implements OnInit {
+export class CreateOrEditSupplierComponent implements OnInit {
   categories: any[] = [];
-  constructor(public service: NhaCungCapService,
+  constructor(public service: SupplierService,
     public http: HttpClient,
     public serviceToast: ToastServiceService,
   ){
@@ -48,12 +48,13 @@ export class NhaCungCapComponent implements OnInit {
   onSubmit = (data) => {
     if (this.service.nhacungcap.id == 0) {
       const formData = new FormData();
-      formData.append('Ten', data.Ten);
-      formData.append('SDT', data.SDT);
-      formData.append('ThongTin', data.ThongTin);
-      formData.append('DiaChi', data.DiaChi);
+      formData.append('SupplierName', data.Ten);
+      formData.append('PhoneNumber', data.SDT);
+      formData.append('Description', data.ThongTin);
+      formData.append('Address', data.DiaChi);
       console.log(data)
-      this.http.post(environment.URL_API + 'nhacungcaps', formData)
+      // this.http.post(environment.URL_API + 'nhacungcaps', formData)
+      this.http.post("https://localhost:44391/api/" + 'suppliers', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
           this.service.getAllNhaCungCaps();
@@ -65,11 +66,12 @@ export class NhaCungCapComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      formData.append('Ten', data.Ten);
-      formData.append('SDT', data.SDT);
-      formData.append('ThongTin', data.ThongTin);
-      formData.append('DiaChi', data.DiaChi);
-      this.http.put(environment.URL_API + 'nhacungcaps/' + `${this.service.nhacungcap.id}`, formData)
+      formData.append('SupplierName', data.Ten);
+      formData.append('PhoneNumber', data.SDT);
+      formData.append('Description', data.ThongTin);
+      formData.append('Address', data.DiaChi);
+      // this.http.put(environment.URL_API + 'nhacungcaps/' + `${this.service.nhacungcap.id}`, formData)
+      this.http.put("https://localhost:44391/api/" + 'suppliers/' + `${this.service.nhacungcap.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
           this.service.getAllNhaCungCaps();

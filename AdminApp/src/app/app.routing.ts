@@ -24,8 +24,6 @@ import { ProfileComponent } from './admin/containers/views/profile/profile.compo
 import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
 import { TaoPhieuNhapsComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhaps.component';
 import { TaoPhieuNhapComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap/tao-phieu-nhap.component';
-import { NhaCungCapsComponent } from './admin/containers/views/nhacungcaps/nhacungcaps.component';
-import { NhaCungCapComponent } from './admin/containers/views/nhacungcaps/nhacungcap/nhacungcap.component';
 import { TaoPhieuNhapSuccessComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-success/tao-phieu-nhap-success.component';
 import { TaoPhieuNhapDetailComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-detail/tao-phieu-nhap-detail.component';
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
@@ -34,6 +32,8 @@ import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
 import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
 import { ColorsComponent } from './admin/containers/views/colors/colors.component';
+import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
+import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -125,12 +125,12 @@ export const routes: Routes = [
         component: ProductsComponent, canActivate: [AuthGuard],
       },
       {
-        path: 'admin/nhacungcaps',
-        component: NhaCungCapsComponent, canActivate: [AuthGuard],
+        path: 'admin/suppliers',
+        component: SuppliersComponent, canActivate: [AuthGuard],
       },
       {
-        path: 'admin/nhacungcap',
-        component: NhaCungCapComponent, canActivate: [AuthGuard],
+        path: 'admin/supplier',
+        component: CreateOrEditSupplierComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/categories',
