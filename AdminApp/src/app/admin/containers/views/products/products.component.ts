@@ -14,8 +14,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ImagesmodelComponent } from './imagesmodel/imagesmodel.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastServiceService } from '../../shared/toast-service.service';
-import { SanPhamBienTheService } from '../san-pham-bien-thes/san-pham-bien-the.service';
 import { environment } from '../../../../../environments/environment';
+import { ProductVariantService } from '../product-variants/product-variant.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -24,7 +24,7 @@ import { environment } from '../../../../../environments/environment';
 export class ProductsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(public servicespbt: SanPhamBienTheService,
+  constructor(public servicespbt: ProductVariantService,
     public service: ProductService,
     private breakpointObserver: BreakpointObserver,
     public router: Router,
@@ -38,8 +38,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     'trangThaiHoatDong',
     'tenNhanHieu',
     'tenLoai',
-    'like',
-    'comment',
     'toggle',
     'actions'
      ];

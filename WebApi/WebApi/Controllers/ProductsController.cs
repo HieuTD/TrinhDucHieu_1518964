@@ -34,6 +34,7 @@ namespace WebApi.Controllers
                        Id = s.Id,
                        Name = s.Name,
                        Price = s.Price,
+                       OriginalPrice = s.OriginalPrice,
                        Tag = s.Tag,
                        Discount = s.Discount,
                        Description = s.Description,

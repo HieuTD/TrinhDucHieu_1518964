@@ -56,8 +56,6 @@ import { ImagesmodelComponent } from './admin/containers/views/products/imagesmo
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { AuthGuard } from './admin/containers/views/auth.guard';
 import { ModalComponent } from './admin/containers/modal/modal.component';
-import { SanPhamBienTheComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-the/san-pham-bien-thecomponent';
-import { SanPhamBienThesComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-thes.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HoaDonComponent } from './admin/containers/views/hoa-dons/hoa-don/hoa-don.component';
 import { ChartsModule } from 'ng2-charts';
@@ -95,6 +93,8 @@ import { ColorsComponent } from './admin/containers/views/colors/colors.componen
 import { CreateOrEditColorComponent } from './admin/containers/views/colors/create-or-edit-color/create-or-edit-color.component';
 import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
 import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
+import { CreateOrEditProductVariantComponent } from './admin/containers/views/product-variants/create-or-edit-product-variant/create-or-edit-product-variant.component';
+import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -172,8 +172,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ImagesmodelComponent,
     CategoriesComponent,
     CreateOrEditSizeComponent,
-    SanPhamBienTheComponent,
-    SanPhamBienThesComponent,
+    CreateOrEditProductVariantComponent,
+    ProductVariantsComponent,
     ModalComponent,
     ProfileComponent,
     HoaDonComponent,

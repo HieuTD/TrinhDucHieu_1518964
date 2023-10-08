@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using WebApi.DTOs.Colors;
 using WebApi.Models;
+using WebApi.DTOs.Sizes;
 
 namespace WebApi.Controllers
 {
@@ -114,6 +115,20 @@ namespace WebApi.Controllers
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
+        }
+
+        [HttpGet("listColorCategory")]
+        public async Task<ActionResult<IEnumerable<ListSizeCategory>>> GetListColorCategory()
+        {
+            var rs = from color in _context.Colors
+                     join cate in _context.Categories
+                     on color.CategoryId equals cate.Id
+                     select new ListSizeCategory()
+                     {
+                         Id = color.Id,
+                         Name = color.Name + " " + cate.Name
+                     };
+            return await rs.ToListAsync();
         }
     }
 }

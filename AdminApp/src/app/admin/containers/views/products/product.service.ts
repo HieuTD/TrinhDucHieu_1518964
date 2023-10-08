@@ -15,10 +15,12 @@ export class ProductService {
   constructor(public http: HttpClient) { }
   product: Product = new Product();
   delete(id: number): Observable<any> {
-    return this.http.delete<any>(`${environment.URL_API + "sanphams"}/${id}`)
+    // return this.http.delete<any>(`${environment.URL_API + "sanphams"}/${id}`)
+    return this.http.delete<any>(`${"https://localhost:44391/api/" + "products"}/${id}`)
   }
   get(): Observable<any> {
-    return this.http.get<any>(environment.URL_API + "sanphams")
+    // return this.http.get<any>(environment.URL_API + "sanphams")
+    return this.http.get<any>("https://localhost:44391/api/" + "products")
   }
   getAllProducts() {
     return this.get().subscribe(res => {
@@ -27,13 +29,16 @@ export class ProductService {
   }
   //
   post(product: any): Observable<any> {
-    return this.http.post<any>(environment.URL_API + 'sanphams', product)
+    // return this.http.post<any>(environment.URL_API + 'sanphams', product)
+    return this.http.post<any>("https://localhost:44391/api/" + 'products', product)
   }
   put( id: number,product: any): Observable<any> {
-    return this.http.put<any>(environment.URL_API + 'sanphams/' + id, product)
+    // return this.http.put<any>(environment.URL_API + 'sanphams/' + id, product)
+    return this.http.put<any>("https://localhost:44391/api/" + 'products/' + id, product)
   }
   putHoatDong(id: number,element:Product):Observable<any>{
-    return this.http.put<any>(environment.URL_API + 'sanphams/capnhattrangthaihoatdong/' + id,element)
+    // return this.http.put<any>(environment.URL_API + 'sanphams/capnhattrangthaihoatdong/' + id,element)
+    return this.http.put<any>("https://localhost:44391/api/" + 'products/capnhattrangthaihoatdong/' + id,element)
   }
 }
 export class Product {

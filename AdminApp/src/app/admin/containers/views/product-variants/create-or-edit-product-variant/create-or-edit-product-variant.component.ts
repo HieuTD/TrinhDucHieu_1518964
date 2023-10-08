@@ -1,19 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../../../../environments/environment';
+import { ProductVariantService } from '../product-variant.service';
 import { FileToUploadService } from '../../../shared/file-to-upload.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { CategoryService } from '../../categories/category.service';
 import { ProductService } from '../../products/product.service';
-import { Size, SizeService } from '../../sizes/size.service';
-import { SanPhamBienTheService } from '../san-pham-bien-the.service';
+import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment';
+import { Size } from '../../sizes/size.service';
+
 @Component({
-  selector: 'app-san-pham-bien-the',
-  templateUrl: './san-pham-bien-the.component.html',
-  styleUrls: ['./san-pham-bien-the.component.scss']
+  selector: 'app-create-or-edit-product-variant',
+  templateUrl: './create-or-edit-product-variant.component.html',
+  styleUrls: ['./create-or-edit-product-variant.component.scss']
 })
-export class SanPhamBienTheComponent implements OnInit {
+export class CreateOrEditProductVariantComponent implements OnInit {
   public imgsrc: string = "./assets/Resources/Images/san-pham-bien-the/blog-02.jpg";
   public imgsrc1: string = "./assets/Resources/Images/item/pin.png";
   fileChange(event) {
@@ -49,7 +50,7 @@ export class SanPhamBienTheComponent implements OnInit {
   sizes: any[] = [];
   loaitenmau: any[] = [];
   loaitensize: any[] = [];
-  constructor(public service: SanPhamBienTheService,
+  constructor(public service: ProductVariantService,
     public upfile: FileToUploadService,
     public serviceToast: ToastServiceService,
     public serviceCategory: CategoryService,
@@ -59,7 +60,7 @@ export class SanPhamBienTheComponent implements OnInit {
   get Id_Mau() { return this.newFormGroup.get('Id_Mau'); }
   get Id_SanPham() { return this.newFormGroup.get('Id_SanPham'); }
   get Id_Size() { return this.newFormGroup.get('Id_Size'); }
-  get SoLuongTon(){return this.newFormGroup.get('SoLuongTon') }
+  get SoLuongTon() { return this.newFormGroup.get('SoLuongTon') }
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
       ImagePath: new FormControl(null),
@@ -92,7 +93,7 @@ export class SanPhamBienTheComponent implements OnInit {
         Object.assign(this.sanphams, data)
       }
     )
-    this.http.get(environment.URL_API + "sizes").subscribe(
+    this.http.get("https://localhost:44391/api/" + "sizes").subscribe(
       data => {
         this.sizes = data as Size[]
       }
@@ -102,12 +103,13 @@ export class SanPhamBienTheComponent implements OnInit {
   onSubmit = (data) => {
     if (this.service.sanphambienthe.id == 0) {
       const formData = new FormData();
-      formData.append('MauId', data.Id_Mau);
-      formData.append('SanPhamId', data.Id_SanPham);
+      formData.append('ColorId', data.Id_Mau);
+      formData.append('ProdId', data.Id_SanPham);
       formData.append('SizeId', data.Id_Size);
-      formData.append('SoLuongTon', data.SoLuongTon);
+      formData.append('Stock', data.SoLuongTon);
       console.log(data);
-      this.http.post(environment.URL_API + 'sanphambienthes', formData)
+      // this.http.post(environment.URL_API + 'sanphambienthes', formData)
+      this.http.post("https://localhost:44391/api/" + 'productDetails', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
           this.service.getAllGiaSanPhamMauSacSanPhamSizes();
@@ -119,11 +121,12 @@ export class SanPhamBienTheComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      formData.append('MauId', data.Id_Mau);
-      formData.append('SanPhamId', data.Id_SanPham);
+      formData.append('ColorId', data.Id_Mau);
+      formData.append('ProdId', data.Id_SanPham);
       formData.append('SizeId', data.Id_Size);
-      formData.append('SoLuongTon', data.SoLuongTon);
-      this.http.put(environment.URL_API + 'sanphambienthes/' + `${this.service.sanphambienthe.id}`, formData)
+      formData.append('Stock', data.SoLuongTon);
+      // this.http.put(environment.URL_API + 'sanphambienthes/' + `${this.service.sanphambienthe.id}`, formData)
+      this.http.put("https://localhost:44391/api/" + 'productDetails/' + `${this.service.sanphambienthe.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
           this.service.getAllGiaSanPhamMauSacSanPhamSizes();

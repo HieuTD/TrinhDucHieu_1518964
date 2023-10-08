@@ -111,5 +111,20 @@ namespace WebApi.Controllers
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
+
+        [HttpGet("listSizeCategory")]
+        public async Task<ActionResult<IEnumerable<ListSizeCategory>>> GetListSizeCategory()
+        {
+            var rs = from size in _context.Sizes
+                     join cate in _context.Categories
+                     on size.CategoryId equals cate.Id
+                     select new ListSizeCategory()
+                     {
+                         Id = size.Id,
+                         Name = size.Name + " " + cate.Name
+                     };
+            var kbs = rs.ToListAsync();
+            return await kbs;
+        }
     }
 }

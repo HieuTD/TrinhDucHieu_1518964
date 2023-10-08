@@ -8,7 +8,6 @@ import { BrandsComponent } from './admin/containers/views/brands/brands.componen
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { P404Component } from './admin/containers/views/error/404.component';
 import { P500Component } from './admin/containers/views/error/500.component';
-import { SanPhamBienThesComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-thes.component';
 import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { LoginComponent } from './admin/containers/views/account/login/login.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
@@ -34,6 +33,7 @@ import { CouponsComponent } from './admin/containers/views/coupons/coupons.compo
 import { ColorsComponent } from './admin/containers/views/colors/colors.component';
 import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
 import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
+import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -138,7 +138,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/sanphambienthes',
-        component: SanPhamBienThesComponent, canActivate: [AuthGuard],
+        component: ProductVariantsComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/brands',
