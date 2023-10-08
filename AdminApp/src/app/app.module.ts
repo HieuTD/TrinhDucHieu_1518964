@@ -82,7 +82,6 @@ import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej
 import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej.chart.min';
 import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
-import { BlogComponent } from './admin/containers/views/blogs/blog/blog.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
 import { CreateOrEditCategoryComponent } from './admin/containers/views/categories/create-or-edit-category/create-or-edit-category.component';
 import { CreateOrEditBrandComponent } from './admin/containers/views/brands/create-or-edit-brand/create-or-edit-brand.component';
@@ -95,6 +94,7 @@ import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers
 import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
 import { CreateOrEditProductVariantComponent } from './admin/containers/views/product-variants/create-or-edit-product-variant/create-or-edit-product-variant.component';
 import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
+import { CreateOrEditBlogComponent } from './admin/containers/views/blogs/create-or-edit-blog/create-or-edit-blog.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -192,7 +192,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     HoaDonEditComponent,
     ChatsComponent,
     BlogsComponent,
-    BlogComponent,
+    CreateOrEditBlogComponent,
   ],
   providers: [
     IconSetService,

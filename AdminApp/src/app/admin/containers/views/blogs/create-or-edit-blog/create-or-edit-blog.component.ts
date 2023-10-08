@@ -1,41 +1,42 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BlogService } from '../blog.service';
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ToastServiceService } from '../../../shared/toast-service.service';
-import { BlogService } from '../blog.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'app-create-or-edit-blog',
+  templateUrl: './create-or-edit-blog.component.html',
+  styleUrls: ['./create-or-edit-blog.component.scss']
 })
-export class BlogComponent implements OnInit {
-  constructor(  public service : BlogService,
-                public http :HttpClient ,
-                public toastr: ToastrService,
-                public serviceToast: ToastServiceService,
-              ) {
-                }
-                ngOnInit(): void {
-                  this.newFormGroup = new FormGroup({
-                  TieuDe: new FormControl(null,
-                    [
-                      Validators.required,
-                      Validators.minLength(2),
-                    ]),
-                  NoiDung: new FormControl(null,
-                    [
-                      Validators.required,
-                      Validators.minLength(5),
-                    ]),
-                  Hinh : new FormControl(null,
-                    [
-                      Validators.required,
-                    ]
-                    )
-                  });
-                }
+export class CreateOrEditBlogComponent implements OnInit {
+  constructor(public service: BlogService,
+    public http: HttpClient,
+    public toastr: ToastrService,
+    public serviceToast: ToastServiceService,
+  ) {
+  }
+  ngOnInit(): void {
+    this.newFormGroup = new FormGroup({
+      TieuDe: new FormControl(null,
+        [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+      NoiDung: new FormControl(null,
+        [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+      Hinh: new FormControl(null,
+        [
+          Validators.required,
+        ]
+      )
+    });
+  }
   public Editor = ClassicEditor;
   public newFormGroup: FormGroup;
   urls = new Array<string>();
@@ -67,10 +68,11 @@ export class BlogComponent implements OnInit {
       for (let i = 0; i < this.urls.length; i++) {
         form.append('files', this.selectedFile.item(i))
       }
-      form.append('TieuDe', data.TieuDe);
-      form.append('NoiDung', data.NoiDung);
+      form.append('Title', data.TieuDe);
+      form.append('Description', data.NoiDung);
       this.service.post(form)
         .subscribe(res => {
+          this.service.getAllBlogs();
           this.serviceToast.showToastThemThanhCong()
           this.clearForm();
         }, err => {
@@ -80,13 +82,14 @@ export class BlogComponent implements OnInit {
     }
     else {
       const form = new FormData();
-      form.append('TieuDe', data.TieuDe);
-      form.append('NoiDung', data.NoiDung);
+      form.append('Title', data.TieuDe);
+      form.append('Description', data.NoiDung);
       for (let i = 0; i < this.urls.length; i++) {
         form.append('files', this.selectedFile.item(i))
       }
       this.service.put(this.service.blog.id, form)
         .subscribe(res => {
+          this.service.getAllBlogs();
           this.clearForm();
         }, err => {
           this.serviceToast.showToastSuaThatBai()

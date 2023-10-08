@@ -41,7 +41,7 @@ export class BlogService {
 }
 export class Blog{
   id:number = 0
-  tieude:string
+  title:string
   hinh:string
-  noidung:string
+  description:string
 }

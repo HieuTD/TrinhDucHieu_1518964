@@ -6,8 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Blog, BlogService } from './blog.service';
-import { BlogComponent } from './blog/blog.component';
 import * as signalR from '@microsoft/signalr';
+import { CreateOrEditBlogComponent } from './create-or-edit-blog/create-or-edit-blog.component';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -46,7 +46,7 @@ export class BlogsComponent implements OnInit {
   }
   onModalDialog(){
     this.service.blog = new Blog()
-    this.dialog.open(BlogComponent)
+    this.dialog.open(CreateOrEditBlogComponent)
   }
  doFilter = (value: string) => {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
@@ -59,7 +59,7 @@ showToastXoaThatBai(){
 }
   populateForm(selectedRecord:Blog){
     this.service.blog = Object.assign({},selectedRecord)
-    this.dialog.open(BlogComponent)
+    this.dialog.open(CreateOrEditBlogComponent)
     console.log(selectedRecord)
 }
   clickDelete(id){
