@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using WebApi.Models;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -82,6 +83,7 @@ namespace WebApi.Controllers
             prodDetail.ProdId = request.ProdId;
             prodDetail.ColorId = request.ColorId;
             prodDetail.SizeId = request.SizeId;
+            prodDetail.CreatedAt = DateTime.Now;
 
             _context.ProductDetails.Add(prodDetail);
             await _context.SaveChangesAsync();
@@ -97,6 +99,8 @@ namespace WebApi.Controllers
             prodDetail.ProdId = request.ProdId;
             prodDetail.ColorId = request.ColorId;
             prodDetail.SizeId = request.SizeId;
+            prodDetail.UpdatedAt = DateTime.Now;
+
             _context.ProductDetails.Update(prodDetail);
 
             //Notification notification = new Notification()

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace WebApi.Controllers
             Coupon coupon = new Coupon();
             coupon.Name = StringHelper.RandomString(5);
             coupon.Discount = request.Discount;
+            coupon.CreatedAt = DateTime.Now;
             _context.Add(coupon);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
@@ -53,6 +55,8 @@ namespace WebApi.Controllers
             Coupon coupon = await _context.Coupons.FindAsync(id);
             coupon.Name = StringHelper.RandomString(5);
             coupon.Discount = request.Discount;
+            coupon.UpdatedAt = DateTime.Now;
+
             _context.Update(coupon);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();

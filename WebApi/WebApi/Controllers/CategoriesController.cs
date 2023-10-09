@@ -52,7 +52,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BrandViewModel>> AddCategory([FromForm] CategoryCreateRequest request)
+        public async Task<ActionResult<Category>> AddCategory([FromForm] CategoryCreateRequest request)
         {
             var category = new Category();
             category.Name = request.CategoryName;
@@ -74,7 +74,7 @@ namespace WebApi.Controllers
         {
             var category = await _context.Categories.FirstOrDefaultAsync(b => b.Id == id);
             category.Name = request.CategoryName;
-            category.CreatedAt = DateTime.Now;
+            category.UpdatedAt = DateTime.Now;
             _context.Categories.Update(category);
             //Notification notification = new Notification()
             //{

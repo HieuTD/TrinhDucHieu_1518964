@@ -73,7 +73,7 @@ namespace WebApi.Controllers
         {
             var brand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id);
             brand.Name = request.BrandName;
-            brand.CreatedAt = DateTime.Now;
+            brand.UpdatedAt = DateTime.Now;
             _context.Brands.Update(brand);
             //Notification notification = new Notification()
             //{

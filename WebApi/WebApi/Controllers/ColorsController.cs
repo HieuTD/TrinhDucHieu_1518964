@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SignalR;
 using WebApi.DTOs.Colors;
 using WebApi.Models;
 using WebApi.DTOs.Sizes;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -72,6 +73,7 @@ namespace WebApi.Controllers
             {
                 Name = request.ColorName,
                 CategoryId = request.CategoryId,
+                CreatedAt = DateTime.Now
             };
             _context.Colors.Add(color);
             await _context.SaveChangesAsync();
@@ -85,6 +87,7 @@ namespace WebApi.Controllers
             var color = await _context.Colors.FindAsync(id);
             color.Name = request.ColorName;
             color.CategoryId = request.CategoryId;
+            color.UpdatedAt = DateTime.Now;
             _context.Colors.Update(color);
             //Notification notification = new Notification()
             //{

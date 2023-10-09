@@ -122,7 +122,6 @@ namespace WebApi.Controllers
             ProductImage[] images = _context.ProductImages.Where(s => s.ProdId == id).ToArray();
             _context.ProductImages.RemoveRange(images);
             ProductImage image = new ProductImage();
-            var file = request.files.ToArray();
             var productImages = _context.ProductImages.ToArray().Where(s => s.ProdId == id);
             foreach (var i in productImages)
             {
@@ -130,6 +129,7 @@ namespace WebApi.Controllers
             }
             if (request.files != null)
             {
+                var file = request.files.ToArray();
                 for (int i = 0; i < file.Length; i++)
                 {
                     if (file[i].Length > 0 && file[i].Length < 5120)

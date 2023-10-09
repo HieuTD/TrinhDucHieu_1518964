@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace WebApi.Controllers
             blog.Title = request.Title;
             blog.Description = request.Description;
             blog.UserId = request.UserId;
+            blog.CreatedAt = DateTime.Now;
             //Notification notification = new Notification()
             //{
             //    TenSanPham = request.TieuDe,
@@ -82,6 +84,8 @@ namespace WebApi.Controllers
             blog.Title = upload.Title;
             blog.Description = upload.Description;
             blog.UserId = upload.UserId;
+            blog.UpdatedAt = DateTime.Now;
+
             //Notification notification = new Notification()
             //{
             //    TenSanPham = upload.TieuDe,

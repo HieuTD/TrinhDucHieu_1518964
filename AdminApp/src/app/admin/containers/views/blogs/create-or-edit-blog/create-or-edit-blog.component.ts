@@ -90,6 +90,7 @@ export class CreateOrEditBlogComponent implements OnInit {
       this.service.put(this.service.blog.id, form)
         .subscribe(res => {
           this.service.getAllBlogs();
+          this.serviceToast.showToastSuaThanhCong()
           this.clearForm();
         }, err => {
           this.serviceToast.showToastSuaThatBai()

@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using WebApi.Models;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -61,6 +62,7 @@ namespace WebApi.Controllers
             {
                 Name = request.SizeName,
                 CategoryId = request.CategoryId,
+                CreatedAt = DateTime.Now
             };
             _context.Sizes.Add(size);
             //Notification notification = new Notification()
@@ -80,6 +82,7 @@ namespace WebApi.Controllers
             var size = await _context.Sizes.FindAsync(id);
             size.Name = request.SizeName;
             size.CategoryId = request.CategoryId;
+            size.UpdatedAt = DateTime.Now;
             _context.Sizes.Update(size);
             //Notification notification = new Notification()
             //{

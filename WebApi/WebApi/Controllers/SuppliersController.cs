@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -44,6 +45,7 @@ namespace WebApi.Controllers
             supplier.PhoneNumber = request.PhoneNumber;
             supplier.Description = request.Description;
             supplier.Address = request.Address;
+            supplier.CreatedAt = DateTime.Now;
             _context.Suppliers.Add(supplier);
             await _context.SaveChangesAsync();
             return Ok(supplier);
@@ -56,6 +58,7 @@ namespace WebApi.Controllers
             supplier.PhoneNumber = request.PhoneNumber;
             supplier.Description = request.Description;
             supplier.Address = request.Address;
+            supplier.UpdatedAt = DateTime.Now;
             _context.Suppliers.Update(supplier);
             await _context.SaveChangesAsync();
             return Ok(supplier);
