@@ -16,6 +16,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { environment } from '../../../../../environments/environment';
 import { ProductVariantService } from '../product-variants/product-variant.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -30,7 +31,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     public router: Router,
     public http: HttpClient,
     public dialog: MatDialog,
-    public serviceToast: ToastServiceService,) { }
+    public serviceToast: ToastServiceService,
+    public toastr: ToastrService) { }
   displayedColumns: string[] = ['id', 'ten', 'hinh',
     'gia',
     'giaNhap',
@@ -42,16 +44,23 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     'actions'
      ];
   updateActiveStatus(element:Product) {
-    console.log("element là: ",element);
-      console.log("element.trangThaiHoatDong là: ",element.trangThaiHoatDong);
+    var checkFeatured;
+    if (element.isFeatured == true) {
+      checkFeatured = 'Tắt';
+    } else {
+      checkFeatured = 'Bật';
+    }
       this.service.putHoatDong(element.id,element).subscribe(
         result=>{
           this.service.getAllProducts()
+          this.toastr.success(`${checkFeatured + " trạng thái hoạt động của sản phẩm thành công"}`, 'Thông báo', { timeOut: 2000 });
         },
         error=>{
           console.log(error);
         }
       )
+      console.log("element là: ",element);
+      console.log("element.trangThaiHoatDong là: ",element.isFeatured);
     }
   ngOnInit() {
     this.service.getAllProducts();

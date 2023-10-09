@@ -38,32 +38,32 @@ export class ProductService {
   }
   putHoatDong(id: number,element:Product):Observable<any>{
     // return this.http.put<any>(environment.URL_API + 'sanphams/capnhattrangthaihoatdong/' + id,element)
-    return this.http.put<any>("https://localhost:44391/api/" + 'products/capnhattrangthaihoatdong/' + id,element)
+    return this.http.put<any>("https://localhost:44391/api/" + 'products/updateproductfeature/' + id,element)
   }
 }
 export class Product {
   id: number = 0
-  ten: string
-  khuyenMai: number =0
-  moTa: string
+  name: string
+  discount: number =0
+  description: string
   khoiLuong: number
-  giaBan: number
-  giaNhap:number
-  gioiTinh:number
+  price: number
+  originalPrice:number
+  gender:number
   tag: string
   huongDan: string
-  thanhPhan: string
-  trangThaiSanPham: string
-  trangThaiHoatDong: boolean
+  material: string
+  status: string
+  isFeatured: boolean
   trangThaiSanPhamThietKe: string
-  id_NhanHieu: number
-  id_Loai: number
-  id_NhaCungCap:number
+  brandId: number
+  categoryId: number
+  supplierId:number
   giaSanPhams: number
   sanPhamThietKes: number
   sanPham_SanPhamThietKe: number
-  tenNhanHieu: string
-  tenLoai: string
+  brandName: string
+  categoryName: string
   soLuongLike:number
   soLuongComment:number
 }

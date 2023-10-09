@@ -51,7 +51,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
-import { ProductComponent } from './admin/containers/views/products/product/product.component';
 import { ImagesmodelComponent } from './admin/containers/views/products/imagesmodel/imagesmodel.component';
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { AuthGuard } from './admin/containers/views/auth.guard';
@@ -95,6 +94,7 @@ import { CreateOrEditSupplierComponent } from './admin/containers/views/supplier
 import { CreateOrEditProductVariantComponent } from './admin/containers/views/product-variants/create-or-edit-product-variant/create-or-edit-product-variant.component';
 import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
 import { CreateOrEditBlogComponent } from './admin/containers/views/blogs/create-or-edit-blog/create-or-edit-blog.component';
+import { CreateOrEditProductComponent } from './admin/containers/views/products/create-or-edit-product/create-or-edit-product.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -167,7 +167,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     UsermanagersComponent,
     CreateOrEditBrandComponent,
     ProductsComponent,
-    ProductComponent,
+    CreateOrEditProductComponent,
     RegistrationFormComponent,
     ImagesmodelComponent,
     CategoriesComponent,

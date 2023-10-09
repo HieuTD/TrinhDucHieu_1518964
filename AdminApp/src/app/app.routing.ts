@@ -13,7 +13,6 @@ import { LoginComponent } from './admin/containers/views/account/login/login.com
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
-import { ProductComponent } from './admin/containers/views/products/product/product.component';
 import { HoaDonComponent } from './admin/containers/views/hoa-dons/hoa-don/hoa-don.component';
 import { DashboardComponent } from './admin/containers/views/dashboard/dashboard.component';
 import { ChartJSComponent } from './admin/containers/views/chartjs/chartjs.component';
@@ -34,6 +33,7 @@ import { ColorsComponent } from './admin/containers/views/colors/colors.componen
 import { CreateOrEditSupplierComponent } from './admin/containers/views/suppliers/create-or-edit-supplier/create-or-edit-supplier.component';
 import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
 import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
+import { CreateOrEditProductComponent } from './admin/containers/views/products/create-or-edit-product/create-or-edit-product.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -110,11 +110,11 @@ export const routes: Routes = [
       },
       {
         path: 'admin/product/add',
-        component: ProductComponent, canActivate: [AuthGuard],
+        component: CreateOrEditProductComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/product/edit/:id',
-        component: ProductComponent, canActivate: [AuthGuard],
+        component: CreateOrEditProductComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/product/detail/:id',

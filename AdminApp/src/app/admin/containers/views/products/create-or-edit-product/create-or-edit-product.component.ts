@@ -1,21 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Product, ProductService } from '../product.service';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Router } from '@angular/router';
-import { CategoryService } from '../../categories/category.service';
-import { BrandService } from '../../brands/brand.service';
-import { ToastServiceService } from '../../../shared/toast-service.service';
-import { environment } from '../../../../../../environments/environment';
-import { __values } from 'tslib';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SupplierService } from '../../suppliers/supplier.service';
+import { BrandService } from '../../brands/brand.service';
+import { CategoryService } from '../../categories/category.service';
+import { ToastServiceService } from '../../../shared/toast-service.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-create-or-edit-product',
+  templateUrl: './create-or-edit-product.component.html',
+  styleUrls: ['./create-or-edit-product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class CreateOrEditProductComponent implements OnInit {
   public product: Product
   //Begin Review multile file before upload
   public newForm: FormGroup;
@@ -103,7 +102,7 @@ export class ProductComponent implements OnInit {
         Validators.min(3),
         Validators.max(100000000000),
       ]),
-      KhuyenMai: new FormControl( this.service.product.khuyenMai,[
+      KhuyenMai: new FormControl( this.service.product.discount,[
         Validators.required,
         Validators.min(0),
         Validators.max(50000000000),
@@ -113,11 +112,11 @@ export class ProductComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(10000000000000),
       ]),
-      HuongDan: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(1000000000000),
-      ]),
+      // HuongDan: new FormControl(null, [
+      //   Validators.required,
+      //   Validators.minLength(3),
+      //   Validators.maxLength(1000000000000),
+      // ]),
       ThanhPhan: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
@@ -157,20 +156,20 @@ export class ProductComponent implements OnInit {
       for (let i = 0; i < this.urls.length; i++) {
         form.append('files', this.selectedFile.item(i))
       }
-      form.append('Ten', data.Ten);
-      form.append('KhuyenMai', data.KhuyenMai);
-      form.append('MoTa', data.MoTa);
-      form.append('GiaBan', data.GiaBan);
-      form.append('GiaNhap', data.GiaNhap);
-      form.append('HuongDan', data.HuongDan);
-      form.append('ThanhPhan', data.ThanhPhan);
+      form.append('Name', data.Ten);
+      form.append('Discount', data.KhuyenMai);
+      form.append('Description', data.MoTa);
+      form.append('Price', data.GiaBan);
+      form.append('OriginalPrice', data.GiaNhap);
+      // form.append('HuongDan', data.HuongDan);
+      form.append('Material', data.ThanhPhan);
       form.append('Tag', data.Tag);
-      form.append('GioiTinh',data.GioiTinh)
-      form.append('Id_Loai', data.Id_Loai);
-      form.append('Id_NhanHieu', data.Id_NhanHieu);
-      form.append('Id_NhaCungCap', data.Id_NhaCungCap);
-      form.append('TrangThaiSanPham', data.TrangThaiSanPham);
-      form.append('TrangThaiHoatDong', data.TrangThaiHoatDong);
+      form.append('Gender',data.GioiTinh)
+      form.append('CategoryId', data.Id_Loai);
+      form.append('BrandId', data.Id_NhanHieu);
+      form.append('SupplierId', data.Id_NhaCungCap);
+      form.append('Status', data.TrangThaiSanPham);
+      form.append('IsFeatured', data.TrangThaiHoatDong);
       var json_arr = JSON.stringify(data);
       console.log(json_arr)
       this.service.post(form)
@@ -188,20 +187,21 @@ export class ProductComponent implements OnInit {
     }
     else {
       const form = new FormData();
-      form.append('Ten', data.Ten);
-      form.append('KhuyenMai', data.KhuyenMai);
-      form.append('MoTa', data.MoTa);
-      form.append('GiaBan', data.GiaBan);
-      form.append('GiaNhap', data.GiaNhap);
-      form.append('GioiTinh',data.GioiTinh)
-      form.append('HuongDan', data.HuongDan);
-      form.append('ThanhPhan', data.ThanhPhan);
+      form.append('Name', data.Ten);
+      form.append('Discount', data.KhuyenMai);
+      form.append('Description', data.MoTa);
+      form.append('Price', data.GiaBan);
+      form.append('OriginalPrice', data.GiaNhap);
+      // form.append('HuongDan', data.HuongDan);
+      form.append('Material', data.ThanhPhan);
       form.append('Tag', data.Tag);
-      form.append('Id_Loai', data.Id_Loai);
-      form.append('Id_NhanHieu', data.Id_NhanHieu);
-      form.append('Id_NhaCungCap', data.Id_NhaCungCap);
-      form.append('TrangThaiSanPham', data.TrangThaiSanPham);
-      form.append('TrangThaiSanPhamThietKe', data.TrangThaiSanPhamThietKe);
+      form.append('Gender',data.GioiTinh)
+      form.append('CategoryId', data.Id_Loai);
+      form.append('BrandId', data.Id_NhanHieu);
+      form.append('SupplierId', data.Id_NhaCungCap);
+      form.append('Status', data.TrangThaiSanPham);
+      form.append('IsFeatured', data.TrangThaiHoatDong);
+      // form.append('TrangThaiSanPhamThietKe', data.TrangThaiSanPhamThietKe);
       for (let i = 0; i < this.urls.length; i++) {
         form.append('files', this.selectedFile.item(i))
       }
