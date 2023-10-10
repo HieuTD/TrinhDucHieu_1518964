@@ -21,16 +21,20 @@ export class OrderService {
   cthdViewModel: CTHDViewModel = new CTHDViewModel()
   constructor(public http: HttpClient,private datePipe: DatePipe) { }
   get():Observable<any> {
-    return this.http.get<any>(environment.URL_API + "hoadons")
+    // return this.http.get<any>(environment.URL_API + "hoadons")
+    return this.http.get<any>("https://localhost:44391/api/" + "orders")
   }
   delete(id: number) {
-    return this.http.delete(`environment.URL_API + "hoadons"/${id}`)
+    // return this.http.delete(`environment.URL_API + "hoadons"/${id}`)
+    return this.http.delete(`"https://localhost:44391/api/" + "orders"/${id}`)
   }
   put(hd:any):Observable<any>{
-    return this.http.put<any>(environment.URL_API+"hoadons/suatrangthai/"+this.hoadon.id,hd)
+    // return this.http.put<any>(environment.URL_API+"hoadons/suatrangthai/"+this.hoadon.id,hd)
+    return this.http.put<any>("https://localhost:44391/api/"+"orders/updatestatus/"+this.hoadon.id,hd)
   }
   getMotHoaDonService(id:number):Observable<any>{
-    return this.http.get<any>(environment.URL_API + "hoadons/admindetailorder/"+id)
+    // return this.http.get<any>(environment.URL_API + "hoadons/admindetailorder/"+id)
+    return this.http.get<any>("https://localhost:44391/api/" + "orders/adminorderdetail/"+id)
   }
   getAllHoaDons() {
     this.get().subscribe(
@@ -49,7 +53,7 @@ export class HoaDonUser{
   tongTien: number
   fullName: string
   daLayTien:string
-  trangThai:number
+  status:number
 }
 export class CTHDViewModel {
   idCTHD: number

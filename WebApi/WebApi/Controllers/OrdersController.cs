@@ -40,7 +40,7 @@ namespace WebApi.Controllers
             return await rs.ToListAsync();
         }
 
-        [HttpPut("updateStatus/{id}")]
+        [HttpPut("updatestatus/{id}")]
         public async Task<IActionResult> UpdateStatusOrder(int id, OrderViewModel hd)
         {
             var rs = await _context.Orders.FindAsync(id);
@@ -62,6 +62,86 @@ namespace WebApi.Controllers
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpGet("adminorderdetail/{id}")]
+        public async Task<ActionResult<OrderDetailViewModel>> GetOrderDetail(int id)
+        {
+            var list = new List<ListOrderDetailsViewModel>();
+            var productImageTable = (
+                from sp in _context.Products
+                
+                join isp in _context.ProductImages on 
+                sp.Id equals isp.ProdId into ispGroup
+                from isp in ispGroup.DefaultIfEmpty()
+
+                join spbt in _context.ProductDetails 
+                on sp.Id equals spbt.ProdId
+                
+                join sz in _context.Sizes 
+                on spbt.SizeId equals sz.Id
+                
+                join ms in _context.Colors 
+                on spbt.ColorId equals ms.Id
+                
+                join cthd in _context.OrderDetails 
+                on spbt.Id equals cthd.ProdDetailId
+                
+                join hd1 in _context.Orders 
+                on cthd.OrderId equals hd1.Id
+                where cthd.OrderId == id
+                orderby isp.Id
+                select new
+                {
+                    cthd.Id,
+                    ProductName = sp.Name,
+                    SizeName = sz.Name,
+                    ColorName = ms.Name,
+                    cthd.Quantity,
+                    Price = (decimal)sp.Price,
+                    cthd.TotalPrice,
+                    RowNum = 1
+                }
+            ).ToList();
+
+            foreach (var item in productImageTable)
+            {
+                list.Add(new ListOrderDetailsViewModel()
+                {
+                    Id = item.Id,
+                    ProductName = item.ProductName,
+                    Price = item.Price,
+                    ColorName = item.ColorName,
+                    SizeName = item.SizeName,
+                    Quantity = item.Quantity,
+                    TotalPrice = (decimal)item.TotalPrice
+                });
+            }
+
+            var hd = await (
+                from h in _context.Orders
+                join us in _context.AppUsers on h.UserId equals us.Id
+                where h.Id == id
+                select new OrderDetailViewModel()
+                {
+                    Id = h.Id,
+                    FullName = us.FirstName + ' ' + us.LastName,
+                    Address = us.Address,
+                    Email = us.Email,
+                    PhoneNumber = us.PhoneNumber,
+                    order = new Order()
+                    {
+                        UserId = us.Id,
+                        TotalPrice = h.TotalPrice,
+                        Description = h.Description,
+                        CreatedAt = h.CreatedAt,
+                        Status = h.Status
+                    },
+                    listOrderDetails = list,
+                }
+            ).FirstOrDefaultAsync();
+
+            return hd;
         }
     }
 }
