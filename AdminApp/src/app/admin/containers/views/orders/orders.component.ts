@@ -1,25 +1,25 @@
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Data, Router } from '@angular/router';
+import { HoaDonUser, OrderService } from './order.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastServiceService } from '../../shared/toast-service.service';
-import { HoaDonComponent } from './hoa-don/hoa-don.component';
-import {  HoaDonUser, HoaDonService } from './hoadon.service';
+import { DatePipe } from '@angular/common';
 import * as signalR from '@microsoft/signalr';
-import { HoaDonEditComponent } from './hoa-don-edit/hoa-don-edit.component';
+import { EditOrderComponent } from './edit-order/edit-order.component';
+
 @Component({
-  selector: 'app-hoa-dons',
-  templateUrl: './hoa-dons.component.html',
-  styleUrls: ['./hoa-dons.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class HoaDonsComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
-  constructor(public service: HoaDonService,
+  constructor(public service: OrderService,
     public router: Router,
     public http: HttpClient,
     public dialog: MatDialog,
@@ -60,7 +60,7 @@ export class HoaDonsComponent implements OnInit {
   }
   populateForm(selectedRecord: HoaDonUser) {
     this.service.hoadon = Object.assign({}, selectedRecord)
-    this.dialog.open(HoaDonEditComponent)
+    this.dialog.open(EditOrderComponent)
   } 
   exportGeneratePdf() {
     window.open("https://localhost:44302/api/GeneratePdf/allorder", "_blank");

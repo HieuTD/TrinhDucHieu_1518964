@@ -13,7 +13,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class HoaDonService {
+export class OrderService {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<HoaDonUser>();

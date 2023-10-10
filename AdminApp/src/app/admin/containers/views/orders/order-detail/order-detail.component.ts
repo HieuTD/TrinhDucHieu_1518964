@@ -1,18 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../order.service';
 import { environment } from '../../../../../../environments/environment';
-import { CTHDViewModel, HoaDonService } from '../hoadon.service';
+
 @Component({
-  selector: 'app-hoa-don',
-  templateUrl: './hoa-don.component.html',
-  styleUrls: ['./hoa-don.component.scss']
+  selector: 'app-order-detail',
+  templateUrl: './order-detail.component.html',
+  styleUrls: ['./order-detail.component.scss']
 })
-export class HoaDonComponent implements OnInit {
-  constructor( private service :HoaDonService){
+export class OrderDetailComponent implements OnInit {
+  constructor( private service : OrderService){
   }
   url:any
   hd:any

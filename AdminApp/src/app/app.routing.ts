@@ -8,12 +8,10 @@ import { BrandsComponent } from './admin/containers/views/brands/brands.componen
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { P404Component } from './admin/containers/views/error/404.component';
 import { P500Component } from './admin/containers/views/error/500.component';
-import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { LoginComponent } from './admin/containers/views/account/login/login.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
-import { HoaDonComponent } from './admin/containers/views/hoa-dons/hoa-don/hoa-don.component';
 import { DashboardComponent } from './admin/containers/views/dashboard/dashboard.component';
 import { ChartJSComponent } from './admin/containers/views/chartjs/chartjs.component';
 import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
@@ -34,6 +32,8 @@ import { CreateOrEditSupplierComponent } from './admin/containers/views/supplier
 import { SuppliersComponent } from './admin/containers/views/suppliers/suppliers.component';
 import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
 import { CreateOrEditProductComponent } from './admin/containers/views/products/create-or-edit-product/create-or-edit-product.component';
+import { OrdersComponent } from './admin/containers/views/orders/orders.component';
+import { OrderDetailComponent } from './admin/containers/views/orders/order-detail/order-detail.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -158,7 +158,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/hoadons',
-        component: HoaDonsComponent, canActivate: [AuthGuard],
+        component: OrdersComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/usermanagers',
@@ -178,7 +178,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/hoadon/detail/:id',
-        component: HoaDonComponent, canActivate: [AuthGuard],
+        component: OrderDetailComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/taophieunhap/detail/:id',

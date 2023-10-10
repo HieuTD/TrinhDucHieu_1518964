@@ -49,14 +49,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrandsComponent } from './admin/containers/views/brands/brands.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
-import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { ImagesmodelComponent } from './admin/containers/views/products/imagesmodel/imagesmodel.component';
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { AuthGuard } from './admin/containers/views/auth.guard';
 import { ModalComponent } from './admin/containers/modal/modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { HoaDonComponent } from './admin/containers/views/hoa-dons/hoa-don/hoa-don.component';
 import { ChartsModule } from 'ng2-charts';
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
@@ -73,7 +71,6 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { TaoPhieuNhapSuccessComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-success/tao-phieu-nhap-success.component';
 import { TaoPhieuNhapDetailComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-detail/tao-phieu-nhap-detail.component';
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
-import { HoaDonEditComponent } from './admin/containers/views/hoa-dons/hoa-don-edit/hoa-don-edit.component';
 // Report viewer
 import '@boldreports/javascript-reporting-controls/Scripts/bold.report-viewer.min';
 // data-visualization
@@ -95,6 +92,9 @@ import { CreateOrEditProductVariantComponent } from './admin/containers/views/pr
 import { ProductVariantsComponent } from './admin/containers/views/product-variants/product-variants.component';
 import { CreateOrEditBlogComponent } from './admin/containers/views/blogs/create-or-edit-blog/create-or-edit-blog.component';
 import { CreateOrEditProductComponent } from './admin/containers/views/products/create-or-edit-product/create-or-edit-product.component';
+import { OrdersComponent } from './admin/containers/views/orders/orders.component';
+import { OrderDetailComponent } from './admin/containers/views/orders/order-detail/order-detail.component';
+import { EditOrderComponent } from './admin/containers/views/orders/edit-order/edit-order.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -163,7 +163,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     CreateOrEditColorComponent,
     SizesComponent,
     CreateOrEditCategoryComponent,
-    HoaDonsComponent,
+    OrdersComponent,
     UsermanagersComponent,
     CreateOrEditBrandComponent,
     ProductsComponent,
@@ -176,7 +176,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ProductVariantsComponent,
     ModalComponent,
     ProfileComponent,
-    HoaDonComponent,
+    OrderDetailComponent,
     DefaultLayoutComponent,
     SelectMonthComponent,
     ChartSecondComponent,
@@ -189,7 +189,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     TaoPhieuNhapSuccessComponent,
     TaoPhieuNhapDetailComponent,
     ChartThirdComponent,
-    HoaDonEditComponent,
+    EditOrderComponent,
     ChatsComponent,
     BlogsComponent,
     CreateOrEditBlogComponent,
