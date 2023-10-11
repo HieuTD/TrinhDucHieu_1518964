@@ -1,23 +1,23 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { PhieuNhap, TaoPhieuNhapService } from "./tao-phieu-nhap.service";
-import * as signalR from "@microsoft/signalr";
-import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { MatDialog } from "@angular/material/dialog";
-import { ToastServiceService } from "../../shared/toast-service.service";
-import { TaoPhieuNhapComponent } from "./tao-phieu-nhap/tao-phieu-nhap.component";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { PhieuNhap, ReceiptService } from './receipt.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastServiceService } from '../../shared/toast-service.service';
+import * as signalR from '@microsoft/signalr';
+
 @Component({
-  selector: "app-tao-phieu-nhaps",
-  templateUrl: "./tao-phieu-nhaps.component.html",
-  styleUrls: ["./tao-phieu-nhaps.component.scss"],
+  selector: 'app-receipts',
+  templateUrl: './receipts.component.html',
+  styleUrls: ['./receipts.component.scss']
 })
-export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
+export class ReceiptsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
-    public service: TaoPhieuNhapService,
+    public service: ReceiptService,
     public router: Router,
     public http: HttpClient,
     public dialog: MatDialog,

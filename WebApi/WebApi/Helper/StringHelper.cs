@@ -12,5 +12,12 @@ namespace WebApi.Helper
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public static int ProdDetailIdHandle(string s)
+        {
+            // Lấy về một chuỗi có định dạng vd: "Id: 6 Áo bò" => lấy số 6 parse về kiểu int 
+            string[] arrListStr = s.Split(" ");
+            return int.Parse(arrListStr[1]);
+        }
     }
 }

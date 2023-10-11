@@ -37,6 +37,13 @@ namespace WebApi.Controllers
                     Address = i.Address
                 }).ToListAsync();
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Supplier>> GetSupplierById(int id)
+        {
+            return await _context.Suppliers.FindAsync(id);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddSupplier([FromForm] SupplierCreateRequest request)
         {

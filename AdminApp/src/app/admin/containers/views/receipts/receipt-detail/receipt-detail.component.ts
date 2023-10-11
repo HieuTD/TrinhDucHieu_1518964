@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TaoPhieuNhapService } from '../tao-phieu-nhap.service';
+import { ReceiptService } from '../receipt.service';
+
 @Component({
-  selector: 'app-tao-phieu-nhap-detail',
-  templateUrl: './tao-phieu-nhap-detail.component.html',
-  styleUrls: ['./tao-phieu-nhap-detail.component.scss']
+  selector: 'app-receipt-detail',
+  templateUrl: './receipt-detail.component.html',
+  styleUrls: ['./receipt-detail.component.scss']
 })
-export class TaoPhieuNhapDetailComponent implements OnInit {
+export class ReceiptDetailComponent implements OnInit {
   @Input() childMessage: string;
-  constructor(private service: TaoPhieuNhapService) { }
+  constructor(private service: ReceiptService) { }
   phieunhapchitietphieunhap: any
   ngOnInit(): void {
     this.service.getdetailphieunhap(this.service.idphieunhap).subscribe(

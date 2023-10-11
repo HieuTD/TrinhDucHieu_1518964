@@ -8,7 +8,7 @@ import { environment } from '../../../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class TaoPhieuNhapService {
+export class ReceiptService {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<PhieuNhapNhaCungCap>();
@@ -20,28 +20,38 @@ export class TaoPhieuNhapService {
   phieunhappost:PostPhieuNhap=new PostPhieuNhap()
   idphieunhap:number
   getphieunhaphttp():Observable<any>{
-    return this.http.get(environment.URL_API+"TaoPhieuNhaps")
+    // return this.http.get(environment.URL_API+"TaoPhieuNhaps")
+        return this.http.get("https://localhost:44391/api/"+"receipts")
   }
   getnhacungcaphttp():Observable<any>{
-    return this.http.get(environment.URL_API+"NhaCungCaps")
+    // return this.http.get(environment.URL_API+"NhaCungCaps")
+        return this.http.get("https://localhost:44391/api/"+"suppliers")
   }
-  getonenhacungcaphttp(data):Observable<any>{
-    return this.http.post<any>(environment.URL_API+"TaoPhieuNhaps/NhaCungCap",data)
+  //Lấy ra nhà cung cấp theo Id
+  getonenhacungcaphttp(id):Observable<any>{
+    // return this.http.post<any>(environment.URL_API+"TaoPhieuNhaps/NhaCungCap",data)
+    return this.http.get(`${"https://localhost:44391/api/"}suppliers/${id}`)
   }
-  gettensanphamhttp(data):Observable<any>{
-    return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamNhaCungCap",data)
+  //Lấy ra sản phẩm dựa theo Id nhà cung cấp
+  gettensanphamhttp(supplierid):Observable<any>{
+    // return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamNhaCungCap",data)
+        return this.http.get(`${"https://localhost:44391/api/"}products/listprod/${supplierid}`)
   }
-  gettensanphambienthehttp(data):Observable<any>{
-    return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamBienTheMauSizeLoai",data)
+  //Lấy ra sản phẩm biến thể dựa theo Id sản phẩm
+  gettensanphambienthehttp(prodid):Observable<any>{
+    // return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamBienTheMauSizeLoai",data)
+        return this.http.get(`${"https://localhost:44391/api/"}productDetails/listproddetail/${prodid}`)
   }
   getdetailphieunhap(id:number):Observable<any>{
-    return this.http.get<any>(environment.URL_API+"TaoPhieuNhaps/"+id)
+    // return this.http.get<any>(environment.URL_API+"TaoPhieuNhaps/"+id)
+        return this.http.get<any>("https://localhost:44391/api/"+"TaoPhieuNhaps/"+id)
   }
   post(data):Observable<any>{
-    return this.http.post(environment.URL_API+"TaoPhieuNhaps",data)
+    // return this.http.post(environment.URL_API+"TaoPhieuNhaps",data)
+        return this.http.post("https://localhost:44391/api/"+"receipts",data)
   }
   delete(id:number){
-    return this.http.delete(`${environment.URL_API}/${id}`)
+    return this.http.delete(`${"https://localhost:44391/api/"}/${id}`)
   }
   getAllPhieuNhaps(){
     this.getphieunhaphttp().subscribe(
@@ -80,11 +90,11 @@ export class UploadChiTietPhieuNhapHang{
  SoluongNhap:number
 }
 export class PostPhieuNhap{
-  nguoiLapPhieu:string
-  ghiChu:string
-  tongTien:number
-  idNhaCungCap:string
-  ChiTietPhieuNhaps:any=[]
+  userId:string
+  description:string
+  totalPrice:number
+  supplierId:string
+  receiptDetails:any=[]
 }
 export class PhieuNhapNhaCungCap{
  id:number 

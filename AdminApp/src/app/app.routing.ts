@@ -18,10 +18,6 @@ import { UserdetailComponent } from './admin/containers/userdetail/userdetail.co
 import { WidgetsComponent } from './admin/containers/views/widgets/widgets.component';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
 import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
-import { TaoPhieuNhapsComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhaps.component';
-import { TaoPhieuNhapComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap/tao-phieu-nhap.component';
-import { TaoPhieuNhapSuccessComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-success/tao-phieu-nhap-success.component';
-import { TaoPhieuNhapDetailComponent } from './admin/containers/views/tao-phieu-nhaps/tao-phieu-nhap-detail/tao-phieu-nhap-detail.component';
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
 import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
@@ -34,6 +30,10 @@ import { ProductVariantsComponent } from './admin/containers/views/product-varia
 import { CreateOrEditProductComponent } from './admin/containers/views/products/create-or-edit-product/create-or-edit-product.component';
 import { OrdersComponent } from './admin/containers/views/orders/orders.component';
 import { OrderDetailComponent } from './admin/containers/views/orders/order-detail/order-detail.component';
+import { ReceiptsComponent } from './admin/containers/views/receipts/receipts.component';
+import { ReceiptSuccessComponent } from './admin/containers/views/receipts/receipt-success/receipt-success.component';
+import { CreateReceiptComponent } from './admin/containers/views/receipts/create-receipt/create-receipt.component';
+import { ReceiptDetailComponent } from './admin/containers/views/receipts/receipt-detail/receipt-detail.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -166,15 +166,15 @@ export const routes: Routes = [
       },
       {
         path: 'admin/taophieunhap',
-        component: TaoPhieuNhapsComponent, canActivate: [AuthGuard],
+        component: ReceiptsComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/taophieunhapsuccess',
-        component: TaoPhieuNhapSuccessComponent, canActivate: [AuthGuard],
+        component: ReceiptSuccessComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/taophieunhap/them',
-        component: TaoPhieuNhapComponent, canActivate: [AuthGuard],
+        component: CreateReceiptComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/hoadon/detail/:id',
@@ -182,7 +182,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/taophieunhap/detail/:id',
-        component: TaoPhieuNhapDetailComponent, canActivate: [AuthGuard],
+        component: ReceiptDetailComponent, canActivate: [AuthGuard],
       },
       {
         path: 'admin/chats',

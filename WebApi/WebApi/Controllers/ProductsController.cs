@@ -66,6 +66,12 @@ namespace WebApi.Controllers
             return rs;
         }
 
+        [HttpGet("listprod/{supplierid}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductBySupplierId(int supplierId)
+        {
+            return await _context.Products.Where(s => s.SupplierId == supplierId).ToListAsync();
+        }
+
         [HttpPut("updateproductfeature/{id}")]
         public async Task<ActionResult> UpdateProductFeature(int id, Product sp)
         {

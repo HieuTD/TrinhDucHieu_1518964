@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using WebApi.Models;
 using System;
+using WebApi.DTOs.Products;
 
 namespace WebApi.Controllers
 {
@@ -127,6 +128,28 @@ namespace WebApi.Controllers
             //await _hubContext.Clients.All.BroadcastMessage();
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+
+        [HttpGet("listproddetail/{id}")]
+        public async Task<ActionResult<IEnumerable<GetListProdDetailByProdIdVM>>> GetListProdDetailByProdId(int id)
+        {
+            var kb = from spbt in _context.ProductDetails
+                     join sp in _context.Products.Where(s => s.Id == id)
+                     on spbt.ProdId equals sp.Id
+                     join l in _context.Categories
+                     on sp.CategoryId equals l.Id
+                     join m in _context.Colors
+                     on spbt.ColorId equals m.Id
+                     join s in _context.Sizes
+                     on spbt.SizeId equals s.Id
+                     select new GetListProdDetailByProdIdVM()
+                     {
+                         Id = spbt.Id,
+                         Name = "Id: " + spbt.Id + " Tên: " + sp.Name + " " + l.Name + " " + m.Name,
+                         OriginalPrice = (decimal)sp.OriginalPrice,
+                     };
+            return await kb.ToListAsync();
         }
     }
 }
