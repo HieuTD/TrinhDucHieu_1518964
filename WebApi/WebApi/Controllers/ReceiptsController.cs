@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using WebApi.Helper;
 using WebApi.Models;
+using WebApi.DTOs.Products;
 
 namespace WebApi.Controllers
 {
@@ -82,6 +83,55 @@ namespace WebApi.Controllers
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ReceiptDetailViewModel>> GetReceiptDetailById(int id)
+        {
+            var listDetail = from spbt in _context.ProductDetails
+                             join sp in _context.Products
+                             on spbt.ProdId equals sp.Id
+                             join l in _context.Categories
+                             on sp.CategoryId equals l.Id
+                             join m in _context.Colors
+                             on spbt.ColorId equals m.Id
+                             join s in _context.Sizes
+                             on spbt.SizeId equals s.Id
+                             join ctpn in _context.ReceiptDetails
+                             on spbt.Id equals ctpn.ProdDetailId
+                             select new GetListProdDetailByReceiptIdVM()
+                             {
+                                 Id = spbt.Id,
+                                 ProductName = sp.Name + " " + s.Name + " " + m.Name,
+                                 OriginalPrice = (decimal)sp.OriginalPrice,
+                                 Quantity = ctpn.Amonut,
+                                 TotalPrice = ctpn.TotalPrice,
+                                 ReceiptId = (int)ctpn.ReceiptId
+                             };
+            var kb = (from phieunhap in _context.Receipts
+                      join us in _context.AppUsers
+                      on phieunhap.UserId equals us.Id
+                      join ncc in _context.Suppliers
+                      on phieunhap.SupplierId equals ncc.Id
+                      select new ReceiptDetailViewModel()
+                      {
+                          Id = phieunhap.Id,
+                          Description = phieunhap.Description,
+                          CreatedAt = phieunhap.CreatedAt,
+                          Name = phieunhap.Name,
+                          TotalPrice = phieunhap.TotalPrice,
+                          UserName = us.FirstName + " " + us.LastName,
+                          Supplier = new Supplier()
+                          {
+                              Id = ncc.Id,
+                              Name = ncc.Name,
+                              Address = ncc.Address,
+                              Description = ncc.Description,
+                              PhoneNumber = ncc.PhoneNumber,
+                          },
+                          ListProdDetails = (List<GetListProdDetailByReceiptIdVM>)listDetail.Where(s => s.ReceiptId == id),
+                      });
+            return await kb.FirstOrDefaultAsync(s => s.Id == id);
         }
     }
 }

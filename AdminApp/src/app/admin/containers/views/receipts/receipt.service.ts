@@ -44,7 +44,7 @@ export class ReceiptService {
   }
   getdetailphieunhap(id:number):Observable<any>{
     // return this.http.get<any>(environment.URL_API+"TaoPhieuNhaps/"+id)
-        return this.http.get<any>("https://localhost:44391/api/"+"TaoPhieuNhaps/"+id)
+        return this.http.get<any>("https://localhost:44391/api/"+"receipts/"+id)
   }
   post(data):Observable<any>{
     // return this.http.post(environment.URL_API+"TaoPhieuNhaps",data)

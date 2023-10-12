@@ -6,23 +6,23 @@
 <table class="table" style="width:100%">
   <tr>
       <th>Id nhà cung cấp: </th>
-      <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.id">{{this.phieunhapchitietphieunhap.nhaCungCap.id}}</td>
+      <td *ngIf="this.phieunhapchitietphieunhap.supplier.id">{{this.phieunhapchitietphieunhap.supplier.id}}</td>
   </tr>
   <tr>
       <th>Tên nhà cung cấp: </th>
-      <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.ten">{{this.phieunhapchitietphieunhap.nhaCungCap.ten}}</td>
+      <td *ngIf="this.phieunhapchitietphieunhap.supplier.name">{{this.phieunhapchitietphieunhap.supplier.name}}</td>
   </tr>
   <tr>
       <th>Số điện thoại: </th>
-      <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.sdt">{{this.phieunhapchitietphieunhap.nhaCungCap.sdt}}</td>
+      <td *ngIf="this.phieunhapchitietphieunhap.supplier.phoneNumber">{{this.phieunhapchitietphieunhap.supplier.phoneNumber}}</td>
   </tr>
   <tr>
       <th>Thông tin: </th>
-      <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.thongTin">{{this.phieunhapchitietphieunhap.nhaCungCap.thongTin}}</td>
+      <td *ngIf="this.phieunhapchitietphieunhap.supplier.description">{{this.phieunhapchitietphieunhap.supplier.description}}</td>
   </tr>
   <tr>
       <th>Địa chỉ: </th>
-      <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.diaChi">{{this.phieunhapchitietphieunhap.nhaCungCap.diaChi}}</td>
+      <td *ngIf="this.phieunhapchitietphieunhap.supplier.address">{{this.phieunhapchitietphieunhap.supplier.address}}</td>
   </tr>
 </table>
 <table class="table">
@@ -49,31 +49,31 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let item of this.phieunhapchitietphieunhap.chiTietPhieuNhaps">
+      <tr *ngFor="let item of this.phieunhapchitietphieunhap.listProdDetails">
           <td *ngIf="item.id">
               {{item.id}}
           </td>
-          <td *ngIf="item.tenSanPhamBienTheMauSize">
-              {{item.tenSanPhamBienTheMauSize}}
+          <td *ngIf="item.productName">
+              {{item.productName}}
           </td>
-          <td *ngIf="item.giaNhap">
-              {{item.giaNhap}}
+          <td *ngIf="item.originalPrice">
+              {{item.originalPrice}}
           </td>
-          <td *ngIf="item.soluongNhap">
-              {{item.soluongNhap}}
+          <td *ngIf="item.quantity">
+              {{item.quantity}}
           </td>
-          <td *ngIf="item.thanhTienNhap">
-              {{item.thanhTienNhap|number}} VNĐ
+          <td *ngIf="item.totalPrice">
+              {{item.totalPrice|number}} VNĐ
           </td>
-          <td *ngIf="item.id_PhieuNhapHang">
-              {{item.id_PhieuNhapHang}}
+          <td *ngIf="item.receiptId">
+              {{item.receiptId}}
           </td>
       </tr>
-      <h4 style="font-weight: bold; text-underline-position: auto;">Tổng tiền: {{this.phieunhapchitietphieunhap.tongTien}} VNĐ</h4>
+      <h4 style="font-weight: bold; text-underline-position: auto;">Tổng tiền: {{this.phieunhapchitietphieunhap.totalPrice}} VNĐ</h4>
   </tbody>
 </table>
 <h3 style="font-weight: bold; display: inline;">Ghi chú: </h3>
-<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.ghiChu">{{this.phieunhapchitietphieunhap.ghiChu}}</h4>
+<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.description">{{this.phieunhapchitietphieunhap.description}}</h4>
 <br>
 <h3 style="font-weight: bold; display: inline;">Người lập phiếu: </h3>
-<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.nguoiLapPhieu">{{this.phieunhapchitietphieunhap.nguoiLapPhieu}}</h4>
+<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.userName">{{this.phieunhapchitietphieunhap.userName}}</h4>
