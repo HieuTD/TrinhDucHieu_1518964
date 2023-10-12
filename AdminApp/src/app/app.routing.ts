@@ -17,7 +17,6 @@ import { ChartJSComponent } from './admin/containers/views/chartjs/chartjs.compo
 import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
 import { WidgetsComponent } from './admin/containers/views/widgets/widgets.component';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
-import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
 import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
@@ -34,6 +33,7 @@ import { ReceiptsComponent } from './admin/containers/views/receipts/receipts.co
 import { ReceiptSuccessComponent } from './admin/containers/views/receipts/receipt-success/receipt-success.component';
 import { CreateReceiptComponent } from './admin/containers/views/receipts/create-receipt/create-receipt.component';
 import { ReceiptDetailComponent } from './admin/containers/views/receipts/receipt-detail/receipt-detail.component';
+import { StatisticsComponent } from './admin/containers/views/statistics/statistics.component';
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
 export const routes: Routes = [
   {
@@ -91,7 +91,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/chartsecond',
-        component: ChartSecondComponent
+        component: StatisticsComponent
       },
       {
         path: 'admin/chartthird',

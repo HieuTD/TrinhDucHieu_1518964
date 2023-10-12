@@ -12,7 +12,7 @@ namespace WebApi.Models
         public int Id { get; set; }
         //public DateTime DateTime { get; set; }
         public string Description { get; set; }
-        public int Status { get; set; }
+        public int Status { get; set; } //0: chưa xác nhận, 1: đã xác nhận, 2: Hoàn thành, 3: Đã Hủy
         public decimal TotalPrice { get; set; }
         public string Address { get; set; }
 

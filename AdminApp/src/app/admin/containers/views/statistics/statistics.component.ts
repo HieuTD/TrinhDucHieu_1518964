@@ -1,14 +1,14 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { StatisticService } from './statistic.service';
 import * as signalR from '@microsoft/signalr';
-import { ChartSecondService } from './chart-second.service';
-import { SelectMonthComponent } from './select-month/select-month.component';
+
 @Component({
-  selector: 'app-chart-second',
-  templateUrl: './chart-second.component.html',
-  styleUrls: ['./chart-second.component.scss']
+  selector: 'app-statistics',
+  templateUrl: './statistics.component.html',
+  styleUrls: ['./statistics.component.scss']
 })
-export class ChartSecondComponent implements OnInit {
+export class StatisticsComponent implements OnInit {
   dataSourceBrand: { chart: { caption: string; plottooltext: string; showLegend: string; showPercentValues: string; legendPosition: string; useDataPlotColorForLabels: string; enablemultislicing: string; showlegend: string; theme: string; }; data: { label: string; value: string; }[]; };
   nam2021: any;
   errorMessage: any;
@@ -17,37 +17,15 @@ export class ChartSecondComponent implements OnInit {
   doanhthucaonhat: any;
   nam2021soluong: any;
   soLuongTon: any;
-  constructor(public service:ChartSecondService,    public dialog: MatDialog,
+  constructor(public service:StatisticService,    public dialog: MatDialog,
     public zone: NgZone) {
-    this.dataSourceBrand = {
-      "chart": {
-        "caption": "Tỉ lệ giữa top(3) các nhãn hiệu bán chạy nhất và tổng tổng số sản phẩm bán ra",
-        "plottooltext": "$label đạt tỉ lệ <b>$percentValue</b>",
-        "showLegend": "1",
-        "showPercentValues": "1",
-        "legendPosition": "bottom",
-        "useDataPlotColorForLabels": "1",
-        "enablemultislicing": "0",
-        "showlegend": "0",
-        "theme": "fusion",
-      },
-      "data": [{
-        label: "",
-        value: ""
-      }, {
-        label: "",
-        value: ""
-      }, {
-        label: "",
-        value: ""
-      }]
-    };
+    
   }
   public dataSourceYear: any = {
     chart: {
-      caption: 'Doanh thu các tháng trong năm 2021',
+      caption: 'Doanh thu các tháng trong năm 2023',
       xAxisName: 'Tháng',
-      yAxisName: 'Số tiền thu về',
+      yAxisName: 'Số tiền bán được',
       numberSuffix: '',
       theme: 'umber'
     },
@@ -93,8 +71,8 @@ export class ChartSecondComponent implements OnInit {
   public dataSourceDoanhThu: any = {
     chart: {
       caption: 'sản phẩm biến thể đạt top 10 doanh số cao nhất',
-      xAxisName: 'Tên sản phẩm biến thể',
-      yAxisName: 'doanh thu',
+      xAxisName: 'Tên sản phẩm',
+      yAxisName: 'Doanh thu',
       numberSuffix: '',
       theme: 'umber'
     },
@@ -115,9 +93,6 @@ export class ChartSecondComponent implements OnInit {
     this.getTop10SanPhamLoiNhats()
     this.getSoLanXuatHienTrongDonHang()
     this.getThongKeThang();
-    this.getNam2021doanhso();
-    this.getSoLuongTrongNam();
-    this.getTopNhanHieu();
     const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
@@ -136,29 +111,8 @@ export class ChartSecondComponent implements OnInit {
     connection.on("BroadcastMessage", () => {
       this.getTop10SanPhamLoiNhats()
     })
-    connection.on("BroadcastMessage", () => {
-      this.getTopNhanHieu()
-    })
-    connection.on("BroadcastMessage", () => {
-      this.getNam2021doanhso()
-    })
-    connection.on("BroadcastMessage", () => {
-      this.getNam2021doanhso()
-    })
-    connection.on("BroadcastMessage", () => {
-      this.getSoLuongTrongNam()
-    })
   }
-  getNam2021doanhso() {
-    this.service.getNam2021DoanhSo().subscribe(
-      result => {
-        this.nam2021 = result as any
-      },
-      error => {
-        this.errorMessage = <any>error
-      }
-    )
-  }
+
   //quantrong
   getThongKeThang() {
     this.service.getThongKeThang().subscribe(
@@ -167,7 +121,7 @@ export class ChartSecondComponent implements OnInit {
         console.log(this.dataThongKe);
         for (var i = 0; i < this.dataThongKe.length; i++) {
           this.dataSourceYear.data[this.dataThongKe[i].month].label = this.dataThongKe[i].month as any
-          this.dataSourceYear.data[this.dataThongKe[i].month].value = this.dataThongKe[i].revenues as any
+          this.dataSourceYear.data[this.dataThongKe[i].month].value = this.dataThongKe[i].profit as any
         }
       },
       error => {
@@ -184,8 +138,8 @@ export class ChartSecondComponent implements OnInit {
         this.soLanXuatHien = result as any
         this.lengthtopsolan = this.soLanXuatHien.length
         for (var i = 0; i < this.lengthtopsolan; i++) {
-          this.dataSourceSoLanXuatHien.data[i].label = this.soLanXuatHien[i].tenSP
-          this.dataSourceSoLanXuatHien.data[i].value = this.soLanXuatHien[i].soLanXuatHienTrongDonHang
+          this.dataSourceSoLanXuatHien.data[i].label = this.soLanXuatHien[i].productName
+          this.dataSourceSoLanXuatHien.data[i].value = this.soLanXuatHien[i].count
         }
       },
       error => {
@@ -203,53 +157,12 @@ export class ChartSecondComponent implements OnInit {
         this.doanhthucaonhat = result as any
         this.lengthtop = this.doanhthucaonhat.length
         for (var i = 0; i < this.lengthtop; i++) {
-          this.dataSourceDoanhThu.data[i].label = this.doanhthucaonhat[i].tenSP
-          this.dataSourceDoanhThu.data[i].value = this.doanhthucaonhat[i].doanhSoCaoNhat
+          this.dataSourceDoanhThu.data[i].label = this.doanhthucaonhat[i].productName
+          this.dataSourceDoanhThu.data[i].value = this.doanhthucaonhat[i].profit
         }
       }
     )
   }
-  ///Quan trong
-  getSoLuongTrongNam() {
-    this.service.getNam2021SoLuong().subscribe(
-      result => {
-        this.nam2021soluong = result as any
-      },
-      error => {
-        this.errorMessage = <any>error
-      }
-    )
-  }
-  bienthedoanhthu: any
-  getTopBienTheDoanhThu() {
-    this.service.getTopBienTheDoanhThu().subscribe(
-      result => {
-        this.bienthedoanhthu = result as any
-      },
-      error => {
-        this.errorMessage = <any>error
-      }
-    )
-  }
-  nhanhieutop: any
-  getTopNhanHieu() {
-    this.service.getTopNhanHieuDoanhThu().subscribe(
-      result => {
-        this.nhanhieutop = result as any
-        for (var i = 0; i < this.nhanhieutop.length; i++) {
-          this.dataSourceBrand.data[i].label = this.nhanhieutop[i].ten
-          this.dataSourceBrand.data[i].value = this.nhanhieutop[i].soLuong
-        }
-      },
-      error => {
-        this.errorMessage = <any>error
-      }
-    )
-  }
-  openDialog() {
-    const dialogRef = this.dialog.open(SelectMonthComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+
+
 }

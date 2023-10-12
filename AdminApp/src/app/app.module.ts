@@ -63,8 +63,6 @@ import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { FusionChartsModule } from 'angular-fusioncharts';
-import { SelectMonthComponent } from './admin/containers/views/chart-second/select-month/select-month.component';
-import { ChartSecondComponent } from './admin/containers/views/chart-second/chart-second.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
 // Report viewer
@@ -95,6 +93,7 @@ import { ReceiptsComponent } from './admin/containers/views/receipts/receipts.co
 import { CreateReceiptComponent } from './admin/containers/views/receipts/create-receipt/create-receipt.component';
 import { ReceiptSuccessComponent } from './admin/containers/views/receipts/receipt-success/receipt-success.component';
 import { ReceiptDetailComponent } from './admin/containers/views/receipts/receipt-detail/receipt-detail.component';
+import { StatisticsComponent } from './admin/containers/views/statistics/statistics.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -178,8 +177,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ProfileComponent,
     OrderDetailComponent,
     DefaultLayoutComponent,
-    SelectMonthComponent,
-    ChartSecondComponent,
+    StatisticsComponent,
     CreateOrEditSupplierComponent,
     SuppliersComponent,
     CreateOrEditCouponComponent,
