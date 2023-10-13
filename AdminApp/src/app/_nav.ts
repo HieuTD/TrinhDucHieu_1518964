@@ -14,11 +14,11 @@ export const navItems: INavData[] = [
         url: '/admin/chartsecond',
         icon: 'cil-chart-pie',
       },
-      {
-        name: 'Nhập hàng',
-        url: '/admin/chartthird',
-        icon: 'cil-bar-chart',
-      },
+      // {
+      //   name: 'Nhập hàng',
+      //   url: '/admin/chartthird',
+      //   icon: 'cil-bar-chart',
+      // },
     ]
   },
   {
@@ -75,11 +75,11 @@ export const navItems: INavData[] = [
         url:'admin/blogs',
         icon:'cil-chat-bubble'
       },
-      {
-        name:'Trò chuyện',
-        url:'admin/chats',
-        icon:'cil-chat-bubble'
-      },
+      // {
+      //   name:'Trò chuyện',
+      //   url:'admin/chats',
+      //   icon:'cil-chat-bubble'
+      // },
     ]
   },
   {

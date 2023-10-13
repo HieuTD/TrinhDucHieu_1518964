@@ -11,20 +11,20 @@ import { options } from 'fusioncharts';
 export class DashboardService {
   constructor(private http: HttpClient) { } 
   getCountProduct(): Observable<number> {
-    return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countproduct")
-    // return this.http.get<number>("https://localhost:44391/api/" + "Statistics/productcount")
+    // return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countproduct")
+    return this.http.get<number>("https://localhost:44391/api/" + "Statistics/productcount")
   }
   getCountOrder(): Observable<number> {
-    return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countorder")
-    // return this.http.get<number>("https://localhost:44391/api/" + "Statistics/ordercount")
+    // return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countorder")
+    return this.http.get<number>("https://localhost:44391/api/" + "Statistics/ordercount")
   }
   getCountUser(): Observable<number> {
-    return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countuser")
-    // return this.http.get<number>("https://localhost:44391/api/" + "Statistics/usercount")
+    // return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countuser")
+    return this.http.get<number>("https://localhost:44391/api/" + "Statistics/usercount")
   }
   getCountTotalMoney(): Observable<number> {
-    return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countmoney")
-    // return this.http.get<number>("https://localhost:44391/api/" + "Statistics/moneycount")
+    // return this.http.get<number>(environment.URL_API + "ThongKeSoLuongs/countmoney")
+    return this.http.get<number>("https://localhost:44391/api/" + "Statistics/moneycount")
   }
   getTopDataSetBanRaTonKho():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeBieuDos/topdatasetbanratonkho") 
