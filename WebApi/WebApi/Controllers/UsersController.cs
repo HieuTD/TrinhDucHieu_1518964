@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,6 +117,14 @@ namespace WebApi.Controllers
                 }
             }
             return await Task.FromResult<ClaimsIdentity>(null);
+        }
+
+        [HttpGet("getUserAddress")]
+        public async Task<IActionResult> GetUerAddress(string id)
+        {
+            //var id = json.GetValue("id_user").ToString();
+            var result = await _context.AppUsers.Where(d => d.Id == id).Select(d => d.Address).SingleOrDefaultAsync();
+            return Ok(result);
         }
     }
 }
