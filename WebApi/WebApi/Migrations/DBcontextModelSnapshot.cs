@@ -408,10 +408,10 @@ namespace WebApi.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProdDetailId")
+                    b.Property<int?>("ProdId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProdId")
+                    b.Property<int?>("ProdVariantId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -431,9 +431,9 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdDetailId");
-
                     b.HasIndex("ProdId");
+
+                    b.HasIndex("ProdVariantId");
 
                     b.HasIndex("UserId");
 
@@ -637,10 +637,10 @@ namespace WebApi.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProdDetailId")
+                    b.Property<int?>("ProdId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProdId")
+                    b.Property<int?>("ProdVariantId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -662,9 +662,9 @@ namespace WebApi.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProdDetailId");
-
                     b.HasIndex("ProdId");
+
+                    b.HasIndex("ProdVariantId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -745,57 +745,6 @@ namespace WebApi.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("WebApi.Models.ProductDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ProdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SizeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("ProdId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ProductDetails");
                 });
 
             modelBuilder.Entity("WebApi.Models.ProductImage", b =>
@@ -888,6 +837,57 @@ namespace WebApi.Migrations
                     b.ToTable("ProductLikes");
                 });
 
+            modelBuilder.Entity("WebApi.Models.ProductVariant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ProdId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("ProdId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductVariants");
+                });
+
             modelBuilder.Entity("WebApi.Models.Receipt", b =>
                 {
                     b.Property<int>("Id")
@@ -965,7 +965,7 @@ namespace WebApi.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ProdDetailId")
+                    b.Property<int?>("ProdVariantId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ReceiptId")
@@ -982,7 +982,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdDetailId");
+                    b.HasIndex("ProdVariantId");
 
                     b.HasIndex("ReceiptId");
 
@@ -1220,13 +1220,13 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Cart", b =>
                 {
-                    b.HasOne("WebApi.Models.ProductDetail", "ProductDetail")
-                        .WithMany("Carts")
-                        .HasForeignKey("ProdDetailId");
-
                     b.HasOne("WebApi.Models.Product", "Product")
                         .WithMany("Carts")
                         .HasForeignKey("ProdId");
+
+                    b.HasOne("WebApi.Models.ProductVariant", "ProductVariant")
+                        .WithMany("Carts")
+                        .HasForeignKey("ProdVariantId");
 
                     b.HasOne("WebApi.Models.AppUser", "AppUser")
                         .WithMany("Carts")
@@ -1236,7 +1236,7 @@ namespace WebApi.Migrations
 
                     b.Navigation("Product");
 
-                    b.Navigation("ProductDetail");
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("WebApi.Models.Color", b =>
@@ -1263,19 +1263,19 @@ namespace WebApi.Migrations
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId");
 
-                    b.HasOne("WebApi.Models.ProductDetail", "ProductDetail")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProdDetailId");
-
                     b.HasOne("WebApi.Models.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProdId");
+
+                    b.HasOne("WebApi.Models.ProductVariant", "ProductVariant")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProdVariantId");
 
                     b.Navigation("Order");
 
                     b.Navigation("Product");
 
-                    b.Navigation("ProductDetail");
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("WebApi.Models.Product", b =>
@@ -1305,27 +1305,6 @@ namespace WebApi.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("WebApi.Models.ProductDetail", b =>
-                {
-                    b.HasOne("WebApi.Models.Color", "Color")
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("ColorId");
-
-                    b.HasOne("WebApi.Models.Product", "Product")
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("ProdId");
-
-                    b.HasOne("WebApi.Models.Size", "Size")
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
-                });
-
             modelBuilder.Entity("WebApi.Models.ProductImage", b =>
                 {
                     b.HasOne("WebApi.Models.Product", "Product")
@@ -1350,6 +1329,27 @@ namespace WebApi.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("WebApi.Models.ProductVariant", b =>
+                {
+                    b.HasOne("WebApi.Models.Color", "Color")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("ColorId");
+
+                    b.HasOne("WebApi.Models.Product", "Product")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("ProdId");
+
+                    b.HasOne("WebApi.Models.Size", "Size")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("SizeId");
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("WebApi.Models.Receipt", b =>
                 {
                     b.HasOne("WebApi.Models.Supplier", "Supplier")
@@ -1369,15 +1369,15 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.ReceiptDetail", b =>
                 {
-                    b.HasOne("WebApi.Models.ProductDetail", "ProductDetail")
+                    b.HasOne("WebApi.Models.ProductVariant", "ProductVariant")
                         .WithMany("ReceiptDetails")
-                        .HasForeignKey("ProdDetailId");
+                        .HasForeignKey("ProdVariantId");
 
                     b.HasOne("WebApi.Models.Receipt", "Receipt")
                         .WithMany("ReceiptDetails")
                         .HasForeignKey("ReceiptId");
 
-                    b.Navigation("ProductDetail");
+                    b.Navigation("ProductVariant");
 
                     b.Navigation("Receipt");
                 });
@@ -1427,7 +1427,7 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Color", b =>
                 {
-                    b.Navigation("ProductDetails");
+                    b.Navigation("ProductVariants");
                 });
 
             modelBuilder.Entity("WebApi.Models.Order", b =>
@@ -1441,12 +1441,12 @@ namespace WebApi.Migrations
 
                     b.Navigation("OrderDetails");
 
-                    b.Navigation("ProductDetails");
-
                     b.Navigation("ProductImages");
+
+                    b.Navigation("ProductVariants");
                 });
 
-            modelBuilder.Entity("WebApi.Models.ProductDetail", b =>
+            modelBuilder.Entity("WebApi.Models.ProductVariant", b =>
                 {
                     b.Navigation("Carts");
 
@@ -1462,7 +1462,7 @@ namespace WebApi.Migrations
 
             modelBuilder.Entity("WebApi.Models.Size", b =>
                 {
-                    b.Navigation("ProductDetails");
+                    b.Navigation("ProductVariants");
                 });
 
             modelBuilder.Entity("WebApi.Models.Supplier", b =>

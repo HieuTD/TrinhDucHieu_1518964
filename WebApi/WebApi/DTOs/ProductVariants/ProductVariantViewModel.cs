@@ -1,6 +1,6 @@
-﻿namespace WebApi.DTOs.ProductDetails
+﻿namespace WebApi.DTOs.ProductVariants
 {
-    public class ProductDetailViewModel
+    public class ProductVariantViewModel
     {
         public int Id { get; set; }
         public int Stock { get; set; }

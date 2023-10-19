@@ -222,9 +222,9 @@ namespace WebApi.Controllers
             {
                 FileHelper.DeleteFileOnTypeAndNameAsync("product", i.Name);
             }
-            Models.ProductDetail[] spbts;
-            spbts = _context.ProductDetails.Where(s => s.ProdId == id).ToArray();
-            _context.ProductDetails.RemoveRange(spbts);
+            Models.ProductVariant[] spbts;
+            spbts = _context.ProductVariants.Where(s => s.ProdId == id).ToArray();
+            _context.ProductVariants.RemoveRange(spbts);
             ProductImage[] images = _context.ProductImages.Where(s => s.ProdId == id).ToArray();
             _context.ProductImages.RemoveRange(images);
             await _context.SaveChangesAsync();

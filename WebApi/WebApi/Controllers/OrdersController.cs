@@ -75,7 +75,7 @@ namespace WebApi.Controllers
                 sp.Id equals isp.ProdId into ispGroup
                 from isp in ispGroup.DefaultIfEmpty()
 
-                join spbt in _context.ProductDetails 
+                join spbt in _context.ProductVariants
                 on sp.Id equals spbt.ProdId
                 
                 join sz in _context.Sizes 
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
                 on spbt.ColorId equals ms.Id
                 
                 join cthd in _context.OrderDetails 
-                on spbt.Id equals cthd.ProdDetailId
+                on spbt.Id equals cthd.ProdVariantId
                 
                 join hd1 in _context.Orders 
                 on cthd.OrderId equals hd1.Id

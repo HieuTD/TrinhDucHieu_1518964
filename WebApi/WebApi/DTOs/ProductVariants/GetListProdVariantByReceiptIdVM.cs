@@ -1,6 +1,6 @@
-﻿namespace WebApi.DTOs.Products
+﻿namespace WebApi.DTOs.ProductVariants
 {
-    public class GetListProdDetailByReceiptIdVM
+    public class GetListProdVariantByReceiptIdVM
     {
         public int Id { get; set; }
         public string ProductName { get; set; }

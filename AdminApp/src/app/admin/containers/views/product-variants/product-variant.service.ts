@@ -17,10 +17,10 @@ export class ProductVariantService{
     constructor(public http:HttpClient) { }
     delete(id:number):Observable<any>{
     //   return this.http.delete<any>(`${this.url}/${id}`)
-      return this.http.delete<any>(`${"https://localhost:44391/api/"+"productDetails"}/${id}`)
+      return this.http.delete<any>(`${"https://localhost:44391/api/"+"productVariants"}/${id}`)
     }
     gethttp():Observable<any>{
-      return this.http.get("https://localhost:44391/api/"+"productDetails")
+      return this.http.get("https://localhost:44391/api/"+"productVariants")
     }
     getAllGiaSanPhamMauSacSanPhamSizes(){
       this.gethttp().subscribe(

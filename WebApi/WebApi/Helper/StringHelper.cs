@@ -13,7 +13,7 @@ namespace WebApi.Helper
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public static int ProdDetailIdHandle(string s)
+        public static int ProdVariantIdHandle(string s)
         {
             // Lấy về một chuỗi có định dạng vd: "Id: 6 Áo bò" => lấy số 6 parse về kiểu int 
             string[] arrListStr = s.Split(" ");

@@ -36,10 +36,10 @@ export class CreateReceiptComponent implements OnInit {
       secondCtrl: []
     });
     this.newFormGroupChiTiet = new FormGroup({
-      ProdDetailPrice: new FormControl(null,
+      ProdVariantPrice: new FormControl(null,
         [
         ]),
-      ProdDetailName: new FormControl(null,
+        ProdVariantName: new FormControl(null,
         [
           Validators.required
         ]),
@@ -59,12 +59,12 @@ export class CreateReceiptComponent implements OnInit {
   public secondFormGroup: FormGroup;
   public newFormGroupChiTiet: FormGroup;
   public newFormGroupPhieuNhap: FormGroup;
-  get ProdDetailName() { return this.newFormGroupChiTiet.get('ProdDetailName'); }
+  get ProdVariantName() { return this.newFormGroupChiTiet.get('ProdVariantName'); }
   get Quantity() { return this.newFormGroupChiTiet.get('Quantity'); }
-  get ProdDetailPrice() { return this.newFormGroupChiTiet.get('ProdDetailPrice'); }
+  get ProdVariantPrice() { return this.newFormGroupChiTiet.get('ProdVariantPrice'); }
   get GhiChu() { return this.newFormGroupPhieuNhap.get('GhiChu'); }
   GiaNhapSanPhamBienThes(value) {
-    this.newFormGroupChiTiet.get('ProdDetailPrice').setValue(value)
+    this.newFormGroupChiTiet.get('ProdVariantPrice').setValue(value)
   }
   idncc: any
   getSanPhamNhaCungCap(event) {
@@ -102,7 +102,7 @@ export class CreateReceiptComponent implements OnInit {
   tongTien() {
     let sum = 0
     for (var i = 0; i < this.chitiets.length; i++) {
-      sum = sum + (this.chitiets[i].Quantity * this.chitiets[i].ProdDetailPrice)
+      sum = sum + (this.chitiets[i].Quantity * this.chitiets[i].ProdVariantPrice)
     }
     return sum
   }

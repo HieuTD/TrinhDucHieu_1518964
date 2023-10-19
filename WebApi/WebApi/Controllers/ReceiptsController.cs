@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using WebApi.Helper;
 using WebApi.Models;
-using WebApi.DTOs.Products;
+using WebApi.DTOs.ProductVariants;
 
 namespace WebApi.Controllers
 {
@@ -67,14 +67,14 @@ namespace WebApi.Controllers
             foreach (var chitietupload in uploadPhieuNhap.ReceiptDetails)
             {
                 ReceiptDetail ctpn = new ReceiptDetail();
-                ctpn.ProdDetailId = StringHelper.ProdDetailIdHandle(chitietupload.ProdDetailName);
-                ctpn.TotalPrice = chitietupload.ProdDetailPrice * chitietupload.Quantity;
+                ctpn.ProdVariantId = StringHelper.ProdVariantIdHandle(chitietupload.ProdVariantName);
+                ctpn.TotalPrice = chitietupload.ProdVariantPrice * chitietupload.Quantity;
                 ctpn.ReceiptId = phieuNhap.Id;
                 ctpn.Amonut = chitietupload.Quantity;
-                ProductDetail spbt = await _context.ProductDetails.FindAsync(StringHelper.ProdDetailIdHandle(chitietupload.ProdDetailName));
+                ProductVariant spbt = await _context.ProductVariants.FindAsync(StringHelper.ProdVariantIdHandle(chitietupload.ProdVariantName));
                 //Cập nhật lại số lượng hàng trong kho
                 spbt.Stock = spbt.Stock + chitietupload.Quantity;
-                _context.ProductDetails.Update(spbt);
+                _context.ProductVariants.Update(spbt);
                 listctpn.Add(ctpn);
                 _context.ReceiptDetails.Add(ctpn);
                 await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ReceiptDetailViewModel>> GetReceiptDetailById(int id)
         {
-            var listDetail = from spbt in _context.ProductDetails
+            var listDetail = from spbt in _context.ProductVariants
                              join sp in _context.Products
                              on spbt.ProdId equals sp.Id
                              join l in _context.Categories
@@ -98,8 +98,8 @@ namespace WebApi.Controllers
                              join s in _context.Sizes
                              on spbt.SizeId equals s.Id
                              join ctpn in _context.ReceiptDetails
-                             on spbt.Id equals ctpn.ProdDetailId
-                             select new GetListProdDetailByReceiptIdVM()
+                             on spbt.Id equals ctpn.ProdVariantId
+                             select new GetListProdVariantByReceiptIdVM()
                              {
                                  Id = spbt.Id,
                                  ProductName = sp.Name + " " + s.Name + " " + m.Name,
@@ -129,7 +129,7 @@ namespace WebApi.Controllers
                               Description = ncc.Description,
                               PhoneNumber = ncc.PhoneNumber,
                           },
-                          ListProdDetails = (List<GetListProdDetailByReceiptIdVM>)listDetail.Where(s => s.ReceiptId == id),
+                          ListProdVariants = (List<GetListProdVariantByReceiptIdVM>)listDetail.Where(s => s.ReceiptId == id),
                       });
             return await kb.FirstOrDefaultAsync(s => s.Id == id);
         }
