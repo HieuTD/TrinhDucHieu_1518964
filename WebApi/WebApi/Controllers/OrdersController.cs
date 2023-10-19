@@ -143,5 +143,22 @@ namespace WebApi.Controllers
 
             return hd;
         }
+
+
+        [HttpGet("listorderbyuserid/{id}")]
+        public async Task<ActionResult> GetListOrderByUserId(string id)
+        {
+            var result = await _context.Orders.Where(d => d.UserId == id).ToListAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetOrderById(int id)
+        {
+            var rs = await _context.Orders.Where(d => d.Id == id).FirstOrDefaultAsync();
+            rs.AppUser = await _context.AppUsers.Where(d => d.Id == rs.UserId).FirstOrDefaultAsync();
+            return Ok(rs);
+        }
+
     }
 }

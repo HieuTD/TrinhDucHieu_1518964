@@ -21,14 +21,14 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        [HttpPost("getCart/{id}")]
+        [HttpGet("getCart/{id}")]
         public async Task<ActionResult<IEnumerable<CartViewModel>>> GetCartByUserId(string id)
         {
             var getiduser = id;
             var resuft = await _context.Carts.Where(s => s.UserId == getiduser)
                 .Select(d => new CartViewModel
                 {
-                    ProdDetailId = d.ProdDetailId,
+                    ProdVariantId = d.ProdVariantId,
                     CartID = d.Id,
                     Color = d.Color,
                     Size = d.Size,
@@ -83,7 +83,7 @@ namespace WebApi.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteCart([FromBody] CartDeleteRequest delete)
         {
-            var card = _context.Carts.Where(d => d.ProdDetailId == delete.ProdDetailId && d.UserId == delete.UserId).SingleOrDefault();
+            var card = _context.Carts.Where(d => d.ProdVariantId == delete.ProdVariantId && d.UserId == delete.UserId).SingleOrDefault();
             _context.Carts.Remove(card);
             await _context.SaveChangesAsync();
             //return Json("1");

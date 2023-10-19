@@ -8,7 +8,7 @@ namespace WebApi.DTOs.Carts
         public string UserID { get; set; }
         public string Color { get; set; }
         public int Quantity { get; set; }
-        public int? ProdDetailId { get; set; }
+        public int? ProdVariantId { get; set; }
         public string Size { get; set; }
     }
 }
