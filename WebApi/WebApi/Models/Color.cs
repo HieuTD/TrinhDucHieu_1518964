@@ -15,6 +15,6 @@ namespace WebApi.Models
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        public ICollection<ProductDetail> ProductDetails { get; set; }
+        public ICollection<ProductVariant> ProductVariants { get; set; }
     }
 }

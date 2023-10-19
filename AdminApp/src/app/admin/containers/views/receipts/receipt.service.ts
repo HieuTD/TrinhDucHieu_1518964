@@ -40,7 +40,7 @@ export class ReceiptService {
   //Lấy ra sản phẩm biến thể dựa theo Id sản phẩm
   gettensanphambienthehttp(prodid):Observable<any>{
     // return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamBienTheMauSizeLoai",data)
-        return this.http.get(`${"https://localhost:44391/api/"}productDetails/listproddetail/${prodid}`)
+        return this.http.get(`${"https://localhost:44391/api/"}productVariants/listprodvariant/${prodid}`)
   }
   getdetailphieunhap(id:number):Observable<any>{
     // return this.http.get<any>(environment.URL_API+"TaoPhieuNhaps/"+id)

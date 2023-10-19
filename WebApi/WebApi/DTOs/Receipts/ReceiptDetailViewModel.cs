@@ -2,6 +2,7 @@
 using System;
 using WebApi.Models;
 using WebApi.DTOs.Products;
+using WebApi.DTOs.ProductVariants;
 
 namespace WebApi.DTOs.Receipts
 {
@@ -14,6 +15,6 @@ namespace WebApi.DTOs.Receipts
         public string Description { get; set; }
         public string UserName { get; set; }
         public Supplier Supplier { get; set; }
-        public List<GetListProdDetailByReceiptIdVM> ListProdDetails { get; set; }
+        public List<GetListProdVariantByReceiptIdVM> ListProdVariants { get; set; }
     }
 }

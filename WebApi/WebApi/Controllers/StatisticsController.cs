@@ -71,7 +71,7 @@ namespace WebApi.Controllers
 
             var result = await (from sanPham in _context.Products
 
-                                join sanPhamBienThe in _context.ProductDetails 
+                                join sanPhamBienThe in _context.ProductVariants
                                 on sanPham.Id equals sanPhamBienThe.ProdId
 
                                 join mauSac in _context.Colors 
@@ -81,7 +81,7 @@ namespace WebApi.Controllers
                                 on sanPhamBienThe.SizeId equals size.Id
 
                                 join chiTietHoaDon in _context.OrderDetails 
-                                on sanPhamBienThe.Id equals chiTietHoaDon.ProdDetailId
+                                on sanPhamBienThe.Id equals chiTietHoaDon.ProdVariantId
 
                                 join hoaDon in _context.Orders 
                                 on chiTietHoaDon.OrderId equals hoaDon.Id
@@ -125,7 +125,7 @@ namespace WebApi.Controllers
 
             var result = await (from sanPham in _context.Products
                                 
-                                join sanPhamBienThe in _context.ProductDetails 
+                                join sanPhamBienThe in _context.ProductVariants
                                 on sanPham.Id equals sanPhamBienThe.ProdId
 
                                 join mauSac in _context.Colors 
@@ -135,7 +135,7 @@ namespace WebApi.Controllers
                                 on sanPhamBienThe.SizeId equals size.Id
 
                                 join chiTietHoaDon in _context.OrderDetails 
-                                on sanPhamBienThe.Id equals chiTietHoaDon.ProdDetailId
+                                on sanPhamBienThe.Id equals chiTietHoaDon.ProdVariantId
 
                                 join hoaDon in _context.Orders 
                                 on chiTietHoaDon.OrderId equals hoaDon.Id

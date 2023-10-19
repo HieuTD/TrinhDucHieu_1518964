@@ -21,8 +21,8 @@ namespace WebApi.Models
         [ForeignKey("ProdId")]
         public virtual Product Product { get; set; }
 
-        public int? ProdDetailId { get; set; }
-        [ForeignKey("ProdDetailId")]
-        public virtual ProductDetail ProductDetail { get; set; }
+        public int? ProdVariantId { get; set; }
+        [ForeignKey("ProdVariantId")]
+        public virtual ProductVariant ProductVariant { get; set; }
     }
 }

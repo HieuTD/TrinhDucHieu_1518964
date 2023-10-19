@@ -109,7 +109,7 @@ export class CreateOrEditProductVariantComponent implements OnInit {
       formData.append('Stock', data.SoLuongTon);
       console.log(data);
       // this.http.post(environment.URL_API + 'sanphambienthes', formData)
-      this.http.post("https://localhost:44391/api/" + 'productDetails', formData)
+      this.http.post("https://localhost:44391/api/" + 'productVariants', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
           this.service.getAllGiaSanPhamMauSacSanPhamSizes();
@@ -126,7 +126,7 @@ export class CreateOrEditProductVariantComponent implements OnInit {
       formData.append('SizeId', data.Id_Size);
       formData.append('Stock', data.SoLuongTon);
       // this.http.put(environment.URL_API + 'sanphambienthes/' + `${this.service.sanphambienthe.id}`, formData)
-      this.http.put("https://localhost:44391/api/" + 'productDetails/' + `${this.service.sanphambienthe.id}`, formData)
+      this.http.put("https://localhost:44391/api/" + 'productVariants/' + `${this.service.sanphambienthe.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
           this.service.getAllGiaSanPhamMauSacSanPhamSizes();

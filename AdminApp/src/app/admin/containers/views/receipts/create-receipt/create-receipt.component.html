@@ -78,7 +78,7 @@
               </div>
               <div class="form-group">
                 <span class="label label-default">Tên sản phẩm biến thể</span>
-                <select class="form-control" [disabled]="selectedFruit !== 'Apple'" formControlName="ProdDetailName">
+                <select class="form-control" [disabled]="selectedFruit !== 'Apple'" formControlName="ProdVariantName">
                   <option *ngFor="let item of this.sanphambienthes" [value]="item.name">
                     {{item.name}}
                   </option>
@@ -86,7 +86,7 @@
               </div>
               <div class="form-group">
                 <span class="label label-default">Giá nhập sản phẩm biến thể</span>
-                <input type="text" class="form-control" formControlName="ProdDetailPrice" readonly>
+                <input type="text" class="form-control" formControlName="ProdVariantPrice" readonly>
               </div>
               <div class="form-group">
                 <span class="label label-default">Số lượng cần nhập</span>
@@ -141,16 +141,16 @@
             <tbody>
               <tr *ngFor="let item of chitiets">
                 <td>
-                  {{item.ProdDetailName}}
+                  {{item.ProdVariantName}}
                 </td>
                 <td>
-                  {{item.ProdDetailPrice|number}} VNĐ
+                  {{item.ProdVariantPrice|number}} VNĐ
                 </td>
                 <td>
                   {{item.Quantity}}
                 </td>
                 <td>
-                  {{item.ProdDetailPrice*item.Quantity}}
+                  {{item.ProdVariantPrice*item.Quantity}}
                 </td>
                 <td>
                   <button class="btn btn-danger"><i class="fa fa-trash" (click)="deleteDetail(item)"

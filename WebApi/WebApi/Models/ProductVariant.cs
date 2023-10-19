@@ -5,7 +5,7 @@ using WebApi.Models.Common;
 
 namespace WebApi.Models
 {
-    public class ProductDetail : BaseModel
+    public class ProductVariant : BaseModel
     {
         [Key]
         public int Id { get; set; }

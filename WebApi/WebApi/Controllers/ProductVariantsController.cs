@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebApi.DTOs.ProductDetails;
 using WebApi.EF;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -10,25 +9,26 @@ using Microsoft.AspNetCore.SignalR;
 using WebApi.Models;
 using System;
 using WebApi.DTOs.Products;
+using WebApi.DTOs.ProductVariants;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductDetailsController : ControllerBase
+    public class ProductVariantsController : ControllerBase
     {
         private readonly DBcontext _context;
 
-        public ProductDetailsController(DBcontext context)
+        public ProductVariantsController(DBcontext context)
         {
             _context = context;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDetailViewModel>>> GetAllProductDetails()
+        public async Task<ActionResult<IEnumerable<ProductVariantViewModel>>> GetAllProductVariants()
         {
-            var query = from pd in _context.ProductDetails
+            var query = from pd in _context.ProductVariants
 
                      join p in _context.Products
                      on pd.ProdId equals p.Id
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
                      
                      join s in _context.Sizes
                      on pd.SizeId equals s.Id
-                     select new ProductDetailViewModel()
+                     select new ProductVariantViewModel()
                      {
                          Id = pd.Id,
                          ProdId = p.Id,
@@ -54,55 +54,55 @@ namespace WebApi.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDetailViewModel>> GetProductDetailById(int id)
+        public async Task<ActionResult<ProductVariantViewModel>> GetProductVariantById(int id)
         {
-            var prodDetail = await _context.ProductDetails.FindAsync(id);
-            if (prodDetail == null)
+            var prodVariant = await _context.ProductVariants.FindAsync(id);
+            if (prodVariant == null)
             {
                 return NotFound();
             }
-            return new ProductDetailViewModel()
+            return new ProductVariantViewModel()
             {
-                Id = prodDetail.Id,
-                ProdId = prodDetail.Id,
-                ColorId = prodDetail.Id,
-                SizeId = prodDetail.Id,
-                Stock = prodDetail.Stock
+                Id = prodVariant.Id,
+                ProdId = prodVariant.Id,
+                ColorId = prodVariant.Id,
+                SizeId = prodVariant.Id,
+                Stock = prodVariant.Stock
             };
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductDetailViewModel>> AddProductDetail([FromForm] ProductDetailCreateRequest request)
+        public async Task<ActionResult<ProductVariantViewModel>> AddProductVariant([FromForm] ProductVariantCreateRequest request)
         {
             //Notification notification = new Notification()
             //{
             //    TranType = "Add"
             //};
             //_context.Notifications.Add(notification);
-            ProductDetail prodDetail = new ProductDetail();
-            prodDetail.Stock = request.Stock;
-            prodDetail.ProdId = request.ProdId;
-            prodDetail.ColorId = request.ColorId;
-            prodDetail.SizeId = request.SizeId;
-            prodDetail.CreatedAt = DateTime.Now;
+            ProductVariant prodVariant = new ProductVariant();
+            prodVariant.Stock = request.Stock;
+            prodVariant.ProdId = request.ProdId;
+            prodVariant.ColorId = request.ColorId;
+            prodVariant.SizeId = request.SizeId;
+            prodVariant.CreatedAt = DateTime.Now;
 
-            _context.ProductDetails.Add(prodDetail);
+            _context.ProductVariants.Add(prodVariant);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
-            return Ok(prodDetail);
+            return Ok(prodVariant);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProductDetail(int id, [FromForm] ProductDetailCreateRequest request)
+        public async Task<IActionResult> UpdateProductVariant(int id, [FromForm] ProductVariantCreateRequest request)
         {
-            ProductDetail prodDetail = await _context.ProductDetails.FindAsync(id);
-            prodDetail.Stock = request.Stock;
-            prodDetail.ProdId = request.ProdId;
-            prodDetail.ColorId = request.ColorId;
-            prodDetail.SizeId = request.SizeId;
-            prodDetail.UpdatedAt = DateTime.Now;
+            ProductVariant prodVariant = await _context.ProductVariants.FindAsync(id);
+            prodVariant.Stock = request.Stock;
+            prodVariant.ProdId = request.ProdId;
+            prodVariant.ColorId = request.ColorId;
+            prodVariant.SizeId = request.SizeId;
+            prodVariant.UpdatedAt = DateTime.Now;
 
-            _context.ProductDetails.Update(prodDetail);
+            _context.ProductVariants.Update(prodVariant);
 
             //Notification notification = new Notification()
             //{
@@ -115,10 +115,10 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSanPhamBienTh(int id)
+        public async Task<IActionResult> DeleteProductVariant(int id)
         {
-            ProductDetail prodDetail = await _context.ProductDetails.FindAsync(id);
-            _context.ProductDetails.Remove(prodDetail);
+            ProductVariant prodVariant = await _context.ProductVariants.FindAsync(id);
+            _context.ProductVariants.Remove(prodVariant);
             //Notification notification = new Notification()
             //{
             //    //TenSanPham = spbt.ImagePath,
@@ -131,10 +131,10 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpGet("listproddetail/{id}")]
-        public async Task<ActionResult<IEnumerable<GetListProdDetailByProdIdVM>>> GetListProdDetailByProdId(int id)
+        [HttpGet("listprodvariant/{id}")]
+        public async Task<ActionResult<IEnumerable<GetListProdVariantByProdIdVM>>> GetListProdVariantByProdId(int id)
         {
-            var kb = from spbt in _context.ProductDetails
+            var kb = from spbt in _context.ProductVariants
                      join sp in _context.Products.Where(s => s.Id == id)
                      on spbt.ProdId equals sp.Id
                      join l in _context.Categories
@@ -143,7 +143,7 @@ namespace WebApi.Controllers
                      on spbt.ColorId equals m.Id
                      join s in _context.Sizes
                      on spbt.SizeId equals s.Id
-                     select new GetListProdDetailByProdIdVM()
+                     select new GetListProdVariantByProdIdVM()
                      {
                          Id = spbt.Id,
                          Name = "Id: " + spbt.Id + " Tên: " + sp.Name + " " + l.Name + " " + m.Name,

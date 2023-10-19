@@ -493,47 +493,6 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    ProdId = table.Column<int>(type: "int", nullable: true),
-                    ColorId = table.Column<int>(type: "int", nullable: true),
-                    SizeId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_Colors_ColorId",
-                        column: x => x.ColorId,
-                        principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_Products_ProdId",
-                        column: x => x.ProdId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductDetails_Sizes_SizeId",
-                        column: x => x.SizeId,
-                        principalTable: "Sizes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductImages",
                 columns: table => new
                 {
@@ -596,6 +555,47 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductVariants",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    ProdId = table.Column<int>(type: "int", nullable: true),
+                    ColorId = table.Column<int>(type: "int", nullable: true),
+                    SizeId = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductVariants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductVariants_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductVariants_Products_ProdId",
+                        column: x => x.ProdId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductVariants_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -641,7 +641,7 @@ namespace WebApi.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ProdId = table.Column<int>(type: "int", nullable: true),
-                    ProdDetailId = table.Column<int>(type: "int", nullable: true),
+                    ProdVariantId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -660,15 +660,15 @@ namespace WebApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Carts_ProductDetails_ProdDetailId",
-                        column: x => x.ProdDetailId,
-                        principalTable: "ProductDetails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Carts_Products_ProdId",
                         column: x => x.ProdId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Carts_ProductVariants_ProdVariantId",
+                        column: x => x.ProdVariantId,
+                        principalTable: "ProductVariants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -686,7 +686,7 @@ namespace WebApi.Migrations
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrderId = table.Column<int>(type: "int", nullable: true),
                     ProdId = table.Column<int>(type: "int", nullable: true),
-                    ProdDetailId = table.Column<int>(type: "int", nullable: true),
+                    ProdVariantId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -705,15 +705,15 @@ namespace WebApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_ProductDetails_ProdDetailId",
-                        column: x => x.ProdDetailId,
-                        principalTable: "ProductDetails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProdId",
                         column: x => x.ProdId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_ProductVariants_ProdVariantId",
+                        column: x => x.ProdVariantId,
+                        principalTable: "ProductVariants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -727,7 +727,7 @@ namespace WebApi.Migrations
                     Amonut = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReceiptId = table.Column<int>(type: "int", nullable: true),
-                    ProdDetailId = table.Column<int>(type: "int", nullable: true),
+                    ProdVariantId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -740,9 +740,9 @@ namespace WebApi.Migrations
                 {
                     table.PrimaryKey("PK_ReceiptDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ReceiptDetails_ProductDetails_ProdDetailId",
-                        column: x => x.ProdDetailId,
-                        principalTable: "ProductDetails",
+                        name: "FK_ReceiptDetails_ProductVariants_ProdVariantId",
+                        column: x => x.ProdVariantId,
+                        principalTable: "ProductVariants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -808,14 +808,14 @@ namespace WebApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carts_ProdDetailId",
-                table: "Carts",
-                column: "ProdDetailId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProdId",
                 table: "Carts",
                 column: "ProdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_ProdVariantId",
+                table: "Carts",
+                column: "ProdVariantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
@@ -833,34 +833,19 @@ namespace WebApi.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProdDetailId",
-                table: "OrderDetails",
-                column: "ProdDetailId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ProdId",
                 table: "OrderDetails",
                 column: "ProdId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_ProdVariantId",
+                table: "OrderDetails",
+                column: "ProdVariantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_ColorId",
-                table: "ProductDetails",
-                column: "ColorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_ProdId",
-                table: "ProductDetails",
-                column: "ProdId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_SizeId",
-                table: "ProductDetails",
-                column: "SizeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProdId",
@@ -893,9 +878,24 @@ namespace WebApi.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReceiptDetails_ProdDetailId",
+                name: "IX_ProductVariants_ColorId",
+                table: "ProductVariants",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariants_ProdId",
+                table: "ProductVariants",
+                column: "ProdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariants_SizeId",
+                table: "ProductVariants",
+                column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceiptDetails_ProdVariantId",
                 table: "ReceiptDetails",
-                column: "ProdDetailId");
+                column: "ProdVariantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReceiptDetails_ReceiptId",
@@ -982,7 +982,7 @@ namespace WebApi.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "ProductDetails");
+                name: "ProductVariants");
 
             migrationBuilder.DropTable(
                 name: "Receipts");
