@@ -133,5 +133,17 @@ namespace WebApi.Controllers
                      };
             return await rs.ToListAsync();
         }
+
+
+        [HttpGet("listcolorbyprodid/{id}")]
+        public async Task<ActionResult> GetListColorByProdId(int id)
+        {
+            var colorId = _context.ProductVariants.Where(d => d.ProdId == id).Select(d => d.ColorId).ToList();
+            var rs = _context.Colors.Where(d => colorId.Contains(d.Id)).
+                Select(d => new {
+                    ColorName = d.Name
+                });
+            return Ok(await rs.ToListAsync());
+        }
     }
 }

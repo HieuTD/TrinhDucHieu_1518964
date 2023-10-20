@@ -36,9 +36,8 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
               this.product =resp as Product;
               this.list_san_pham_bien_the= this.product.sanPhamBienThes;
               this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.moTa);
-              this.http.post(environment.URL_API+"mausacs/mau/",{
-                id_san_pham:this.id_product,
-    }).subscribe(
+              this.http.get(environment.URL_API+"mausacs/mau/"+this.id_product
+              ).subscribe(
       res=>{
         this.mau=res;
       });
@@ -54,10 +53,11 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
   ngOnInit(){
   }
   onChangeMau(mau){
-    this.http.post(environment.URL_API+"sizes/sizetheomau/",{
-      id_san_pham:this.id_product,
-      mamau:mau
-    }).subscribe(
+    var val = {
+      prodId: this.id_product,
+      colorName: mau,
+    };
+    this.http.post(environment.URL_API+"sizes/sizetheomau/",val).subscribe(
       res=>{
         this.size=res;
       });

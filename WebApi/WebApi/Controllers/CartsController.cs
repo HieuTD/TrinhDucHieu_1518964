@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<CartViewModel>>> GetCartByUserId(string id)
         {
             var getiduser = id;
-            var resuft = await _context.Carts.Where(s => s.UserId == getiduser)
+            var rs = await _context.Carts.Where(s => s.UserId == getiduser)
                 .Select(d => new CartViewModel
                 {
                     ProdVariantId = d.ProdVariantId,
@@ -43,7 +43,7 @@ namespace WebApi.Controllers
                     //        KhuyenMai = i.KhuyenMai
                     //    }).FirstOrDefault(),
                 }).ToListAsync();
-            return resuft;
+            return rs;
         }
 
 

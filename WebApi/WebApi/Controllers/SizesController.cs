@@ -129,5 +129,21 @@ namespace WebApi.Controllers
             var kbs = rs.ToListAsync();
             return await kbs;
         }
+
+
+        [HttpPost("listSizeByColor")]
+        public async Task<ActionResult> GetListSizeByColor(GetListSizeByColorRequest request)
+        {
+            var categoryId = _context.Products.Where(d => d.Id == request.ProdId).Select(d => d.CategoryId).SingleOrDefault();
+            var mauloai = request.ColorName + categoryId;
+            var colorId = _context.Colors.Where(d => d.Name + d.CategoryId == mauloai && d.CategoryId == categoryId).Select(d => d.Id).SingleOrDefault();
+            var listSizeId = _context.ProductVariants.Where(d => d.ColorId == colorId && d.ProdId == request.ProdId).Select(d => d.SizeId.ToString()).ToList();
+            var rs = _context.Sizes.Where(d => listSizeId.Contains(d.Id.ToString())).Select(
+                d => new
+                {
+                    size = d.Name
+                }).ToList();
+            return Ok(rs);
+        }
     }
 }
