@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Models;
 using Microsoft.AspNetCore.SignalR;
+using System;
 
 namespace WebApi.Controllers
 {
@@ -64,6 +65,7 @@ namespace WebApi.Controllers
             return Ok();
         }
 
+        //Lấy chỉ tiết hóa đơn cho ADMIN
         [HttpGet("adminorderdetail/{id}")]
         public async Task<ActionResult<OrderDetailViewModel>> GetOrderDetail(int id)
         {
@@ -160,5 +162,50 @@ namespace WebApi.Controllers
             return Ok(rs);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Order>> AddOrder(Order hd)
+        {
+            Order hoaDon = new Order()
+            {
+                Status = 0,
+                Description = hd.Description,
+                UserId = hd.UserId,
+                CreatedAt = DateTime.Now,
+                //Tinh = hd.Tinh,
+                //Huyen = hd.Huyen,
+                //Xa = hd.Xa,
+                Address = hd.Address,
+                TotalPrice = hd.TotalPrice
+            };
+            _context.Orders.Add(hoaDon);
+            await _context.SaveChangesAsync();
+            //NotificationCheckout notification = new NotificationCheckout()
+            //{
+            //    ThongBaoMaDonHang = hoaDon.Id,
+            //};
+            //_context.NotificationCheckouts.Add(notification);
+            var cart = _context.Carts.Where(d => d.UserId == hd.UserId).ToList();
+            for (int i = 0; i < cart.Count; i++)
+            {
+                var thisSanPhamBienThe = _context.ProductVariants.Find(cart[i].ProdVariantId);
+                OrderDetail cthd = new OrderDetail();
+                cthd.ProdId = cart[i].ProdId;
+                cthd.ProdVariantId = cart[i].ProdVariantId;
+                cthd.OrderId = hoaDon.Id;
+                cthd.Price = (decimal)cart[i].Price;
+                cthd.Quantity = cart[i].Quantity;
+                cthd.TotalPrice = (decimal)cart[i].Price * cart[i].Quantity;
+                cthd.Size = cart[i].Size;
+                cthd.Color = cart[i].Color;
+                //Khi hoàn tất đặt đơn hàng thì số lượng sản phẩm trong kho sẽ trừ đi số sản phẩm mua trong giỏ hàng
+                thisSanPhamBienThe.Stock = thisSanPhamBienThe.Stock - cart[i].Quantity;
+                _context.ProductVariants.Update(thisSanPhamBienThe);
+                _context.OrderDetails.Add(cthd);
+                _context.Carts.Remove(cart[i]);
+                await _context.SaveChangesAsync();
+            };
+            //await _hubContext.Clients.All.BroadcastMessage();
+            return Ok(1);
+        }
     }
 }

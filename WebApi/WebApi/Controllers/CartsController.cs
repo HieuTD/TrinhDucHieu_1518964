@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs.Carts;
+using WebApi.DTOs.Products;
 using WebApi.EF;
 using WebApi.Models;
 
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        [HttpGet("getCart/{id}")]
+        [HttpGet("getcartbyuserid/{id}")]
         public async Task<ActionResult<IEnumerable<CartViewModel>>> GetCartByUserId(string id)
         {
             var getiduser = id;
@@ -33,15 +34,15 @@ namespace WebApi.Controllers
                     Color = d.Color,
                     Size = d.Size,
                     Quantity = d.Quantity,
-                    //ProductDetail = _context.SanPhams.Where(i => i.Id == d.SanPhamId).Select(
-                    //    i => new ProductDetail
-                    //    {
-                    //        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == d.SanPhamId).Select(q => q.ImageName).FirstOrDefault(),
-                    //        Id = i.Id,
-                    //        Ten = i.Ten,
-                    //        GiaBan = i.GiaBan,
-                    //        KhuyenMai = i.KhuyenMai
-                    //    }).FirstOrDefault(),
+                    ProductDetail = _context.Products.Where(i => i.Id == d.ProdId).Select(
+                        i => new ProductDetailViewModel
+                        {
+                            Image = _context.ProductImages.Where(q => q.ProdId == d.ProdId).Select(q => q.Name).FirstOrDefault(),
+                            Id = i.Id,
+                            Name = i.Name,
+                            Price = i.Price,
+                            Discount = i.Discount
+                        }).FirstOrDefault(),
                 }).ToListAsync();
             return rs;
         }
@@ -67,15 +68,15 @@ namespace WebApi.Controllers
                     Color = d.Color,
                     Size = d.Size,
                     Quantity = d.Quantity,
-                    //ProductDetail = _context.SanPhams.Where(i => i.Id == d.SanPhamId).Select(
-                    //    i => new ProductDetail
-                    //    {
-                    //        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == d.SanPhamId).Select(q => q.ImageName).FirstOrDefault(),
-                    //        Id = i.Id,
-                    //        Ten = i.Ten,
-                    //        GiaBan = i.GiaBan,
-                    //        KhuyenMai = i.KhuyenMai
-                    //    }).FirstOrDefault(),
+                    ProductDetail = _context.Products.Where(i => i.Id == d.ProdId).Select(
+                        i => new ProductDetailViewModel
+                        {
+                            Image = _context.ProductImages.Where(q => q.ProdId == d.ProdId).Select(q => q.Name).FirstOrDefault(),
+                            Id = i.Id,
+                            Name = i.Name,
+                            Price = i.Price,
+                            Discount = i.Discount
+                        }).FirstOrDefault(),
                 }).ToList();
             return Ok(resuft);
         }
@@ -88,6 +89,46 @@ namespace WebApi.Controllers
             await _context.SaveChangesAsync();
             //return Json("1");
             return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Cart>> GetCartById(int id)
+        {
+            var cart = await _context.Carts.FindAsync(id);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+            return cart;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Cart>> AddCart(Cart cart)
+        {
+            var shoppingCartItem = _context.Carts
+                .SingleOrDefault(s => s.ProdId == cart.ProdId && s.UserId == cart.UserId && s.Color == cart.Color && s.Size == cart.Size);
+
+            //Nếu chưa có loại sản phẩm tìm kiếm trong giỏ hàng thì thêm mới sản phẩm đó vào giỏ
+            if (shoppingCartItem == null)
+            {
+                Cart newCart = new Cart();
+                newCart.UserId = cart.UserId;
+                newCart.ProdId = cart.ProdId;
+                newCart.ProdVariantId = cart.ProdVariantId;
+                newCart.Size = cart.Size;
+                newCart.Color = cart.Color;
+                newCart.Price = _context.Products.Where(d => d.Id == cart.ProdId).Select(d => d.Price).FirstOrDefault();
+                newCart.Quantity = cart.Quantity;
+                _context.Carts.Add(newCart);
+                await _context.SaveChangesAsync();
+            }
+            //Nếu có trong giỏ hàng rồi thì chỉ cộng thêm số lượng
+            else
+            {
+                shoppingCartItem.Quantity = shoppingCartItem.Quantity + cart.Quantity;
+            }
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetCartById", new { id = cart.Id }, cart);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using WebApi.Models;
+﻿using WebApi.DTOs.Products;
+using WebApi.Models;
 
 namespace WebApi.DTOs.Carts
 {
@@ -10,5 +11,6 @@ namespace WebApi.DTOs.Carts
         public int Quantity { get; set; }
         public int? ProdVariantId { get; set; }
         public string Size { get; set; }
+        public ProductDetailViewModel ProductDetail { get; set; }
     }
 }
