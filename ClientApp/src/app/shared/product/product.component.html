@@ -18,10 +18,10 @@
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a [routerLink]="'/product/'+product.id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                {{product.ten}}
+                                {{product.name}}
                             </a>
                                 <span class="stext-105 cl3">
-                                {{product.giaBan|number}} VNĐ
+                                {{product.price|number}} VNĐ
                             </span>
                             </div>
                             <div class="block2-txt-child2 flex-r p-t-3">
@@ -211,10 +211,10 @@
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
                             <a [routerLink]="'/product/'+item.id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    {{item.ten}}
+                                    {{item.name}}
                                 </a>
                             <span class="stext-105 cl3">
-                                    {{item.giaBan|number}} VNĐ
+                                    {{item.price|number}} VNĐ
                                 </span>
                         </div>
                         <div class="block2-txt-child2 flex-r p-t-3">
@@ -240,10 +240,10 @@
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
                             <a [routerLink]="'/product/'+item.id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    {{item.ten}}
+                                    {{item.name}}
                                 </a>
                             <span class="stext-105 cl3">
-                                    {{item.giaBan|number}} VNĐ
+                                    {{item.price|number}} VNĐ
                                 </span>
                         </div>
                         <div class="block2-txt-child2 flex-r p-t-3">

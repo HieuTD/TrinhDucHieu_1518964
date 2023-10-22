@@ -1,30 +1,30 @@
 export interface Product {
     id?: number;
-    ten?: string;
-    khuyenMai?: number;
-    moTa?: string;
+    name?: string;
+    discount?: number;
+    description?: string;
     tag?: string;
     image?: string;
-    giaBan?: number;
-    trangThaiSanPham?: string;
+    price?: number;
+    status?: string;
     trangThaiSanPhamThietKe?:string;
-    trangThaiHoatDong?:string;
+    isFeatured?:string;
     huongDan?:string;
-    thanhPhan?:string;
-    tenNhanHieu?:string;
-    tenLoai?:string;
-    id_Loai?:number;
-    gioiTinh?:number;
+    material?:string;
+    brandName?:string;
+    categoryName?:string;
+    categoryId?:number;
+    gender?:number;
     imageSanPhams:imageSanPhams[];
     sanPhamBienThes:sanPhamBienThes[];
     like?:number;
 }
 export interface sanPhamBienThes {
     id?:number;
-    id_SanPham?:number;
-    tenMau?:string;
-    soLuongTon?:number;
-    tenSize?:string;
+    prodId?:number;
+    colorName?:string;
+    stock?:number;
+    sizeName?:string;
 }
 export interface imageSanPhams {
     id?:number;

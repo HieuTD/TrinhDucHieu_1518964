@@ -27,7 +27,8 @@ export class UserService extends BaseService  {
    login(userName, password):boolean {
      var check=false;
       this.http.post(
-      environment.URL_API + 'auth/login',
+      // environment.URL_API + 'auth/login',
+      "https://localhost:44391/api/"+'users/login',
       JSON.stringify({ userName, password }),
       { headers: new HttpHeaders({'Content-Type':'application/json'}
       )}).subscribe(
@@ -40,7 +41,7 @@ export class UserService extends BaseService  {
           check=true;
           this._authNavStatusSource.next(true);
           const clicks = localStorage.getItem('idUser');
-      this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+      this.http.post("https://localhost:44391/api/"+"Carts/getcartbyuserid/"+clicks,{}).subscribe(
         res=>{
           var list_item = res;
           localStorage.setItem('products',JSON.stringify(list_item));

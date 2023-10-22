@@ -146,7 +146,7 @@ namespace WebApi.Controllers
                      select new GetListProdVariantByProdIdVM()
                      {
                          Id = spbt.Id,
-                         Name = "Id: " + spbt.Id + " Tên: " + sp.Name + " " + l.Name + " " + m.Name,
+                         Name = "Id: " + spbt.Id + " Tên: " + sp.Name + " " + s.Name + " " + m.Name,
                          OriginalPrice = (decimal)sp.OriginalPrice,
                      };
             return await kb.ToListAsync();

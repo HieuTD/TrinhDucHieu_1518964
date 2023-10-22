@@ -145,5 +145,15 @@ namespace WebApi.Controllers
                 });
             return Ok(await rs.ToListAsync());
         }
+
+        [HttpGet("color")]
+        public async Task<ActionResult> GetColorName()
+        {
+            var resuft = await _context.Colors.Select(d => new
+            {
+                tenmau = d.Name
+            }).Distinct().ToListAsync();
+            return Ok(resuft);
+        }
     }
 }

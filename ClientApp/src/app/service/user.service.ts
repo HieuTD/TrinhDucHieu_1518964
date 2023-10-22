@@ -41,7 +41,8 @@ export class UserService extends BaseService  {
   }
   LoadCard(){
     const clicks = localStorage.getItem('idUser');
-    this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+    // this.http.post(environment.URL_API+"carts/getcartbyuserid/"+clicks,{}).subscribe(
+    this.http.post("https://localhost:44391/api/"+"carts/getcartbyuserid/"+clicks,{}).subscribe(
       res=>{
         var list_item = res;
         localStorage.setItem('products',JSON.stringify(list_item));

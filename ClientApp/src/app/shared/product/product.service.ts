@@ -8,10 +8,12 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
   constructor(public http: HttpClient) { }
   getlaytatcasanpham():Observable<any> {
-    return this.http.get<any>(environment.URL_API+"sanphams")
+    // return this.http.get<any>(environment.URL_API+"sanphams")
+    return this.http.get<any>("https://localhost:44391/api/"+"products")
   }
   getsanphammoi():Observable<any>{
-    return this.http.get<any>(environment.URL_API+"sanphams/topsanphammoi")
+    // return this.http.get<any>(environment.URL_API+"sanphams/topsanphammoi")
+    return this.http.get<any>("https://localhost:44391/api/"+"products/listnewproduct")
   }
   public trangthaiDataProduct:boolean
 }

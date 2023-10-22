@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
-
+        static string id;
 
 
         public UsersController(DBcontext context, UserManager<AppUser> userManager, IMapper mapper, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
@@ -79,10 +79,6 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
 
-            var userToVerify = await _userManager.FindByNameAsync(request.UserName);
-
-            string id = userToVerify.Id;
-
             var response = new
             {
                 id = identity.Claims.Single(c => c.Type == "id").Value,
@@ -112,6 +108,7 @@ namespace WebApi.Controllers
                         auth.CreatedAt = DateTime.Now;
                         _context.AuthHistories.Add(auth);
                         await _context.SaveChangesAsync();
+                        id = userToVerify.Id;
                         return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
                     }
                 }
@@ -125,6 +122,21 @@ namespace WebApi.Controllers
             //var id = json.GetValue("id_user").ToString();
             var result = await _context.AppUsers.Where(d => d.Id == id).Select(d => d.Address).SingleOrDefaultAsync();
             return Ok(result);
+        }
+
+
+        [HttpGet("authHistory")]
+        public async Task<ActionResult<AppUser>> GetAuthHistory()
+        {
+            var appUser = await _context.AppUsers.FindAsync(id);
+            return appUser;
+        }
+
+        [HttpPost("logout")]
+        public IActionResult logout()
+        {
+            id = null;
+            return Ok();
         }
     }
 }

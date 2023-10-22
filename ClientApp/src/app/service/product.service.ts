@@ -70,7 +70,8 @@ export class CartService {
   }
   LoadCard(){
     const clicks = localStorage.getItem('idUser');
-    this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+    // this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+    this.http.post("https://localhost:44391/api/"+"Carts/getcartbyuserid/"+clicks,{}).subscribe(
       res=>{
         var list_item = res;
         localStorage.setItem('products',JSON.stringify(list_item));

@@ -35,7 +35,7 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
           ).subscribe(resp => {
               this.product =resp as Product;
               this.list_san_pham_bien_the= this.product.sanPhamBienThes;
-              this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.moTa);
+              this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.description);
               this.http.get(environment.URL_API+"mausacs/mau/"+this.id_product
               ).subscribe(
       res=>{
@@ -190,8 +190,8 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 });
   }
   maxQty(){
-    if(this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0]!=null){
-      let maxQty = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0].soLuongTon
+    if(this.list_san_pham_bien_the.filter(d=>d.colorName==this.selectMau&&d.sizeName==this.selectSize)[0]!=null){
+      let maxQty = this.list_san_pham_bien_the.filter(d=>d.colorName==this.selectMau&&d.sizeName==this.selectSize)[0].stock
       return maxQty
     }
     return 0
@@ -211,7 +211,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     {
     }
     else{
-      var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0];
+      var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.colorName==this.selectMau&&d.sizeName==this.selectSize)[0];
       const clicks = localStorage.getItem('idUser');
       var SanPhamId=SanPhamBienThe.id;
       this.http.post(environment.URL_API+"Carts"
@@ -229,7 +229,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     }
   }
   // addToCard(){
-  //   var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0];
+  //   var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.colorName==this.selectMau&&d.sizeName==this.selectSize)[0];
   //   const clicks = localStorage.getItem('idUser');
   //   var SanPhamId=SanPhamBienThe.id;
   //   console.log(SanPhamId);

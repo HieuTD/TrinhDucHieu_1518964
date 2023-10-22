@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit  {
      user:any;
   constructor(public http:HttpClient,private cartService: CartService)
   {
-    this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+    // this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+    this.http.get("https://localhost:44391/api/"+"Users/AuthHistory").subscribe(
     res=>{
       this.user = res;
     },
@@ -99,13 +100,15 @@ $('.js-hide-cart').on('click',function(){
   });
   }
   logout() {
-    this.http.post(environment.URL_API+"Auth/logout",{}).subscribe(
+    // this.http.post(environment.URL_API+"Auth/logout",{}).subscribe(
+    this.http.post("https://localhost:44391/api/"+"Users/logout",{}).subscribe(
         res=>{
         },
         error=>{
         }
         );
-        this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+        // this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+        this.http.get("https://localhost:44391/api/"+"Users/AuthHistory").subscribe(
     res=>{
       this.user = res;
     },

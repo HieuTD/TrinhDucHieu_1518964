@@ -40,11 +40,12 @@ export class RegisterComponent extends BaseService implements OnInit {
     form.append('FirstName', data.FirstName);
     form.append('LastName',data.LastName);
     form.append('Email', data.Email);
-    form.append('SDT', data.SDT);
-    form.append('DiaChi',data.DiaChi);
+    form.append('PhoneNumber', data.SDT);
+    form.append('Address',data.DiaChi);
     form.append('Password',data.Password);
-    form.append('Quyen','User');
-    this.http.post(environment.URL_API+"accounts",form).subscribe(resp => {
+    form.append('Role','User');
+    // this.http.post(environment.URL_API+"accounts",form).subscribe(resp => {
+    this.http.post("https://localhost:44391/api/"+'users/register',form).subscribe(resp => {
         Swal.fire("Đăng ký thành công", ' ', 'success').then(function () {
           // this.router.navigate(['/login']);
           window.location.href='/login'
