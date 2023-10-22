@@ -123,10 +123,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 this.chose_gia = choser;
             });
     }
-    searchthemau(mausac, chose) {
+    searchthemau(colorName, chose) {
         this.http
             // .post(environment.URL_API+'sanphams/searchtheomau', {
-            .post("https://localhost:44391/api/" + 'products/listproductfilterbycolor', mausac
+            .get("https://localhost:44391/api/" + 'products/listproductfilterbycolor/'+colorName
             ).subscribe(resp => {
                 this.list_product = resp as Product[];
                 this.list_product_male = this.list_product.filter(d => d.gender == 1);

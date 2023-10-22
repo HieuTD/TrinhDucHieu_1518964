@@ -370,11 +370,10 @@ namespace WebApi.Controllers
             return Ok(await kb.ToListAsync());
         }
 
-        [HttpPost("listproductfilterbycolor")]
-        public async Task<IActionResult> GetListProdFilterByColor([FromBody] JObject json)
+        [HttpGet("listproductfilterbycolor/{colorName}")]
+        public async Task<IActionResult> GetListProdFilterByColor(string colorName)
         {
-            var mau = json.GetValue("mausac").ToString();
-            var list_id_mau = _context.Colors.Where(d => d.Name == mau).Select(d => d.Id.ToString()).ToList();
+            var list_id_mau = _context.Colors.Where(d => d.Name == colorName).Select(d => d.Id.ToString()).ToList();
             var list_spbienthe_theomau = _context.ProductVariants.Where(d => list_id_mau.Contains((d.ColorId.ToString()))).Select(d => d.ProdId).Distinct().ToList();
             var kb = _context.Products.Where(d => list_spbienthe_theomau.Contains(d.Id)).Select(
                    s => new ProductViewModel()
