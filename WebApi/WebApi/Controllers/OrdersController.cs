@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using WebApi.Models;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace WebApi.Controllers
 {
@@ -157,9 +159,15 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetOrderById(int id)
         {
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
             var rs = await _context.Orders.Where(d => d.Id == id).FirstOrDefaultAsync();
             rs.AppUser = await _context.AppUsers.Where(d => d.Id == rs.UserId).FirstOrDefaultAsync();
-            return Ok(rs);
+            var json = JsonSerializer.Serialize(rs, options);
+            return Ok(json);
         }
 
         [HttpPost]

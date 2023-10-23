@@ -141,7 +141,7 @@ namespace WebApi.Controllers
             var colorId = _context.ProductVariants.Where(d => d.ProdId == id).Select(d => d.ColorId).ToList();
             var rs = _context.Colors.Where(d => colorId.Contains(d.Id)).
                 Select(d => new {
-                    ColorName = d.Name
+                    colorName = d.Name
                 });
             return Ok(await rs.ToListAsync());
         }
@@ -151,7 +151,7 @@ namespace WebApi.Controllers
         {
             var resuft = await _context.Colors.Select(d => new
             {
-                tenmau = d.Name
+                colorName = d.Name
             }).Distinct().ToListAsync();
             return Ok(resuft);
         }

@@ -15,46 +15,52 @@ export class BillDetailsComponent implements OnInit {
   info_user:any;
   user:any;
   tongtien:any;
+  status: any;
   constructor(public http:HttpClient,public route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.id_bill = params['id'];
-      this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
+      // this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
+      this.http.get("https://localhost:44391/api/"+"orders/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
-    this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
+    // this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
+    this.http.get("https://localhost:44391/api/"+"orderdetails/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;
       this.tongtien=0;
       for (let i = 0; i < this.bill_details.length; i++) {
-        this.tongtien=this.tongtien+(this.bill_details[i].gia*this.bill_details[i].soluong)
+        this.tongtien=this.tongtien+(this.bill_details[i].price*this.bill_details[i].quantity)
     }
     });
   });
 }
 Huy(){
-  this.http.post(environment.URL_API+"chitiethoadons/huydon/"+this.id_bill,{
-  }).subscribe(
+  this.status = 1;
+  // this.http.post(environment.URL_API+"chitiethoadons/huydon/"+this.id_bill,{
+  this.http.put("https://localhost:44391/api/"+"orders/updatestatus/"+this.id_bill, this.status).subscribe(
     res=>{
       this.loadChiTietPhieu()
     })
 }
 loadChiTietPhieu()
 {
-  this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
+  // this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
+    this.http.get("https://localhost:44391/api/"+"orders/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
-    this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
+    // this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
+    this.http.get("https://localhost:44391/api/"+"orderdetails/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;
       this.tongtien=0;
       for (let i = 0; i < this.bill_details.length; i++) {
-        this.tongtien=this.tongtien+(this.bill_details[i].gia*this.bill_details[i].soluong)
+        this.tongtien=this.tongtien+(this.bill_details[i].price*this.bill_details[i].quantity)
     }
     });
  }

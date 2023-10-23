@@ -280,13 +280,13 @@ namespace WebApi.Controllers
                        };
             listSPBT = await temp.Where(s => s.ProdId == id).ToListAsync();
 
-            var kb = from s in _context.Products
+            var kb = (from s in _context.Products
 
                      join spbt in _context.ProductVariants
                      on s.Id equals spbt.ProdId
 
-                     join hinh in _context.ProductImages
-                     on s.Id equals hinh.ProdId
+                     //join hinh in _context.ProductImages
+                     //on s.Id equals hinh.ProdId
 
                      join th in _context.Brands
                      on s.BrandId equals th.Id
@@ -315,7 +315,7 @@ namespace WebApi.Controllers
                          BrandName = th.Name,
                          ProductImages = listImage,
                          SanPhamBienThes = listSPBT,
-                     };
+                     }).ToList();
             var rs = kb.FirstOrDefault(s => s.Id == id);
             return rs;
         }
@@ -348,7 +348,7 @@ namespace WebApi.Controllers
         [HttpPost("listproductarrange")]
         public async Task<ActionResult> GetListProductArrange(ProductArrangeRequest sx)
         {
-            var kb = _context.Products.Where(d => d.Price > sx.Low && d.Price < sx.High).Select(
+            var kb = _context.Products.Where(d => d.Price > sx.Low && d.Price <= sx.High).Select(
                    s => new ProductViewModel()
                    {
                        Id = s.Id,

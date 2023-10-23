@@ -15,7 +15,7 @@ export interface Product {
     categoryName?:string;
     categoryId?:number;
     gender?:number;
-    imageSanPhams:imageSanPhams[];
+    productImages:imageSanPhams[];
     sanPhamBienThes:sanPhamBienThes[];
     like?:number;
 }

@@ -43,7 +43,7 @@ namespace WebApi.Controllers
             return Ok(await listcomment.ToListAsync());
         }
 
-        [HttpGet()]
+        [HttpPost("getListReview")]
         public async Task<ActionResult> GetListReview(ReviewCreateRequest request)
         {
             var listcomment = _context.Reviews.Where(d => d.ProdId == request.ProdId).Select(

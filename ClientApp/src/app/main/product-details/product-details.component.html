@@ -24,7 +24,7 @@
                         <div class="wrap-slick3-dots"></div>
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" *ngFor="let item of product.imageSanPhams" data-thumb="https://localhost:44302/Images/list-image-product/{{item.imageName}}">
+                            <div class="item-slick3" *ngFor="let item of product.productImages" data-thumb="https://localhost:44302/Images/list-image-product/{{item.imageName}}">
                                 <div class="wrap-pic-w pos-relative">
                                     <img src="https://localhost:44302/Images/list-image-product/{{item.imageName}}" alt="IMG-PRODUCT">
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="https://localhost:44302/Images/list-image-product/{{item.imageName}}">
@@ -54,7 +54,7 @@
                                 <div class="rs1-select2 bor8 bg0">
                                     <select [(ngModel)]="selectMau" (change)="onChangeMau($event.target.value)" class="js-select2" name="time">
                                     <option value=null>Chọn màu</option>
-                                    <option *ngFor="let item of mau" [value]="item.mau">{{item.mau}}</option>
+                                    <option *ngFor="let item of mau" [value]="item.colorName">{{item.colorName}}</option>
                                 </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
@@ -134,12 +134,16 @@
                                         <div class="size-207" *ngFor="let item of list_review">
                                             <div class="flex-w flex-sb-m p-b-17">
                                                 <span class="mtext-107 cl2 p-r-20">
-                                                    {{item.tenUser}}
+                                                    {{item.userName}}
                                                 </span>
                                             </div>
                                             <p class="stext-102 cl6">
                                                 {{item.content}}
                                             </p>
+                                            <p class="stext-102 cl6">
+                                                {{item.createdAt|date: 'dd/MM/yyyy HH:mm'}}
+                                            </p>
+                                            <br>
                                         </div>
                                     </div>
                                     <!-- Add review -->

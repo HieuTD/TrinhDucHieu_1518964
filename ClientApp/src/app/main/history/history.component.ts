@@ -15,9 +15,8 @@ export class HistoryComponent implements OnInit {
    }
   ngOnInit(): void {
     const clicks = localStorage.getItem('idUser');
-    this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
-      idUser:clicks
-    }).subscribe(
+    // this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
+    this.http.get("https://localhost:44391/api/"+"orders/listorderbyuserid/"+clicks).subscribe(
       res=>{
         this.list_hoadon=res;
       });
@@ -31,9 +30,8 @@ export class HistoryComponent implements OnInit {
     return console.error(err.toString());
   });
   connection.on("BroadcastMessage", () => {
-    this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
-      idUser:clicks
-    }).subscribe(
+    // this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
+      this.http.get("https://localhost:44391/api/"+"orders/listorderbyuserid/"+clicks).subscribe(
       res=>{
         this.list_hoadon=res;
       });

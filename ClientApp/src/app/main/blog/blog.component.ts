@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 export class BlogComponent implements OnInit {
   public listblog:any;
   constructor(public http:HttpClient) {
-    this.http.post(environment.URL_API+"blogs/getBlog/",{}
+    // this.http.post(environment.URL_API+"blogs/getBlog/",{}
+    this.http.get("https://localhost:44391/api/"+"blogs",{}
   ).subscribe(
     res=>{
       this.listblog=res;

@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit  {
   tongtien:any;
    Tinh: string;
    Xa: string;
-   MaGiamGia: string;
+   couponName: string;
    Huyen: string;
    public DiaChi: string;
    list_MGG :any;
@@ -38,25 +38,27 @@ export class CheckoutComponent implements OnInit  {
     this.http.get("https://provinces.open-api.vn/api/?depth=3").subscribe(res=>{
       this.list_tinh_thanh=res;
     } );
-    this.http.post(environment.URL_API+"Carts/getCart/"+this.id_user,{}).subscribe(
+    // this.http.post(environment.URL_API+"Carts/getCart/"+this.id_user,{}).subscribe(
+    this.http.get("https://localhost:44391/api/"+"carts/getcartbyuserid/"+this.id_user,{}).subscribe(  
       res=>{
         this.list_item = res;
         console.log(this.list_item)
         this.tongtien=0;
         for (let i = 0; i < this.list_item.length; i++) {
-            this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
+            this.tongtien=this.tongtien+(this.list_item[i].productDetail.price*this.list_item[i].quantity);
           this.tongThanhToan=this.tongtien+25000;
         }
       });
-    this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(res=>{
+    // this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(res=>{
+    this.http.get("https://localhost:44391/api/"+"coupons").subscribe(res=>{
       this.list_MGG=res;
     } );
     //this.checkdiachi=true;
     this.list_MGGSD=[];
     this.check=null;
-    this.http.post(environment.URL_API+"Auth/getDiaChi/",{
-      id_user :this.id_user
-    }).subscribe(
+    // this.http.post(environment.URL_API+"Auth/getDiaChi/",{
+    this.http.get("https://localhost:44391/api/"+"users/getUserAddress/"+this.id_user
+    ).subscribe(
       res=>{
         this.DiaChiDefaul= <string>res;
         this.DiaChi=this.DiaChiDefaul;
@@ -78,19 +80,21 @@ export class CheckoutComponent implements OnInit  {
  deleteSanPham(item):void {
   const clicks = localStorage.getItem('idUser');
    let delproduct : deleteProduct = new deleteProduct()
-   delproduct.id_sanpham = item.idSanPhamBienThe
-   delproduct.user_ID = clicks
+   delproduct.prodVariantId = item.prodVariantId
+   delproduct.userId = clicks
  console.log(delproduct)
-  this.http.post(environment.URL_API+"Carts/delete",delproduct
+  // this.http.post(environment.URL_API+"Carts/delete",delproduct
+  this.http.post("https://localhost:44391/api/"+"Carts/delete",delproduct
   ).subscribe(
     res=>{
       Swal.fire("Xoá sản phẩm thành công .", '', 'success')
-      this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+      // this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+      this.http.get("https://localhost:44391/api/"+"Carts/getcartbyuserid/"+clicks,{}).subscribe(
       res=>{
         this.list_item = res;
         this.tongtien=0;
         for (let i = 0; i < this.list_item.length; i++) {
-            this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
+            this.tongtien=this.tongtien+(this.list_item[i].productDetail.price*this.list_item[i].quantity);
           this.tongThanhToan=this.tongtien+25000;
         }
         this.cartService.DeleteProduct(item.productDeatail);
@@ -107,16 +111,21 @@ export class CheckoutComponent implements OnInit  {
     }
     else
     {
-    this.check = this.list_MGG.filter(d=>d.code==this.MaGiamGia)[0];
-    this.check_sudung = this.list_MGGSD.filter(d=>d==this.MaGiamGia)[0];
+    //kiểm tra xem mã giảm giá có tồn tại không  
+    this.check = this.list_MGG.filter(d=>d.couponName==this.couponName)[0];
+    //kiểm tra xem mã giảm giá được sử dụng chưa
+    this.check_sudung = this.list_MGGSD.filter(d=>d==this.couponName)[0];
+    //nếu mã giảm giá tồn tại và chưa sử dụng thì 
+    //1.add mã giảm giá đó vào list mã đã sử dụng
+    //2.giảm tiền theo mã giảm giá
     if(this.check!=null&&this.check_sudung==null)
     {
-      this.list_MGGSD.push(this.MaGiamGia)
-      this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
+      this.list_MGGSD.push(this.couponName)
+      this.tongThanhToan=this.tongtien+25000-this.check.discount;
       Swal.fire("Áp dụng mã giảm giá thành công .", '', 'success')
     }
     else{
-      if(this.check_sudung==this.MaGiamGia)
+      if(this.check_sudung==this.couponName)
       {
         Swal.fire("Bạn đã áp mã này rồi.", '', 'error')
       }
@@ -136,14 +145,13 @@ export class CheckoutComponent implements OnInit  {
     else
     {
       const clicks = localStorage.getItem('idUser');
-    this.http.post(environment.URL_API+"hoadons/",{
-      Tinh:this.Tinh,
-      Huyen:this.Huyen,
-      Xa:this.Xa,
-      DiaChi:this.DiaChi,
-      TongTien:this.tongThanhToan-25000,
-      Id_User:clicks
-    }).subscribe(
+      var val = {
+        address: this.DiaChi,
+        totalPrice: this.tongThanhToan-25000,
+        userId: clicks
+      };
+    // this.http.post(environment.URL_API+"hoadons/",{
+    this.http.post("https://localhost:44391/api/"+"orders", val).subscribe(
       res=>{
         Swal.fire("Đặt hàng thành công.", '', 'success').then(function () {
           window.location.href='/history';
@@ -155,39 +163,43 @@ export class CheckoutComponent implements OnInit  {
 }
 ChangeSoLuong(cartID,i){
   const clicks = localStorage.getItem('idUser');
-  this.http.post(environment.URL_API+"Carts/update/",{
-    CartID:cartID,
-    SoLuong:this.soLuong,
-    UserID:clicks
-    }).subscribe(
+  var val = {
+    id: cartID,
+    quantity: this.soLuong,
+    userId: clicks
+  };
+  // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
+  this.http.post("https://localhost:44391/api/"+"Carts/update/",val).subscribe(
       res=>{
         this.list_item=res;
         this.tongtien=0;
         for (let i = 0; i < this.list_item.length; i++) {
-          this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
+          this.tongtien=this.tongtien+(this.list_item[i].productDetail.price*this.list_item[i].quantity);
           this.tongThanhToan=this.tongtien+25000;
         }
       }
     );
-    this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
+    this.tongThanhToan=this.tongtien+25000-this.check.discount;
 }
   updateCongSanPham(cartID,soLuong){
     const clicks = localStorage.getItem('idUser');
-    this.http.post(environment.URL_API+"Carts/update/",{
-    CartID:cartID,
-    SoLuong:soLuong+1,
-    UserID:clicks
-    }).subscribe(
+    var val = {
+      id: cartID,
+      quantity: soLuong+1,
+      userId: clicks
+    };
+    // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
+    this.http.put("https://localhost:44391/api/"+"Carts/update/",val).subscribe(
       res=>{
         this.list_item=res;
         this.tongtien=0;
         for (let i = 0; i < this.list_item.length; i++) {
-            this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
+            this.tongtien=this.tongtien+(this.list_item[i].productDetail.price*this.list_item[i].quantity);
           this.tongThanhToan=this.tongtien+25000;
         }
       }
     );
-    this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
+    this.tongThanhToan=this.tongtien+25000-this.check.discount;
   }
   updateTruSanPham(cartID,soLuong){
     const clicks = localStorage.getItem('idUser');
@@ -199,21 +211,23 @@ ChangeSoLuong(cartID,i){
     {
       soLuong=soLuong-1;
     }
-    this.http.post(environment.URL_API+"Carts/update/",{
-    CartID:cartID,
-    SoLuong:soLuong,
-    UserID:clicks
-    }).subscribe(
+    var val = {
+      id: cartID,
+      quantity: soLuong,
+      userId: clicks
+    };
+    // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
+      this.http.put("https://localhost:44391/api/"+"Carts/update/",val).subscribe(
       res=>{
         this.list_item=res;
         this.tongtien=0;
         for (let i = 0; i < this.list_item.length; i++) {
-            this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
+            this.tongtien=this.tongtien+(this.list_item[i].productDetail.price*this.list_item[i].quantity);
           this.tongThanhToan=this.tongtien+25000;
         }
         }
     );
-    this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
+    this.tongThanhToan=this.tongtien+25000-this.check.discount;
   }
   changTinhThanh(event:any):void{
     this.Tinh=event;
@@ -229,6 +243,6 @@ ChangeSoLuong(cartID,i){
   }
 }
 export class deleteProduct{
-  id_sanpham : number
-  user_ID : string
+  prodVariantId : number
+  userId : string
 }

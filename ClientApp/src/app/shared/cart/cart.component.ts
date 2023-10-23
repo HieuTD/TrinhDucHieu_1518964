@@ -12,7 +12,8 @@ export class CartComponent implements OnInit {
 	list_item:any;
   constructor(public http:HttpClient) {
 	const clicks = localStorage.getItem('idUser');
-	this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+	// this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
+	this.http.get("https://localhost:44391/api/"+"Carts/getcartbyuserid/"+clicks,{}).subscribe(
 		res=>{
 		  this.list_item = res;
 		});

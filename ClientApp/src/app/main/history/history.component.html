@@ -29,19 +29,19 @@
                     <tbody>
                         <tr *ngFor="let item of list_hoadon">
                             <td class="text-center">#{{item.id}}</td>
-                            <td class="text-center">{{item.ngayTao|date: 'dd/MM/yyyy HH:mm'}}</td>
-                            <td class="text-center">{{item.tongTien|number}}</td>
+                            <td class="text-center">{{item.createdAt|date: 'dd/MM/yyyy HH:mm'}}</td>
+                            <td class="text-center">{{item.totalPrice|number}}</td>
                             <td class="text-center">
-                                <span *ngIf="item.trangThai==0">
+                                <span *ngIf="item.status==0">
                                     Chưa xác nhận
                                 </span>
-                                <span *ngIf="item.trangThai==1">
+                                <span *ngIf="item.status==1">
                                     Đã xác nhận
                                 </span>
-                                <span *ngIf="item.trangThai==2">
+                                <span *ngIf="item.status==2">
                                     Hoàn thành
                                 </span>
-                                <span *ngIf="item.trangThai==3">
+                                <span *ngIf="item.status==3">
                                     Đã huỷ
                                 </span>
                             </td>

@@ -34,20 +34,20 @@
                                             <img src="https://localhost:44302/Images/list-image-product/{{item.productDetail.image}}" alt="IMG">
                                         </div>
                                     </td>
-                                    <td class="column-2">{{item.productDetail.ten}} ( {{item.mau}} - {{item.size}} )</td>
-                                    <td class="column-3">{{item.productDetail.giaBan|number}} VNĐ</td>
+                                    <td class="column-2">{{item.productDetail.name}} ( {{item.color}} - {{item.size}} )</td>
+                                    <td class="column-3">{{item.productDetail.price|number}} VNĐ</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <button (click)="updateTruSanPham(item.cartID,item.soLuong)" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <button (click)="updateTruSanPham(item.cartID,item.quantity)" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i  class="fs-16 zmdi zmdi-minus"></i>
                                             </button>
-                                            <input class="mtext-104 cl3 txt-center num-product" (change)="ChangeSoLuong(item.cartID,item.soLuong)" type="number" name="num-product1" [value]="item.soLuong">
-                                            <button (click)="updateCongSanPham(item.cartID,item.soLuong)" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <input class="mtext-104 cl3 txt-center num-product" (change)="ChangeSoLuong(item.cartID,item.quantity)" type="number" name="num-product1" [value]="item.quantity">
+                                            <button (click)="updateCongSanPham(item.cartID,item.quantity)" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                               <i  class="fs-16 zmdi zmdi-plus"></i>
                                             </button>
                                         </div>
                                     </td>
-                                    <td class="column-5">{{item.soLuong*item.productDetail.giaBan|number}} VNĐ</td>
+                                    <td class="column-5">{{item.quantity*item.productDetail.price|number}} VNĐ</td>
                                     <td style="padding-left: 23px;"><button (click)="deleteSanPham(item)"><mat-icon>delete</mat-icon></button></td>
                                 </tr>
                             </tbody>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                         <div class="flex-w flex-m m-r-20 m-tb-5">
-                            <input [(ngModel)]="MaGiamGia" class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
+                            <input [(ngModel)]="couponName" class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
                             <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                 <button (click)="maGiamGia()" type="submit">Áp dụng giảm giá</button>
                             </div>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="size-209" *ngIf="check!=null">
                             <span class="mtext-110 cl2">
-                            - {{check.soTienGiam|number}} VNĐ
+                            - {{check.discount|number}} VNĐ
                           </span>
                         </div>
                     </div>

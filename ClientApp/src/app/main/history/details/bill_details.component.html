@@ -24,12 +24,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="width: 50%;" class="text-left"> <b>Mã hoá đơn:</b> #{{bill.id}}
+                        <td style="width: 50%;" class="text-left"> <b>Mã hoá đơn:</b> #{{bill.Id}}
                             <br>
-                            <b>Ngày mua:</b> {{bill.ngayTao|date: 'dd/MM/yyyy HH:mm'}}</td>
-                        <td style="width: 50%;" class="text-left"> <b>Phương thức thanh toán:</b> Thanh toán khi nhận hàng
+                            <b>Ngày mua:</b> {{bill.CreatedAt|date: 'dd/MM/yyyy HH:mm'}}
+                        </td>
+                        <td style="width: 50%;" class="text-left"> <b>Phương thức thanh toán:</b> Thanh toán khi nhận
+                            hàng
                             <br>
-                            <b>Vận chuyển:</b> </td>
+                            <b>Vận chuyển:</b>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -43,14 +46,12 @@
                 <tbody>
                     <tr>
                         <td class="text-left">
-                            <br><span>{{bill.user.firstName}} {{bill.user.lastName}}</span>,
-                            <br>{{bill.user.diaChi}},
-                            <br>{{bill.user.sdt}}
-                            <td class="text-left">{{bill.diaChi}}
-                                <br>{{bill.xa}},
-                                <br>{{bill.huyen}},
-                                <br>{{bill.tinh}},
-                                <br>{{bill.ghiChu}}</td>
+                            <span>{{bill.AppUser.FirstName}} {{bill.AppUser.LastName}}</span>,
+                            <br>{{bill.AppUser.Address}},
+                            <br>{{bill.AppUser.PhoneNumber}}
+                        <td class="text-left">{{bill.Address}}
+                            <br>Ghi chú: {{bill.Description}}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -66,10 +67,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of bill_details">
-                            <td class="text-left">{{item.sanPham.ten}} </td>
-                            <td class="text-right">{{item.soluong}}</td>
-                            <td class="text-right">{{item.giaBan|number}}</td>
-                            <td class="text-right">{{item.soluong*item.gia|number}}</td>
+                            <td class="text-left">{{item.product.name}} </td>
+                            <td class="text-right">{{item.quantity}}</td>
+                            <td class="text-right">{{item.price|number}}</td>
+                            <td class="text-right">{{item.quantity*item.price|number}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -89,19 +90,20 @@
                             <td colspan="2"></td>
                             <td class="text-right"><b>Giảm giá</b>
                             </td>
-                            <td class="text-right">{{tongtien-bill.tongTien|number}} VNĐ</td>
+                            <td class="text-right">{{tongtien-bill.TotalPrice|number}} VNĐ</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td class="text-right"><b>Tổng tiền phải trả</b>
                             </td>
-                            <td class="text-right">{{bill.tongTien+25000|number}} VNĐ</td>
+                            <td class="text-right">{{bill.TotalPrice+25000|number}} VNĐ</td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
             <div class="buttons clearfix" style="padding-bottom: 20px;">
-                <div class="pull-right" style="padding-left: 20px;"><a class="btn btn-primary" [routerLink]="'/history'">Trở về</a>
+                <div class="pull-right" style="padding-left: 20px;"><a class="btn btn-primary"
+                        [routerLink]="'/history'">Trở về</a>
                 </div>
                 <div *ngIf="bill.trangThai!=1" class="pull-right"><a class="btn btn-primary" (click)="Huy()">Huỷ đơn</a>
                 </div>

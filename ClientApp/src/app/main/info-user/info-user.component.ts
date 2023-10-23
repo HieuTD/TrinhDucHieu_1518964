@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 export class InfoUserComponent implements OnInit {
   user:any;
   constructor(public http:HttpClient) {
-    this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+    // this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
+    this.http.get("https://localhost:44391/api/"+"users/AuthHistory").subscribe(
     res=>{
       this.user = res;
     },
