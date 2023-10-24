@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApi.EF;
 using WebApi.Helper.AutoMapper;
+using WebApi.Helper.FileStorage;
 using WebApi.Helper.JwtConfigure;
 using WebApi.Models;
 
@@ -80,6 +81,8 @@ namespace WebApi
                 .AddEntityFrameworkStores<DBcontext>()
                 .AddDefaultTokenProviders();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            services.AddTransient<IFileStorageService, FileStorageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

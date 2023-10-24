@@ -18,6 +18,6 @@ namespace WebApi.DTOs.Products
         public string Status { get; set; } //Trạng thái sản phẩm: mới, cũ ...
         public bool IsFeatured { get; set; } //Ẩn hiện
         public string Material { get; set; }
-        public ICollection<IFormFile> files { get; set; }
+        public IFormFile files { get; set; }
     }
 }

@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using WebApi.DTOs.Products;
 using WebApi.DTOs.ProductVariants;
 using WebApi.EF;
 using WebApi.Helper;
+using WebApi.Helper.FileStorage;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -20,10 +23,13 @@ namespace WebApi.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly DBcontext _context;
+        private const string LIST_IMAGE_PRODUCT = "Images/list-image-product";
+        private readonly IFileStorageService _storageService;
 
-        public ProductsController(DBcontext context)
+        public ProductsController(DBcontext context, IFileStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         [HttpGet]
@@ -137,18 +143,18 @@ namespace WebApi.Controllers
             }
             if (request.files != null)
             {
-                var file = request.files.ToArray();
-                for (int i = 0; i < file.Length; i++)
-                {
-                    if (file[i].Length > 0 && file[i].Length < 5120)
-                    {
-                        listImage.Add(new ProductImage()
-                        {
-                            Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i),
-                            ProdId = product.Id,
-                        });
-                    }
-                }
+                //var file = request.files.ToArray();
+                //for (int i = 0; i < file.Length; i++)
+                //{
+                //    if (file[i].Length > 0 && file[i].Length < 5120)
+                //    {
+                //        listImage.Add(new ProductImage()
+                //        {
+                //            Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i),
+                //            ProdId = product.Id,
+                //        });
+                //    }
+                //}
             }
             else // xu li khi khong cap nhat hinh
             {
@@ -171,7 +177,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> AddProduct([FromForm] ProductCreateRequest request)
         {
-            var listImage = new List<ProductImage>();
+             var listImage = new List<ProductImage>();
             Product product = new Product()
             {
                 Name = request.Name,
@@ -195,26 +201,31 @@ namespace WebApi.Controllers
             //    TranType = "Add"
             //};
             //_context.Notifications.Add(notification);
-            var file = request.files.ToArray();
             _context.Products.Add(product);
-            await _context.SaveChangesAsync();
             if (request.files != null)
             {
-                for (int i = 0; i < file.Length; i++)
+                product.ProductImages = new List<ProductImage>()
                 {
-                    if (file[i].Length > 0 && file[i].Length < 5120)
+                    new ProductImage()
                     {
-                        var productImage = new ProductImage();
-                        productImage.Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i);
-                        productImage.ProdId = product.Id;
-                        _context.ProductImages.Update(productImage);
-                        await _context.SaveChangesAsync();
+                        CreatedAt = DateTime.Now,
+                        Name = await this.SaveFile(request.files),
                     }
-                }
-            }
+                };
+            };
+            await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
+
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return "/" + LIST_IMAGE_PRODUCT + "/" + fileName;
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
