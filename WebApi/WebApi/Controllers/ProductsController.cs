@@ -133,41 +133,44 @@ namespace WebApi.Controllers
             //    TranType = "Edit"
             //};
             //_context.Notifications.Add(notification);
-            ProductImage[] images = _context.ProductImages.Where(s => s.ProdId == id).ToArray();
-            _context.ProductImages.RemoveRange(images);
-            ProductImage image = new ProductImage();
-            var productImages = _context.ProductImages.ToArray().Where(s => s.ProdId == id);
-            foreach (var i in productImages)
-            {
-                FileHelper.DeleteFileOnTypeAndNameAsync("product", i.Name);
-            }
+
+            //update ảnh
             if (request.files != null)
             {
-                //var file = request.files.ToArray();
-                //for (int i = 0; i < file.Length; i++)
-                //{
-                //    if (file[i].Length > 0 && file[i].Length < 5120)
-                //    {
-                //        listImage.Add(new ProductImage()
-                //        {
-                //            Name = await FileHelper.UploadImageAndReturnFileNameAsync(request, null, "product", (IFormFile[])request.files, i),
-                //            ProdId = product.Id,
-                //        });
-                //    }
-                //}
-            }
-            else // xu li khi khong cap nhat hinh
-            {
-                List<ProductImage> List;
-                List = _context.ProductImages.Where(s => s.ProdId == id).ToList();
-                foreach (ProductImage img in List)
-                    listImage.Add(new ProductImage()
+                var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.ProdId == id);
+                //Nếu trước đó chưa có ảnh thì tạo ảnh mới
+                if (image == null)
+                {
+                    product.ProductImages = new List<ProductImage>()
                     {
-                        Name = img.Name,
-                        ProdId = product.Id,
-                    }); ;
+                        new ProductImage()
+                        {
+                            CreatedAt = DateTime.Now,
+                            Name = await this.SaveFile(request.files),
+                        }
+                    };
+                }
+                //Nếu đã có ảnh thì xóa ảnh cũ và cập nhật ảnh mới
+                else
+                {
+                    _context.ProductImages.Remove(image);
+                    await _context.SaveChangesAsync();
+                    product.ProductImages = new List<ProductImage>()
+                    {
+                        new ProductImage()
+                        {
+                            CreatedAt = DateTime.Now,
+                            Name = await this.SaveFile(request.files),
+                        }
+                    };
+                }
+            }
+            //không update ảnh
+            else 
+            {
+                var image = _context.ProductImages.Where(s => s.ProdId == id).ToList();
+                product.ProductImages = image;
             };
-            product.ProductImages = listImage;
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
@@ -230,16 +233,13 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var productImages = _context.ProductImages.ToArray().Where(s => s.ProdId == id);
-            foreach (var i in productImages)
-            {
-                FileHelper.DeleteFileOnTypeAndNameAsync("product", i.Name);
-            }
+            var image = await _context.ProductImages.FirstOrDefaultAsync(s => s.ProdId == id);
+            _context.ProductImages.Remove(image);
+
             Models.ProductVariant[] spbts;
             spbts = _context.ProductVariants.Where(s => s.ProdId == id).ToArray();
             _context.ProductVariants.RemoveRange(spbts);
-            ProductImage[] images = _context.ProductImages.Where(s => s.ProdId == id).ToArray();
-            _context.ProductImages.RemoveRange(images);
+            
             await _context.SaveChangesAsync();
             var sanPham = await _context.Products.FindAsync(id);
             if (sanPham == null)
@@ -270,8 +270,6 @@ namespace WebApi.Controllers
         [HttpGet("productdetail/{id}")]
         public async Task<ActionResult<ProductDetailViewModel>> GetProductDetailByProdId(int id)
         {
-            List<ProductImage> listImage;
-            listImage = await _context.ProductImages.Where(s => s.ProdId == id).ToListAsync();
             List<ListProdVariantWithColorSize> listSPBT;
 
             var temp = from s in _context.ProductVariants
@@ -296,10 +294,10 @@ namespace WebApi.Controllers
                      join spbt in _context.ProductVariants
                      on s.Id equals spbt.ProdId
 
-                     //join hinh in _context.ProductImages
-                     //on s.Id equals hinh.ProdId
+                      join hinh in _context.ProductImages
+                      on s.Id equals hinh.ProdId
 
-                     join th in _context.Brands
+                      join th in _context.Brands
                      on s.BrandId equals th.Id
 
                      join l in _context.Categories
@@ -324,7 +322,7 @@ namespace WebApi.Controllers
                          BrandId = s.BrandId,
                          CategoryName = l.Name,
                          BrandName = th.Name,
-                         ProductImages = listImage,
+                         Image = _context.ProductImages.Where(q => q.ProdId == s.Id).Select(q => q.Name).FirstOrDefault(),
                          SanPhamBienThes = listSPBT,
                      }).ToList();
             var rs = kb.FirstOrDefault(s => s.Id == id);

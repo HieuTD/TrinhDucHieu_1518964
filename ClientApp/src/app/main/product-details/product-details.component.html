@@ -24,10 +24,10 @@
                         <div class="wrap-slick3-dots"></div>
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" *ngFor="let item of product.productImages" data-thumb="https://localhost:44302/Images/list-image-product/{{item.imageName}}">
+                            <div class="item-slick3">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="https://localhost:44302/Images/list-image-product/{{item.imageName}}" alt="IMG-PRODUCT">
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="https://localhost:44302/Images/list-image-product/{{item.imageName}}">
+                                    <img src="https://localhost:44391{{product.image}}" alt="IMG-PRODUCT">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="https://localhost:44391{{product.image}}">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
