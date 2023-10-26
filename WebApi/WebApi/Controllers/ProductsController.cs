@@ -154,6 +154,7 @@ namespace WebApi.Controllers
                 else
                 {
                     _context.ProductImages.Remove(image);
+                    _storageService.DeleteFileProductAsync(image.Name);
                     await _context.SaveChangesAsync();
                     product.ProductImages = new List<ProductImage>()
                     {
@@ -225,7 +226,7 @@ namespace WebApi.Controllers
         {
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            await _storageService.SaveFileProductAsync(file.OpenReadStream(), fileName);
             return "/" + LIST_IMAGE_PRODUCT + "/" + fileName;
         }
 
@@ -234,7 +235,12 @@ namespace WebApi.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var image = await _context.ProductImages.FirstOrDefaultAsync(s => s.ProdId == id);
-            _context.ProductImages.Remove(image);
+            if (image != null)
+            {
+                _context.ProductImages.Remove(image);
+                _storageService.DeleteFileProductAsync(image.Name);
+            }
+
 
             Models.ProductVariant[] spbts;
             spbts = _context.ProductVariants.Where(s => s.ProdId == id).ToArray();

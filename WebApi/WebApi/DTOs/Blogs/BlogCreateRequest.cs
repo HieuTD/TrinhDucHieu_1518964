@@ -10,6 +10,6 @@ namespace WebApi.DTOs.Blogs
         public string Title { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
-        public ICollection<IFormFile> files { get; set; }
+        public IFormFile files { get; set; }
     }
 }

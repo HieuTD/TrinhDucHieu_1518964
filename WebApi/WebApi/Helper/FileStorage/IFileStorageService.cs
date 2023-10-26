@@ -7,8 +7,12 @@ namespace WebApi.Helper.FileStorage
     {
         string GetFileUrl(string fileName);
 
-        Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
+        Task SaveFileProductAsync(Stream mediaBinaryStream, string fileName);
 
-        Task DeleteFileAsync(string fileName);
+        Task DeleteFileProductAsync(string fileName);
+
+        Task SaveFileBlogAsync(Stream mediaBinaryStream, string fileName);
+
+        Task DeleteFileBlogAsync(string fileName);
     }
 }
