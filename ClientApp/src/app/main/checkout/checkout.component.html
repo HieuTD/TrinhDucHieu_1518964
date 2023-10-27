@@ -31,7 +31,7 @@
                                 <tr class="table_row" *ngFor="let item of list_item">
                                     <td class="column-1">
                                         <div class="how-itemcart1">
-                                            <img src="https://localhost:44302/Images/list-image-product/{{item.productDetail.image}}" alt="IMG">
+                                            <img src="https://localhost:44391{{item.productDetail.image}}" alt="IMG">
                                         </div>
                                     </td>
                                     <td class="column-2">{{item.productDetail.name}} ( {{item.color}} - {{item.size}} )</td>
@@ -172,7 +172,7 @@
                             </span>
                             </div>
                         </div>
-                        <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer button-custom">
                         Tiến hành thanh toán
                     </button>
                     </form>

@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.Extensions.Configuration;
+using WebApi.Helper.Common;
 
 namespace WebApi.Controllers
 {
@@ -19,10 +22,14 @@ namespace WebApi.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly DBcontext _context;
+        private IConfiguration Configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public OrdersController(DBcontext context)
+        public OrdersController(DBcontext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            Configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -74,24 +81,24 @@ namespace WebApi.Controllers
             var list = new List<ListOrderDetailsViewModel>();
             var productImageTable = (
                 from sp in _context.Products
-                
-                join isp in _context.ProductImages on 
+
+                join isp in _context.ProductImages on
                 sp.Id equals isp.ProdId into ispGroup
                 from isp in ispGroup.DefaultIfEmpty()
 
                 join spbt in _context.ProductVariants
                 on sp.Id equals spbt.ProdId
-                
-                join sz in _context.Sizes 
+
+                join sz in _context.Sizes
                 on spbt.SizeId equals sz.Id
-                
-                join ms in _context.Colors 
+
+                join ms in _context.Colors
                 on spbt.ColorId equals ms.Id
-                
-                join cthd in _context.OrderDetails 
+
+                join cthd in _context.OrderDetails
                 on spbt.Id equals cthd.ProdVariantId
-                
-                join hd1 in _context.Orders 
+
+                join hd1 in _context.Orders
                 on cthd.OrderId equals hd1.Id
                 where cthd.OrderId == id
                 orderby isp.Id
@@ -171,35 +178,35 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> AddOrder(Order hd)
+        public async Task<ActionResult<Order>> AddOrder(OrderCreateRequest request)
         {
-            Order hoaDon = new Order()
+            Order order = new Order()
             {
                 Status = 0,
-                Description = hd.Description,
-                UserId = hd.UserId,
+                Description = request.Description,
+                UserId = request.UserId,
                 CreatedAt = DateTime.Now,
                 //Tinh = hd.Tinh,
                 //Huyen = hd.Huyen,
                 //Xa = hd.Xa,
-                Address = hd.Address,
-                TotalPrice = hd.TotalPrice
+                Address = request.Address,
+                TotalPrice = request.TotalPrice
             };
-            _context.Orders.Add(hoaDon);
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             //NotificationCheckout notification = new NotificationCheckout()
             //{
             //    ThongBaoMaDonHang = hoaDon.Id,
             //};
             //_context.NotificationCheckouts.Add(notification);
-            var cart = _context.Carts.Where(d => d.UserId == hd.UserId).ToList();
+            var cart = _context.Carts.Where(d => d.UserId == request.UserId).ToList();
             for (int i = 0; i < cart.Count; i++)
             {
                 var thisSanPhamBienThe = _context.ProductVariants.Find(cart[i].ProdVariantId);
                 OrderDetail cthd = new OrderDetail();
                 cthd.ProdId = cart[i].ProdId;
                 cthd.ProdVariantId = cart[i].ProdVariantId;
-                cthd.OrderId = hoaDon.Id;
+                cthd.OrderId = order.Id;
                 cthd.Price = (decimal)cart[i].Price;
                 cthd.Quantity = cart[i].Quantity;
                 cthd.TotalPrice = (decimal)cart[i].Price * cart[i].Quantity;
@@ -212,8 +219,59 @@ namespace WebApi.Controllers
                 _context.Carts.Remove(cart[i]);
                 await _context.SaveChangesAsync();
             };
+
+            string urlPayment = "";
+            if(request.TypePayment == 0)
+            {
+                urlPayment = await UrlPayment(0, order.Id);
+            }
             //await _hubContext.Clients.All.BroadcastMessage();
-            return Ok(1);
+            return Ok(urlPayment);
+        }
+
+        private async Task<string> UrlPayment(int TypePayment, int orderId)
+        {
+            var urlPayment = "";
+            var order = _context.Orders.FirstOrDefault(o => o.Id == orderId);
+            //Get Config Info
+            string vnp_Returnurl = Configuration.GetValue<string>("Vnpay:vnp_Returnurl"); //URL nhan ket qua tra ve 
+            string vnp_Url = Configuration.GetValue<string>("Vnpay:vnp_Url"); //URL thanh toan cua VNPAY 
+            string vnp_TmnCode = Configuration.GetValue<string>("Vnpay:vnp_TmnCode"); //Ma định danh merchant kết nối (Terminal Id)
+            string vnp_HashSecret = Configuration.GetValue<string>("Vnpay:vnp_HashSecret"); //Secret Key
+
+            //Build URL for VNPAY
+            VnPayLibrary vnpay = new VnPayLibrary();
+
+            vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+            vnpay.AddRequestData("vnp_Command", "pay");
+            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+            vnpay.AddRequestData("vnp_Amount", ((long)order.TotalPrice * 100).ToString()); //Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 100,000 VND (một trăm nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 10000000
+            if (TypePayment == 1)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "VNPAYQR");
+            }
+            else if (TypePayment == 2)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "VNBANK");
+            }
+            else if (TypePayment == 3)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "INTCARD");
+            }
+
+            vnpay.AddRequestData("vnp_CreateDate", order.CreatedAt?.ToString("yyyyMMddHHmmss"));
+            vnpay.AddRequestData("vnp_CurrCode", "VND");
+            vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(_httpContextAccessor));
+            vnpay.AddRequestData("vnp_Locale", "vn");
+            vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang:" + order.Id);
+            vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
+
+            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+            vnpay.AddRequestData("vnp_TxnRef", order.Id.ToString()); // Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
+
+            urlPayment = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+            //log.InfoFormat("VNPAY URL: {0}", paymentUrl);
+            return urlPayment;
         }
     }
 }
