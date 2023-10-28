@@ -31,3 +31,7 @@ export interface imageSanPhams {
     imageName?:string;
     idSanPham?:number;
 }
+
+export interface ApiResponse {
+    urlVNPay?: string;
+  }

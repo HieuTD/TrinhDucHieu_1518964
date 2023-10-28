@@ -224,9 +224,17 @@ namespace WebApi.Controllers
             if(request.TypePayment == 0)
             {
                 urlPayment = await UrlPayment(0, order.Id);
+                var url = new
+                {
+                    urlVNPay = urlPayment
+                };
+                return Ok(url);
+            }
+            else
+            {
+                return Ok();
             }
             //await _hubContext.Clients.All.BroadcastMessage();
-            return Ok(urlPayment);
         }
 
         private async Task<string> UrlPayment(int TypePayment, int orderId)
