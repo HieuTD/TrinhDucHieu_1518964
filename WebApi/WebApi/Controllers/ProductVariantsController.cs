@@ -96,7 +96,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> UpdateProductVariant(int id, [FromForm] ProductVariantCreateRequest request)
         {
             ProductVariant prodVariant = await _context.ProductVariants.FindAsync(id);
-            prodVariant.Stock = request.Stock;
+            //prodVariant.Stock = request.Stock;
             prodVariant.ProdId = request.ProdId;
             prodVariant.ColorId = request.ColorId;
             prodVariant.SizeId = request.SizeId;
