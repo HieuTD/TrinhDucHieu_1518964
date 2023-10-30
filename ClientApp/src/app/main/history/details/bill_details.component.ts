@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contact',
   templateUrl: './bill_details.component.html',
@@ -38,10 +39,14 @@ export class BillDetailsComponent implements OnInit {
   });
 }
 Huy(){
-  this.status = 1;
+  var val = {
+    status: 3
+  };
   // this.http.post(environment.URL_API+"chitiethoadons/huydon/"+this.id_bill,{
-  this.http.put("https://localhost:44391/api/"+"orders/updatestatus/"+this.id_bill, this.status).subscribe(
+  this.http.put("https://localhost:44391/api/"+"orders/updatestatus/"+this.id_bill, val).subscribe(
     res=>{
+      Swal.fire("Huỷ đơn hàng thành công.", '', 'success')
+      window.location.href = '/history';
       this.loadChiTietPhieu()
     })
 }

@@ -138,5 +138,20 @@ namespace WebApi.Controllers
             id = null;
             return Ok();
         }
+
+
+        [HttpPut("updateUser/{id}")]
+        public async Task<IActionResult> UpdateUser(string id, UserCreateRequest request)
+        {
+            //var id = json.GetValue("id_user").ToString();
+            var result = await _context.AppUsers.Where(d => d.Id == id).SingleOrDefaultAsync();
+            request.FirstName = request.LastName;
+            request.LastName = request.LastName;
+            request.PhoneNumber = request.PhoneNumber;
+            request.Address = request.Address;
+            request.Email = request.Email;
+            request.Password = request.Password;
+            return Ok(result);
+        }
     }
 }

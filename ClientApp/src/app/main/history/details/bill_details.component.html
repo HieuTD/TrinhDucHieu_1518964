@@ -105,7 +105,7 @@
                 <div class="pull-right" style="padding-left: 20px;"><a class="btn btn-primary"
                         [routerLink]="'/history'">Trở về</a>
                 </div>
-                <div *ngIf="bill.trangThai!=1" class="pull-right"><a class="btn btn-primary" (click)="Huy()">Huỷ đơn</a>
+                <div *ngIf="bill.status!=1" class="pull-right"><a class="btn btn-primary" (click)="Huy()">Huỷ đơn</a>
                 </div>
             </div>
         </div>
