@@ -28,7 +28,7 @@
           </div>
       </div>
       <div class="form-group">
-          <span class="label label-default">Id_Loai</span>
+          <span class="label label-default">Tên loại</span>
           <select class="form-control" [(ngModel)]="service.size.categoryId" formControlName="Id_Loai">
               <option *ngFor="let category of this.categories" [value]="category.id">{{category.categoryName}}</option>
           </select>
