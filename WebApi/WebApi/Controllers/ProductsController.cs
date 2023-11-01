@@ -238,7 +238,7 @@ namespace WebApi.Controllers
             if (image != null)
             {
                 _context.ProductImages.Remove(image);
-                _storageService.DeleteFileProductAsync(image.Name);
+                await _storageService.DeleteFileProductAsync(image.Name);
             }
 
 

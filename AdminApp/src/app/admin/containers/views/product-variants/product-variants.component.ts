@@ -28,18 +28,18 @@ export class ProductVariantsComponent implements OnInit, AfterViewInit {
   public sanphambienthe: SanPhamBienThe
   ngOnInit(): void {
     this.service.getAllGiaSanPhamMauSacSanPhamSizes();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:44302/notify')
-      .build();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
-    connection.on("BroadcastMessage", () => {
-      this.service.getAllGiaSanPhamMauSacSanPhamSizes();
-    });
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl('https://localhost:44302/notify')
+    //   .build();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.service.getAllGiaSanPhamMauSacSanPhamSizes();
+    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;

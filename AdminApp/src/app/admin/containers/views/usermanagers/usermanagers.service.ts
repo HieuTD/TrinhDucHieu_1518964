@@ -22,7 +22,7 @@ export class UserManagersService{
       return this.http.delete(`${this.url}/${id}`)
     }
     getAllUsers(){
-      this.http.get("https://localhost:44391/api/"+"users").subscribe(
+      this.http.get(environment.URL_API+"users").subscribe(
         res=>{
           this.dataSource.data = res as User[];
         }

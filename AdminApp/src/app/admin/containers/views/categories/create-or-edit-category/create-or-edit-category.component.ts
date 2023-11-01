@@ -3,6 +3,7 @@ import { CategoryService } from '../category.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-create-or-edit-category',
@@ -30,7 +31,7 @@ export class CreateOrEditCategoryComponent implements OnInit {
       const formData = new FormData();
       formData.append('CategoryName', data.Name);
       // this.http.post(environment.URL_API+'loais', formData)
-      this.http.post("https://localhost:44391/api/" + 'categories', formData)
+      this.http.post(environment.URL_API + 'categories', formData)
         .subscribe(res => {
           this.toastService.showToastThemThanhCong();
           this.service.getAllCategories();
@@ -44,7 +45,7 @@ export class CreateOrEditCategoryComponent implements OnInit {
       const formData = new FormData();
       formData.append('CategoryName', data.Name);
       // this.http.put(environment.URL_API+'loais/'+`${this.service.category.id}`, formData)
-      this.http.put("https://localhost:44391/api/" + 'categories/' + `${this.service.category.id}`, formData)
+      this.http.put(environment.URL_API + 'categories/' + `${this.service.category.id}`, formData)
         .subscribe(res => {
           this.toastService.showToastSuaThanhCong();
           this.service.getAllCategories();

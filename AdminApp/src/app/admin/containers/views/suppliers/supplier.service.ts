@@ -16,11 +16,11 @@ export class SupplierService{
     constructor(public http:HttpClient) { }
     delete(id:number){
     //   return this.http.delete(`${environment.URL_API}nhacungcaps/${id}`)
-      return this.http.delete(`${"https://localhost:44391/api/"}suppliers/${id}`)
+      return this.http.delete(`${environment.URL_API}suppliers/${id}`)
     }
     gethttp():Observable<any>{
     //   return this.http.get(environment.URL_API+"nhacungcaps")
-      return this.http.get("https://localhost:44391/api/"+"suppliers")
+      return this.http.get(environment.URL_API+"suppliers")
     }
     getAllNhaCungCaps(){
       this.gethttp().subscribe(

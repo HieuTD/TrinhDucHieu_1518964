@@ -29,18 +29,18 @@ export class OrdersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'id_User', 'ngayTao', 'ghiChi', 'tongTien','trangThai','actions'];
   ngOnInit(): void {
     this.service.getAllHoaDons();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:44302/notify')
-      .build();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
-    connection.on("BroadcastMessage", () => {
-      this.service.getAllHoaDons();
-    });
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl('https://localhost:44302/notify')
+    //   .build();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.service.getAllHoaDons();
+    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;

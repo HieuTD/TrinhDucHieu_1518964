@@ -31,7 +31,7 @@ export class CreateOrEditCouponComponent implements OnInit {
       const formData = new FormData()
       formData.append('Discount', data.SoTienGiam);
       // this.http.post(environment.URL_API + 'magiamgias',formData)
-      this.http.post("https://localhost:44391/api/" + 'coupons', formData)
+      this.http.post(environment.URL_API + 'coupons', formData)
         .subscribe(res => {
           this.toastService.showToastThemThanhCong();
           this.service.getAllMaGiamGias()
@@ -45,7 +45,7 @@ export class CreateOrEditCouponComponent implements OnInit {
       const formData = new FormData();
       formData.append('Discount', data.SoTienGiam);
       // this.http.put(environment.URL_API + 'magiamgias/' + `${this.service.magiamgia.id}`, formData)
-      this.http.put("https://localhost:44391/api/" + 'coupons/' + `${this.service.magiamgia.id}`, formData)
+      this.http.put(environment.URL_API + 'coupons/' + `${this.service.magiamgia.id}`, formData)
         .subscribe(res => {
           this.toastService.showToastSuaThanhCong();
           this.service.getAllMaGiamGias()

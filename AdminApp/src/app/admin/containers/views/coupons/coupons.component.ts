@@ -26,18 +26,18 @@ export class CouponsComponent implements OnInit {
     'actions'];
   ngOnInit(): void {
     this.service.getAllMaGiamGias();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:44302/notify')
-      .build();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
-    connection.on("BroadcastMessage", () => {
-      this.service.getAllMaGiamGias();
-    });
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl('https://localhost:44302/notify')
+    //   .build();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.service.getAllMaGiamGias();
+    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;

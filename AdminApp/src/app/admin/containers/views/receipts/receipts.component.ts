@@ -34,21 +34,21 @@ export class ReceiptsComponent implements OnInit, AfterViewInit {
   ];
   ngOnInit(): void {
     this.service.getAllPhieuNhaps();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl("https://localhost:44302/notify")
-      .build();
-    connection
-      .start()
-      .then(function () {
-        console.log("SignalR Connected!");
-      })
-      .catch(function (err) {
-        return console.error(err.toString());
-      });
-    connection.on("BroadcastMessage", () => {
-      this.service.getAllPhieuNhaps();
-    });
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl("https://localhost:44302/notify")
+    //   .build();
+    // connection
+    //   .start()
+    //   .then(function () {
+    //     console.log("SignalR Connected!");
+    //   })
+    //   .catch(function (err) {
+    //     return console.error(err.toString());
+    //   });
+    // connection.on("BroadcastMessage", () => {
+    //   this.service.getAllPhieuNhaps();
+    // });
   }
   doFilter = (value: string) => {
     this.service.dataSource.filter = value.trim().toLocaleLowerCase();

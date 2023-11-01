@@ -64,18 +64,18 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
   ngOnInit() {
     this.service.getAllProducts();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:44302/notify')
-      .build();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
-    connection.on("BroadcastMessage", () => {
-      this.service.getAllProducts();
-    });
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl('https://localhost:44302/notify')
+    //   .build();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.service.getAllProducts();
+    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;

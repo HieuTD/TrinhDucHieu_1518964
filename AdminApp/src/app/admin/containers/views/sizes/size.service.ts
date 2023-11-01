@@ -16,11 +16,11 @@ export class SizeService{
     constructor(public http:HttpClient) { }
     delete(id:number){
       // return this.http.delete(`${environment.URL_API}sizes/${id}`)
-      return this.http.delete(`${"https://localhost:44391/api/"}sizes/${id}`)
+      return this.http.delete(`${environment.URL_API}sizes/${id}`)
     }
     get():Observable<any>{
       // return this.http.get(environment.URL_API+"sizes")
-      return this.http.get("https://localhost:44391/api/"+"sizes")
+      return this.http.get(environment.URL_API+"sizes")
     }
     getAllSizes(){
       this.get().subscribe(

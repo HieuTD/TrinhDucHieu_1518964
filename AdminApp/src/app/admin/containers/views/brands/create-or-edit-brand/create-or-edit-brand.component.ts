@@ -57,7 +57,7 @@ export class CreateOrEditBrandComponent implements OnInit {
       const formData = new FormData();
       formData.append('BrandName', data.Name);
       console.log(data)
-      this.http.post("https://localhost:44391/api/" + 'brands', formData)
+      this.http.post(environment.URL_API + 'brands', formData)
         .subscribe(res => {
           this.showToastThemThanhCong()
           this.service.getAllBrands();
@@ -71,7 +71,7 @@ export class CreateOrEditBrandComponent implements OnInit {
     else {
       const formData = new FormData();
       formData.append('BrandName', data.Name);
-      this.http.put("https://localhost:44391/api/" + 'brands/' + `${this.service.brand.id}`, formData)
+      this.http.put(environment.URL_API + 'brands/' + `${this.service.brand.id}`, formData)
         .subscribe(res => {
           this.showToastSuaThanhCong()
           this.service.getAllBrands();

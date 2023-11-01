@@ -21,37 +21,37 @@ export class ReceiptService {
   idphieunhap:number
   getphieunhaphttp():Observable<any>{
     // return this.http.get(environment.URL_API+"TaoPhieuNhaps")
-        return this.http.get("https://localhost:44391/api/"+"receipts")
+        return this.http.get(environment.URL_API+"receipts")
   }
   getnhacungcaphttp():Observable<any>{
     // return this.http.get(environment.URL_API+"NhaCungCaps")
-        return this.http.get("https://localhost:44391/api/"+"suppliers")
+        return this.http.get(environment.URL_API+"suppliers")
   }
   //Lấy ra nhà cung cấp theo Id
   getonenhacungcaphttp(id):Observable<any>{
     // return this.http.post<any>(environment.URL_API+"TaoPhieuNhaps/NhaCungCap",data)
-    return this.http.get(`${"https://localhost:44391/api/"}suppliers/${id}`)
+    return this.http.get(`${environment.URL_API}suppliers/${id}`)
   }
   //Lấy ra sản phẩm dựa theo Id nhà cung cấp
   gettensanphamhttp(supplierid):Observable<any>{
     // return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamNhaCungCap",data)
-        return this.http.get(`${"https://localhost:44391/api/"}products/listprod/${supplierid}`)
+        return this.http.get(`${environment.URL_API}products/listprod/${supplierid}`)
   }
   //Lấy ra sản phẩm biến thể dựa theo Id sản phẩm
   gettensanphambienthehttp(prodid):Observable<any>{
     // return this.http.post(environment.URL_API+"TaoPhieuNhaps/SanPhamBienTheMauSizeLoai",data)
-        return this.http.get(`${"https://localhost:44391/api/"}productVariants/listprodvariant/${prodid}`)
+        return this.http.get(`${environment.URL_API}productVariants/listprodvariant/${prodid}`)
   }
   getdetailphieunhap(id:number):Observable<any>{
     // return this.http.get<any>(environment.URL_API+"TaoPhieuNhaps/"+id)
-        return this.http.get<any>("https://localhost:44391/api/"+"receipts/"+id)
+        return this.http.get<any>(environment.URL_API+"receipts/"+id)
   }
   post(data):Observable<any>{
     // return this.http.post(environment.URL_API+"TaoPhieuNhaps",data)
-        return this.http.post("https://localhost:44391/api/"+"receipts",data)
+        return this.http.post(environment.URL_API+"receipts",data)
   }
   delete(id:number){
-    return this.http.delete(`${"https://localhost:44391/api/"}/${id}`)
+    return this.http.delete(`${environment.URL_API}/${id}`)
   }
   getAllPhieuNhaps(){
     this.getphieunhaphttp().subscribe(

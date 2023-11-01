@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { UserService } from '../user.service';
 import {  UserRegistration} from '../user.service'
 import { environment } from '../../../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -36,7 +37,7 @@ export class RegistrationFormComponent implements OnInit {
  errors: string;  
  isRequesting: boolean;
  submitted: boolean = false;
- constructor(public userService: UserService,private router: Router,public http : HttpClient, public _snackBar:  MatSnackBar) { 
+ constructor(public userService: UserService,private router: Router,public http : HttpClient, public _snackBar:  MatSnackBar, public toastr: ToastrService) { 
  }
  onLogin(){
   this.router.navigate(['/login'])
@@ -60,7 +61,8 @@ export class RegistrationFormComponent implements OnInit {
     form.append('Role','Admin');
     this.http.post("https://localhost:44391/api/"+'users/register',form).subscribe
     (result  => {
-      this.router.navigate(['/login'],{queryParams: {brandNew: true,email:data.email}});                     
+      this.router.navigate(['/login'],{queryParams: {brandNew: true,email:data.email}});
+      this.toastr.success('Đăng ký thành công', 'Thông báo', { timeOut: 2000 });                    
     },
       errors =>  this.errors = errors
     )

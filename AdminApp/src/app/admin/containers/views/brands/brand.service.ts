@@ -16,11 +16,11 @@ export class BrandService{
     constructor(public http:HttpClient) { }
     get():Observable<any>{
       // return this.http.get(environment.URL_API+"nhanhieus")
-      return this.http.get("https://localhost:44391/api/"+"brands")
+      return this.http.get(environment.URL_API+"brands")
     }
     delete(id:number){
       // return this.http.delete(`${environment.URL_API+"nhanhieus"}/${id}`)
-      return this.http.delete(`${"https://localhost:44391/api/"+"brands"}/${id}`)
+      return this.http.delete(`${environment.URL_API+"brands"}/${id}`)
     }
     getAllBrands(){
       this.get().subscribe(

@@ -33,31 +33,31 @@ export class DashboardComponent implements OnInit {
     this.getCountOrder()
     this.getCountUser();
     this.getCountTotalMoney();
-    this.getTopDataSetBanRaTonKho();
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:44302/notify')
-      .build();
-    connection.start().then(function () {
-      console.log('SignalR Connected!');
-    }).catch(function (err) {
-      return console.error(err.toString());
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getCountProduct();
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getCountUser();
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getCountTotalMoney();
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getCountOrder();
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getTopDataSetBanRaTonKho()
-    })
+    // this.getTopDataSetBanRaTonKho();
+    // const connection = new signalR.HubConnectionBuilder()
+    //   .configureLogging(signalR.LogLevel.Information)
+    //   .withUrl('https://localhost:44302/notify')
+    //   .build();
+    // connection.start().then(function () {
+    //   console.log('SignalR Connected!');
+    // }).catch(function (err) {
+    //   return console.error(err.toString());
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.getCountProduct();
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.getCountUser();
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.getCountTotalMoney();
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.getCountOrder();
+    // });
+    // connection.on("BroadcastMessage", () => {
+    //   this.getTopDataSetBanRaTonKho()
+    // })
   }
   dataSource: any;
   selectedSlice = 'none';

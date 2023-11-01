@@ -54,7 +54,7 @@ export class CreateOrEditSupplierComponent implements OnInit {
       formData.append('Address', data.DiaChi);
       console.log(data)
       // this.http.post(environment.URL_API + 'nhacungcaps', formData)
-      this.http.post("https://localhost:44391/api/" + 'suppliers', formData)
+      this.http.post(environment.URL_API + 'suppliers', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
           this.service.getAllNhaCungCaps();
@@ -71,7 +71,7 @@ export class CreateOrEditSupplierComponent implements OnInit {
       formData.append('Description', data.ThongTin);
       formData.append('Address', data.DiaChi);
       // this.http.put(environment.URL_API + 'nhacungcaps/' + `${this.service.nhacungcap.id}`, formData)
-      this.http.put("https://localhost:44391/api/" + 'suppliers/' + `${this.service.nhacungcap.id}`, formData)
+      this.http.put(environment.URL_API + 'suppliers/' + `${this.service.nhacungcap.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
           this.service.getAllNhaCungCaps();

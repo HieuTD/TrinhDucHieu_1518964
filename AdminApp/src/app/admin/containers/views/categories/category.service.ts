@@ -16,11 +16,11 @@ export class CategoryService{
     constructor(public http:HttpClient) { }
     delete(id:number){
       // return this.http.delete(`${environment.URL_API+"loais"}/${id}`)
-      return this.http.delete(`${"https://localhost:44391/api/"+"categories"}/${id}`)
+      return this.http.delete(`${environment.URL_API+"categories"}/${id}`)
     }
     get():Observable<any>{
       // return this.http.get<any>(environment.URL_API+"loais")
-      return this.http.get<any>("https://localhost:44391/api/"+"categories")
+      return this.http.get<any>(environment.URL_API+"categories")
     }
     getAllCategories(){
       this.get().subscribe(

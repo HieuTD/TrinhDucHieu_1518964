@@ -9,17 +9,17 @@ export class StatisticService {
   constructor(private http: HttpClient) { }
   getThongKeThang(): Observable<any> {
     // return this.http.get<any>(environment.URL_API + "statistics/topprofitbymonth")
-    return this.http.get<any>("https://localhost:44391/api/"  + "statistics/topprofitbymonth")
+    return this.http.get<any>(environment.URL_API  + "statistics/topprofitbymonth")
     
   }
   getSoLanSanPhamXuatHienTrongDonHang():Observable<any>{
     // return this.http.get<any>(environment.URL_API+"statistics/toporderproducts")
-    return this.http.get<any>("https://localhost:44391/api/" +"statistics/toporderproducts")
+    return this.http.get<any>(environment.URL_API +"statistics/toporderproducts")
     
   }
   getSanPhamDoanhThuTop():Observable<any>{
     // return this.http.get<any>(environment.URL_API+"statistics/topprofitproducts")
-    return this.http.get<any>("https://localhost:44391/api/" +"statistics/topprofitproducts")
+    return this.http.get<any>(environment.URL_API +"statistics/topprofitproducts")
   }
 
   dataThongKeNgay: any

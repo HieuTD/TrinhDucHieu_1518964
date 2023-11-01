@@ -17,10 +17,10 @@ export class ProductVariantService{
     constructor(public http:HttpClient) { }
     delete(id:number):Observable<any>{
     //   return this.http.delete<any>(`${this.url}/${id}`)
-      return this.http.delete<any>(`${"https://localhost:44391/api/"+"productVariants"}/${id}`)
+      return this.http.delete<any>(`${environment.URL_API+"productVariants"}/${id}`)
     }
     gethttp():Observable<any>{
-      return this.http.get("https://localhost:44391/api/"+"productVariants")
+      return this.http.get(environment.URL_API+"productVariants")
     }
     getAllGiaSanPhamMauSacSanPhamSizes(){
       this.gethttp().subscribe(
@@ -33,15 +33,15 @@ export class ProductVariantService{
     /* Dùng cho component modal thêm xóa sửa */
     getAllSanPhams(){
     //   return this.http.get(environment.URL_API+"sanphams")
-      return this.http.get("https://localhost:44391/api/"+"products")
+      return this.http.get(environment.URL_API+"products")
     }
     getAllTenSizeLoai(){
     //   return this.http.get(environment.URL_API+"sizes/tensizeloai")
-      return this.http.get("https://localhost:44391/api/"+"sizes/listSizeCategory")
+      return this.http.get(environment.URL_API+"sizes/listSizeCategory")
     }
     getAllTenMauLoai(){
     //   return this.http.get(environment.URL_API+"mausacs/tenmauloai")
-      return this.http.get("https://localhost:44391/api/"+"colors/listColorCategory")
+      return this.http.get(environment.URL_API+"colors/listColorCategory")
     }
   }
   export class LoaiMau{

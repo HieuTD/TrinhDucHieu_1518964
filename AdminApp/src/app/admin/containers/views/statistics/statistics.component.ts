@@ -93,24 +93,24 @@ export class StatisticsComponent implements OnInit {
     this.getTop10SanPhamLoiNhats()
     this.getSoLanXuatHienTrongDonHang()
     this.getThongKeThang();
-    const connection = new signalR.HubConnectionBuilder()
-    .configureLogging(signalR.LogLevel.Information)
-    .withUrl('https://localhost:44302/notify')
-    .build();
-  connection.start().then(function () {
-    console.log('SignalR Connected!');
-  }).catch(function (err) {
-    return console.error(err.toString());
-  });
-    connection.on("BroadcastMessage", () => {
-      this.getSoLanXuatHienTrongDonHang()
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getThongKeThang();
-    });
-    connection.on("BroadcastMessage", () => {
-      this.getTop10SanPhamLoiNhats()
-    })
+  //   const connection = new signalR.HubConnectionBuilder()
+  //   .configureLogging(signalR.LogLevel.Information)
+  //   .withUrl('https://localhost:44302/notify')
+  //   .build();
+  // connection.start().then(function () {
+  //   console.log('SignalR Connected!');
+  // }).catch(function (err) {
+  //   return console.error(err.toString());
+  // });
+  //   connection.on("BroadcastMessage", () => {
+  //     this.getSoLanXuatHienTrongDonHang()
+  //   });
+  //   connection.on("BroadcastMessage", () => {
+  //     this.getThongKeThang();
+  //   });
+  //   connection.on("BroadcastMessage", () => {
+  //     this.getTop10SanPhamLoiNhats()
+  //   })
   }
 
   //quantrong
