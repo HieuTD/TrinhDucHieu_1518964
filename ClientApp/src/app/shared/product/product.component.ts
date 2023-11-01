@@ -31,7 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.chose_mau = 1
         this.http
             // .get(environment.URL_API+'mausacs/mausac/', {}
-            .get("https://localhost:44391/api/" + 'colors/color/', {}
+            .get(environment.URL_API + 'colors/color/', {}
             ).subscribe(resp => {
                 this.mausac = resp;
             });
@@ -64,28 +64,28 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.service.getsanphammoi().subscribe(resp => {
             this.products = resp as Product[];
         });
-        const connection = new signalR.HubConnectionBuilder()
-            .configureLogging(signalR.LogLevel.Information)
-            .withUrl('https://localhost:44302/notify')
-            .build();
-        connection.start().then(function () {
-            console.log('SignalR Connected!');
-        }).catch(function (err) {
-            return console.error(err.toString());
-        });
-        connection.on("BroadcastMessage", () => {
-            this.service.getlaytatcasanpham().subscribe(resp => {
-                this.list_product = resp as Product[];
-                this.list_product_male = this.list_product.filter(d => d.gender == 1);
-                this.list_product_female = this.list_product.filter(d => d.gender == 2);
-            });
-        });
-        connection.on("BroadcastMessage", () => {
-            this.service.getsanphammoi().subscribe(resp => {
-                this.products = resp as Product[];
-                this.statusData = true;
-            });
-        });
+        // const connection = new signalR.HubConnectionBuilder()
+        //     .configureLogging(signalR.LogLevel.Information)
+        //     .withUrl('https://localhost:44302/notify')
+        //     .build();
+        // connection.start().then(function () {
+        //     console.log('SignalR Connected!');
+        // }).catch(function (err) {
+        //     return console.error(err.toString());
+        // });
+        // connection.on("BroadcastMessage", () => {
+        //     this.service.getlaytatcasanpham().subscribe(resp => {
+        //         this.list_product = resp as Product[];
+        //         this.list_product_male = this.list_product.filter(d => d.gender == 1);
+        //         this.list_product_female = this.list_product.filter(d => d.gender == 2);
+        //     });
+        // });
+        // connection.on("BroadcastMessage", () => {
+        //     this.service.getsanphammoi().subscribe(resp => {
+        //         this.products = resp as Product[];
+        //         this.statusData = true;
+        //     });
+        // });
     }
     like(idSanPham) {
         const clicks = localStorage.getItem('idUser');
@@ -95,7 +95,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           };
         this.http
             // .post(environment.URL_API+'sanphams/like/', {
-            .post("https://localhost:44391/api/" + 'productlikes/like/', val
+            .post(environment.URL_API + 'productlikes/like/', val
             ).subscribe(resp => {
                 if (resp == 1) {
                     this.list_product.filter(d => d.id == idSanPham)[0].like == 1;
@@ -115,7 +115,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
           };
         this.http
             // .post(environment.URL_API+'sanphams/sapxepsanpham', {
-            .post("https://localhost:44391/api/" + 'products/listproductarrange', val
+            .post(environment.URL_API + 'products/listproductarrange', val
             ).subscribe(resp => {
                 this.list_product = resp as Product[];
                 this.list_product_male = this.list_product.filter(d => d.gender == 1);
@@ -126,7 +126,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     searchthemau(colorName, chose) {
         this.http
             // .post(environment.URL_API+'sanphams/searchtheomau', {
-            .get("https://localhost:44391/api/" + 'products/listproductfilterbycolor/'+colorName
+            .get(environment.URL_API + 'products/listproductfilterbycolor/'+colorName
             ).subscribe(resp => {
                 this.list_product = resp as Product[];
                 this.list_product_male = this.list_product.filter(d => d.gender == 1);
@@ -142,7 +142,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         const clicks = localStorage.getItem('idUser');
         this.http
             // .post(environment.URL_API+'sanphams/checklike/', {
-            .post("https://localhost:44391/api/" + 'sanphams/checklike/', {
+            .post(environment.URL_API + 'sanphams/checklike/', {
                 IdSanPham: idSanPham,
                 IdUser: clicks,
             }

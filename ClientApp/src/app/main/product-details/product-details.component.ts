@@ -32,13 +32,13 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     });
     this.soLuong = 0;
     // this.http.get(environment.URL_API+"sanphams/chitietsanpham/"+this.id_product
-    this.http.get("https://localhost:44391/api/" + "products/productdetail/" + this.id_product
+    this.http.get(environment.URL_API + "products/productdetail/" + this.id_product
     ).subscribe(resp => {
       this.product = resp as Product;
       this.list_san_pham_bien_the = this.product.sanPhamBienThes;
       this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.description);
       // this.http.get(environment.URL_API+"mausacs/mau/"+this.id_product
-      this.http.get("https://localhost:44391/api/" + "colors/listcolorbyprodid/" + this.id_product
+      this.http.get(environment.URL_API + "colors/listcolorbyprodid/" + this.id_product
       ).subscribe(
         res => {
           this.mau = res;
@@ -48,7 +48,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       var val = {
         prodId: this.id_product,
       };
-      this.http.post("https://localhost:44391/api/" + "reviews/getListReview", val).subscribe(
+      this.http.post(environment.URL_API + "reviews/getListReview", val).subscribe(
         res => {
           this.list_review = res;
         });
@@ -62,7 +62,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       colorName: mau,
     };
     // this.http.post(environment.URL_API+"sizes/sizetheomau/",val).subscribe(
-    this.http.post("https://localhost:44391/api/" + "sizes/listSizeByColor/", val).subscribe(
+    this.http.post(environment.URL_API + "sizes/listSizeByColor/", val).subscribe(
       res => {
         this.size = res;
       });
@@ -75,7 +75,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       prodId: this.product.id,
       content: this.Content,
     };
-    this.http.post("https://localhost:44391/api/" + "reviews", val).subscribe(
+    this.http.post(environment.URL_API + "reviews", val).subscribe(
       res => {
         this.list_review = res;
         this.Content = "";
@@ -236,7 +236,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
         quantity: this.soLuong,
       };
       //  this.http.post(environment.URL_API+"Carts", val
-      this.http.post("https://localhost:44391/api/" + "Carts", val
+      this.http.post(environment.URL_API + "Carts", val
       ).subscribe(resp => {
         this.cartService.addToCart(product);
       });

@@ -45,7 +45,7 @@ export class RegisterComponent extends BaseService implements OnInit {
     form.append('Password',data.Password);
     form.append('Role','User');
     // this.http.post(environment.URL_API+"accounts",form).subscribe(resp => {
-    this.http.post("https://localhost:44391/api/"+'users/register',form).subscribe(resp => {
+    this.http.post(environment.URL_API+'users/register',form).subscribe(resp => {
         Swal.fire("Đăng ký thành công", ' ', 'success').then(function () {
           // this.router.navigate(['/login']);
           window.location.href='/login'

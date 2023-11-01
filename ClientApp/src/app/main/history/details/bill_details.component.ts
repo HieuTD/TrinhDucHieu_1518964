@@ -21,13 +21,13 @@ export class BillDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id_bill = params['id'];
       // this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
-      this.http.get("https://localhost:44391/api/"+"orders/"+this.id_bill,{
+      this.http.get(environment.URL_API+"orders/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
     // this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
-    this.http.get("https://localhost:44391/api/"+"orderdetails/"+this.id_bill,{
+    this.http.get(environment.URL_API+"orderdetails/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;
@@ -43,7 +43,7 @@ Huy(){
     status: 3
   };
   // this.http.post(environment.URL_API+"chitiethoadons/huydon/"+this.id_bill,{
-  this.http.put("https://localhost:44391/api/"+"orders/updatestatus/"+this.id_bill, val).subscribe(
+  this.http.put(environment.URL_API+"orders/updatestatus/"+this.id_bill, val).subscribe(
     res=>{
       Swal.fire("Huỷ đơn hàng thành công.", '', 'success')
       window.location.href = '/history';
@@ -53,13 +53,13 @@ Huy(){
 loadChiTietPhieu()
 {
   // this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
-    this.http.get("https://localhost:44391/api/"+"orders/"+this.id_bill,{
+    this.http.get(environment.URL_API+"orders/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
     // this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
-    this.http.get("https://localhost:44391/api/"+"orderdetails/"+this.id_bill,{
+    this.http.get(environment.URL_API+"orderdetails/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;

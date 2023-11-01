@@ -116,7 +116,7 @@ namespace WebApi.Controllers
             return await Task.FromResult<ClaimsIdentity>(null);
         }
 
-        [HttpGet("getUserAddress")]
+        [HttpGet("getUserAddress/{id}")]
         public async Task<IActionResult> GetUerAddress(string id)
         {
             //var id = json.GetValue("id_user").ToString();

@@ -4,7 +4,7 @@
 export const environment = {
   production: false,
   GG_CLIENT_ID :"1047302420815-i49u6epeei8m0sps3fonhrju9000hs5j.apps.googleusercontent.com",
-  URL_API:"https://localhost:44302/api/"
+  URL_API:"https://localhost:44391/api/"
 };
 /*
  * For easier debugging in development mode, you can import the following file

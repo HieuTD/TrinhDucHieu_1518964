@@ -41,7 +41,7 @@ export class CheckoutComponent implements OnInit {
       this.list_tinh_thanh = res;
     });
     // this.http.post(environment.URL_API+"Carts/getCart/"+this.id_user,{}).subscribe(
-    this.http.get("https://localhost:44391/api/" + "carts/getcartbyuserid/" + this.id_user, {}).subscribe(
+    this.http.get(environment.URL_API + "carts/getcartbyuserid/" + this.id_user, {}).subscribe(
       res => {
         this.list_item = res;
         console.log(this.list_item)
@@ -52,14 +52,14 @@ export class CheckoutComponent implements OnInit {
         }
       });
     // this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(res=>{
-    this.http.get("https://localhost:44391/api/" + "coupons").subscribe(res => {
+    this.http.get(environment.URL_API + "coupons").subscribe(res => {
       this.list_MGG = res;
     });
     //this.checkdiachi=true;
     this.list_MGGSD = [];
     this.check = null;
     // this.http.post(environment.URL_API+"Auth/getDiaChi/",{
-    this.http.get("https://localhost:44391/api/" + "users/getUserAddress/" + this.id_user
+    this.http.get(environment.URL_API + "users/getUserAddress/" + this.id_user, {responseType: 'text'}
     ).subscribe(
       res => {
         this.DiaChiDefaul = <string>res;
@@ -84,12 +84,12 @@ export class CheckoutComponent implements OnInit {
     delproduct.userId = clicks
     console.log(delproduct)
     // this.http.post(environment.URL_API+"Carts/delete",delproduct
-    this.http.post("https://localhost:44391/api/" + "Carts/delete", delproduct
+    this.http.post(environment.URL_API + "Carts/delete", delproduct
     ).subscribe(
       res => {
         Swal.fire("Xoá sản phẩm thành công .", '', 'success')
         // this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
-        this.http.get("https://localhost:44391/api/" + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
+        this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
           res => {
             this.list_item = res;
             this.tongtien = 0;
@@ -145,7 +145,7 @@ export class CheckoutComponent implements OnInit {
         typePayment: 0
       };
 
-      this.http.post<ApiResponse>("https://localhost:44391/api/orders", val).subscribe(
+      this.http.post<ApiResponse>(environment.URL_API+"orders", val).subscribe(
         (res: ApiResponse) => {
           console.log(res);
           if (res.urlVNPay) {
@@ -175,7 +175,7 @@ export class CheckoutComponent implements OnInit {
         totalPrice: this.tongThanhToan - 25000,
         userId: clicks,
       };
-      this.http.post("https://localhost:44391/api/" + "orders", val).subscribe(
+      this.http.post(environment.URL_API + "orders", val).subscribe(
         res => {
           Swal.fire("Đặt hàng thành công.", '', 'success').then(function () {
             window.location.href = '/history';
@@ -194,7 +194,7 @@ export class CheckoutComponent implements OnInit {
       userId: clicks
     };
     // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
-    this.http.post("https://localhost:44391/api/" + "Carts/update/", val).subscribe(
+    this.http.post(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
         this.tongtien = 0;
@@ -214,7 +214,7 @@ export class CheckoutComponent implements OnInit {
       userId: clicks
     };
     // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
-    this.http.put("https://localhost:44391/api/" + "Carts/update/", val).subscribe(
+    this.http.put(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
         this.tongtien = 0;
@@ -240,7 +240,7 @@ export class CheckoutComponent implements OnInit {
       userId: clicks
     };
     // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
-    this.http.put("https://localhost:44391/api/" + "Carts/update/", val).subscribe(
+    this.http.put(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
         this.tongtien = 0;

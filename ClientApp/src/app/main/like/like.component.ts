@@ -14,7 +14,7 @@ export class LikeComponent implements OnInit {
   constructor(public http:HttpClient,public route: ActivatedRoute,private cartService: CartService) {
     const clicks = localStorage.getItem('idUser');
   // this.http.post(environment.URL_API+"sanphams/dslike/",{
-  this.http.get("https://localhost:44391/api/"+"productlikes/listprodlikebyuserid/"+clicks).subscribe(
+  this.http.get(environment.URL_API+"productlikes/listprodlikebyuserid/"+clicks).subscribe(
       res=>{
         this.list_sanphamyeuthich=res;
       });
@@ -23,13 +23,13 @@ export class LikeComponent implements OnInit {
   }
   deleteSanPham(product){
     // this.http.post(environment.URL_API+"sanphams/deletelike/"+product.id,{
-    this.http.delete("https://localhost:44391/api/"+"productlikes/"+product.id,{
+    this.http.delete(environment.URL_API+"productlikes/"+product.id,{
   }).subscribe(
     res=>{
       Swal.fire("Xoá sản phẩm thành công .", '', 'success');
       const clicks = localStorage.getItem('idUser');
       // this.http.post(environment.URL_API+"sanphams/dslike/",{
-      this.http.get("https://localhost:44391/api/"+"productlikes/listprodlikebyuserid/"+clicks).subscribe(
+      this.http.get(environment.URL_API+"productlikes/listprodlikebyuserid/"+clicks).subscribe(
           res=>{
             this.list_sanphamyeuthich=res;
           });
