@@ -18,6 +18,8 @@ export class CreateOrEditBlogComponent implements OnInit {
     public serviceToast: ToastServiceService,
   ) {
   }
+  idUser: any
+
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
       TieuDe: new FormControl(null,
@@ -63,6 +65,7 @@ export class CreateOrEditBlogComponent implements OnInit {
     this.newFormGroup.reset();
   }
   onSubmit = (data) => {
+    this.idUser = localStorage.getItem("idUser")
     if (this.service.blog.id == 0) {
       let form = new FormData();
       for (let i = 0; i < this.urls.length; i++) {
@@ -70,6 +73,7 @@ export class CreateOrEditBlogComponent implements OnInit {
       }
       form.append('Title', data.TieuDe);
       form.append('Description', data.NoiDung);
+      form.append('UserId', this.idUser);
       this.service.post(form)
         .subscribe(res => {
           this.service.getAllBlogs();
@@ -84,6 +88,7 @@ export class CreateOrEditBlogComponent implements OnInit {
       const form = new FormData();
       form.append('Title', data.TieuDe);
       form.append('Description', data.NoiDung);
+      form.append('UserId', this.idUser);
       for (let i = 0; i < this.urls.length; i++) {
         form.append('files', this.selectedFile.item(i))
       }
