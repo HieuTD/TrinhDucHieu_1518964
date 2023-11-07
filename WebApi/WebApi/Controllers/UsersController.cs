@@ -141,16 +141,18 @@ namespace WebApi.Controllers
 
 
         [HttpPut("updateUser/{id}")]
-        public async Task<IActionResult> UpdateUser(string id, UserCreateRequest request)
+        public async Task<IActionResult> UpdateUser(string id, [FromForm] UserUpdateRequest request)
         {
             //var id = json.GetValue("id_user").ToString();
             var result = await _context.AppUsers.Where(d => d.Id == id).SingleOrDefaultAsync();
-            request.FirstName = request.LastName;
-            request.LastName = request.LastName;
-            request.PhoneNumber = request.PhoneNumber;
-            request.Address = request.Address;
-            request.Email = request.Email;
-            request.Password = request.Password;
+            result.FirstName = request.FirstName;
+            result.LastName = request.LastName;
+            result.PhoneNumber = request.PhoneNumber;
+            result.Address = request.Address;
+            result.Role = request.Role;
+            await _userManager.ChangePasswordAsync(result, request.Password, request.PasswordNew);
+            _context.AppUsers.Update(result);
+            await _context.SaveChangesAsync();
             return Ok(result);
         }
     }

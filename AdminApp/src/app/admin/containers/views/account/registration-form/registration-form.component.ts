@@ -59,7 +59,7 @@ export class RegistrationFormComponent implements OnInit {
     form.append('LastName', data.lastName);
     form.append('Address',data.location);
     form.append('Role','Admin');
-    this.http.post("https://localhost:44391/api/"+'users/register',form).subscribe
+    this.http.post(environment.URL_API+'users/register',form).subscribe
     (result  => {
       this.router.navigate(['/login'],{queryParams: {brandNew: true,email:data.email}});
       this.toastr.success('Đăng ký thành công', 'Thông báo', { timeOut: 2000 });                    

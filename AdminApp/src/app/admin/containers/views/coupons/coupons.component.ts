@@ -62,7 +62,7 @@ export class CouponsComponent implements OnInit {
           this.service.getAllMaGiamGias()
         },
         err => {
-          this.toastService.showToastXoaThanhCong()
+          this.toastService.showToastXoaThatBai()
         }
       )
     }

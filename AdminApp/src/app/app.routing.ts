@@ -93,9 +93,9 @@ export const routes: Routes = [
         path: 'admin/chartsecond',
         component: StatisticsComponent
       },
-      {
-        path: 'admin/chartthird',
-        component: ChartThirdComponent      },
+      // {
+      //   path: 'admin/chartthird',
+      //   component: ChartThirdComponent      },
       {
         path: 'admin/dashboard',
         component: DashboardComponent, canActivate: [AuthGuard],
@@ -104,10 +104,10 @@ export const routes: Routes = [
         path: 'admin/profile',
         component: UserdetailComponent, canActivate: [AuthGuard],
       },
-      {
-        path: 'admin/chartjs',
-        component: ChartJSComponent, canActivate: [AuthGuard],
-      },
+      // {
+      //   path: 'admin/chartjs',
+      //   component: ChartJSComponent, canActivate: [AuthGuard],
+      // },
       {
         path: 'admin/product/add',
         component: CreateOrEditProductComponent, canActivate: [AuthGuard],
@@ -116,10 +116,10 @@ export const routes: Routes = [
         path: 'admin/product/edit/:id',
         component: CreateOrEditProductComponent, canActivate: [AuthGuard],
       },
-      {
-        path: 'admin/product/detail/:id',
-        component: ProductdetailComponent, canActivate: [AuthGuard],
-      },
+      // {
+      //   path: 'admin/product/detail/:id',
+      //   component: ProductdetailComponent, canActivate: [AuthGuard],
+      // },
       {
         path: 'admin/products',
         component: ProductsComponent, canActivate: [AuthGuard],
