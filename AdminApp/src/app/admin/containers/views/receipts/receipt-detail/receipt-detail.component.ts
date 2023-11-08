@@ -20,7 +20,7 @@ export class ReceiptDetailComponent implements OnInit {
       }
     )
   }
-  exportGeneratePdf() {
-    window.open("https://localhost:44302/api/GeneratePdf/phieunhapdetail/" + this.phieunhapchitietphieunhap.id, "_blank");
-  }
+  // exportGeneratePdf() {
+  //   window.open("https://localhost:44302/api/GeneratePdf/phieunhapdetail/" + this.phieunhapchitietphieunhap.id, "_blank");
+  // }
 }

@@ -62,9 +62,9 @@ export class OrdersComponent implements OnInit {
     this.service.hoadon = Object.assign({}, selectedRecord)
     this.dialog.open(EditOrderComponent)
   } 
-  exportGeneratePdf() {
-    window.open("https://localhost:44302/api/GeneratePdf/allorder", "_blank");
-  }
+  // exportGeneratePdf() {
+  //   window.open("https://localhost:44302/api/GeneratePdf/allorder", "_blank");
+  // }
   clickDelete(id) {
     if (confirm('Bạn có chắc chắn xóa bản ghi này không ??')) {
       this.service.delete(id).subscribe(

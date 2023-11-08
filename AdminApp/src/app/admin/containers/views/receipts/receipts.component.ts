@@ -61,9 +61,9 @@ export class ReceiptsComponent implements OnInit, AfterViewInit {
     this.service.phieunhap = new PhieuNhap();
     this.router.navigate(["admin/taophieunhap/them"]);
   }
-  exportGeneratePdf() {
-    window.open("https://localhost:44302/api/GeneratePdf/allphieunhap", "_blank");
-  }
+  // exportGeneratePdf() {
+  //   window.open("https://localhost:44302/api/GeneratePdf/allphieunhap", "_blank");
+  // }
   populateForm(id: any) {
     this.service.idphieunhap = id;
     this.router.navigate(["admin/taophieunhap/detail/" + id]);

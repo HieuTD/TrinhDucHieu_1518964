@@ -16,9 +16,9 @@ export class OrderDetailComponent implements OnInit {
     this.url = environment.URL_API
     this.getMotHoaDon(this.service.hoadon.id)
   }
-  exportGeneratePdf() {
-    window.open("https://localhost:44302/api/GeneratePdf/orderdetail/"+this.hd.id, "_blank");
-  }
+  // exportGeneratePdf() {
+  //   window.open("https://localhost:44302/api/GeneratePdf/orderdetail/"+this.hd.id, "_blank");
+  // }
   getMotHoaDon(id:any){
     this.service.getMotHoaDonService(id).subscribe(
       res => {
