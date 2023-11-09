@@ -149,11 +149,35 @@ namespace WebApi.Controllers
             result.LastName = request.LastName;
             result.PhoneNumber = request.PhoneNumber;
             result.Address = request.Address;
-            result.Role = request.Role;
+            result.Email = request.Email;
+            result.NormalizedEmail = request.Email.ToUpper();
             await _userManager.ChangePasswordAsync(result, request.Password, request.PasswordNew);
             _context.AppUsers.Update(result);
             await _context.SaveChangesAsync();
             return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _context.AppUsers.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var userAuth = _context.AuthHistories.Where(u => u.UserId == id);
+            if(userAuth == null)
+            {
+                return NotFound();
+            }
+            foreach(var item in userAuth)
+            {
+            _context.AuthHistories.Remove(item);
+            }
+            _context.AppUsers.Remove(user);
+            await _context.SaveChangesAsync();
+            //await _hubContext.Clients.All.BroadcastMessage();
+            return Ok();
         }
     }
 }

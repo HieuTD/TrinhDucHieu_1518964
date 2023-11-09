@@ -4,18 +4,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { ProfileService } from './profile.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  constructor(public toast: ToastServiceService, public service: ProfileService, public http: HttpClient) { }
+  constructor(public toast: ToastrService, public service: ProfileService, public http: HttpClient) { }
   id: string
   userApp: any
   public newFormGroup: FormGroup;
+  user:any;
+  
   ngOnInit(): void {
     this.userApp = JSON.parse(localStorage.getItem("appuser"));
+    this.http.get(environment.URL_API+"users/AuthHistory").subscribe(
+      res=>{
+        this.user = res;
+      },
+      error=>{
+      }
+      );
     this.newFormGroup = new FormGroup({
       SDT: new FormControl(null,
         [
@@ -38,7 +48,7 @@ export class ProfileComponent implements OnInit {
           Validators.minLength(5),
         ]
       ),
-      UserName: new FormControl("",
+      Email: new FormControl("",
         [
           Validators.required,
           Validators.minLength(0),
@@ -65,19 +75,20 @@ export class ProfileComponent implements OnInit {
   }
   onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('PhoneNumber', data.SDT);
-    formData.append('Address', data.DiaChi);
-    formData.append('FirstName', data.FirstName);
-    formData.append('LastName', data.LastName);
-    formData.append('UserName', data.UserName);
-    formData.append('Role', data.Quyen);
+    formData.append('PhoneNumber', this.user.phoneNumber);
+    formData.append('Address', this.user.address);
+    formData.append('FirstName', this.user.firstName);
+    formData.append('LastName', this.user.lastName);
+    formData.append('Email', this.user.email);
+    // formData.append('Role', data.Quyen);
     formData.append('Password', data.Password);
     formData.append('PasswordNew', data.PasswordNew);
-    this.http.put(environment.URL_API + 'users/updateUser/' + `${this.id}`, formData).subscribe(
+    this.http.put(environment.URL_API + 'users/updateUser/' + this.id, formData).subscribe(
       response => {
-        this.toast.showToastSuaThanhCong()
+        this.toast.success("Thông báo", "Cập nhật thông tin thành công")
       },
       error => {
+        this.toast.error("Thông báo", "Cập nhật thông tin thất bại")
       }
     )
   }

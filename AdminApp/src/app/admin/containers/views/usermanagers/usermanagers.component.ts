@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UserManagersService } from './usermanagers.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usermanagers',
@@ -19,10 +20,11 @@ export class UsermanagersComponent implements OnInit {
   constructor(public service:UserManagersService,
               public router : Router,
               public http: HttpClient,
-              public dialog: MatDialog,) { }
+              public dialog: MatDialog,
+              public toast: ToastrService) { }
 public dataSource = new MatTableDataSource<User>();
 displayedColumns: string[] = ['id', 'firstName','lastName',
-'userName','quyen'];
+'userName','quyen','actions'];
   ngOnInit(): void {
     this.service.getAllUsers();
   }
@@ -44,7 +46,11 @@ displayedColumns: string[] = ['id', 'firstName','lastName',
   {
     this.service.delete(id).subscribe(
       res=>{
+        this.toast.success("Thông báo", "Xóa người dùng thành công")
         this.service.getAllUsers()
+      },
+      error => {
+        this.toast.error("Thông báo", "Xóa người dùng thất bại")
       }
     )
 }

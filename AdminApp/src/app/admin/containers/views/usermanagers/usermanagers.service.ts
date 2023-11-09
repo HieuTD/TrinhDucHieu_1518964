@@ -13,13 +13,12 @@ export class UserManagersService{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<User>();
     user:User = new User()
-    readonly url=environment.URL_API+"usermanagers"
     constructor(public http:HttpClient) { }
     get(){
-      return this.http.get(this.url)
+      return this.http.get(environment.URL_API+"users")
     }
     delete(id:number){
-      return this.http.delete(`${this.url}/${id}`)
+      return this.http.delete(`${environment.URL_API+"users"}/${id}`)
     }
     getAllUsers(){
       this.http.get(environment.URL_API+"users").subscribe(
