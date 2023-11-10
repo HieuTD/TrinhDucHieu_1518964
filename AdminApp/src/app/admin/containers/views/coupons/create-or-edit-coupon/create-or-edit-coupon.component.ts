@@ -52,7 +52,7 @@ export class CreateOrEditCouponComponent implements OnInit {
           this.service.magiamgia.id = 0;
         },
           error => {
-            this.toastService.showToastXoaThatBai()
+            this.toastService.showToastSuaThatBai()
           });
     }
   }

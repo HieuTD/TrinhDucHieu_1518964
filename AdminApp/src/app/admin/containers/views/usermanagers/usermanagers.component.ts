@@ -46,11 +46,11 @@ displayedColumns: string[] = ['id', 'firstName','lastName',
   {
     this.service.delete(id).subscribe(
       res=>{
-        this.toast.success("Thông báo", "Xóa người dùng thành công")
+        this.toast.success("Xóa người dùng thành công")
         this.service.getAllUsers()
       },
       error => {
-        this.toast.error("Thông báo", "Xóa người dùng thất bại")
+        this.toast.error("Xóa người dùng thất bại")
       }
     )
 }

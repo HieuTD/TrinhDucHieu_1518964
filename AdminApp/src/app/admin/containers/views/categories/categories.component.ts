@@ -67,7 +67,7 @@ displayedColumns: string[] = ['id', 'ten',
         this.service.getAllCategories()
       },
       err=>{
-        this.toastService.showToastXoaThanhCong()
+        this.toastService.showToastXoaThatBai()
       }
     )
 }

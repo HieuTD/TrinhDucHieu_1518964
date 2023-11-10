@@ -85,10 +85,10 @@ export class ProfileComponent implements OnInit {
     formData.append('PasswordNew', data.PasswordNew);
     this.http.put(environment.URL_API + 'users/updateUser/' + this.id, formData).subscribe(
       response => {
-        this.toast.success("Thông báo", "Cập nhật thông tin thành công")
+        this.toast.success("Cập nhật thông tin thành công")
       },
       error => {
-        this.toast.error("Thông báo", "Cập nhật thông tin thất bại")
+        this.toast.error("Cập nhật thông tin thất bại")
       }
     )
   }
