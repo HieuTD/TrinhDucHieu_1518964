@@ -20,6 +20,7 @@ export class CheckoutComponent implements OnInit {
   couponName: string;
   Huyen: string;
   public DiaChi: string;
+  public Description: string;
   list_MGG: any;
   list_MGGSD: string[];
   check: any;
@@ -142,7 +143,8 @@ export class CheckoutComponent implements OnInit {
         address: this.DiaChi,
         totalPrice: this.tongThanhToan - 25000,
         userId: clicks,
-        typePayment: 0
+        typePayment: 0,
+        Description: this.Description
       };
 
       this.http.post<ApiResponse>(environment.URL_API+"orders", val).subscribe(
@@ -174,6 +176,7 @@ export class CheckoutComponent implements OnInit {
         address: this.DiaChi,
         totalPrice: this.tongThanhToan - 25000,
         userId: clicks,
+        Description: this.Description
       };
       this.http.post(environment.URL_API + "orders", val).subscribe(
         res => {
