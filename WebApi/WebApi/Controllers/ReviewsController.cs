@@ -30,6 +30,7 @@ namespace WebApi.Controllers
                 ProdId = request.ProdId,
                 Content = request.Content,
                 UserId = request.UserId,
+                Rating = request.Rating
             };
             _context.Add(resuft);
             _context.SaveChanges();
@@ -38,7 +39,8 @@ namespace WebApi.Controllers
                 {
                     Content = d.Content,
                     UserName = _context.AppUsers.Where(s => s.Id == d.UserId).Select(s => s.FirstName + " " + s.LastName).SingleOrDefault(),
-                    CreatedAt = d.CreatedAt
+                    CreatedAt = d.CreatedAt,
+                    Rating = d.Rating
                 });
             return Ok(await listcomment.ToListAsync());
         }
@@ -51,7 +53,8 @@ namespace WebApi.Controllers
                  {
                      Content = d.Content,
                      UserName = _context.AppUsers.Where(s => s.Id == d.UserId).Select(s => s.FirstName + " " + s.LastName).SingleOrDefault(),
-                     CreatedAt = d.CreatedAt
+                     CreatedAt = d.CreatedAt,
+                     Rating = d.Rating
                  });
             return Ok(await listcomment.ToListAsync());
         }

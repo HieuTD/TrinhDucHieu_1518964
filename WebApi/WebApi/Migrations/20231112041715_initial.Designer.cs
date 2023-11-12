@@ -10,7 +10,7 @@ using WebApi.EF;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DBcontext))]
-    [Migration("20231019023758_initial")]
+    [Migration("20231112041715_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1017,6 +1017,9 @@ namespace WebApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("ProdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")

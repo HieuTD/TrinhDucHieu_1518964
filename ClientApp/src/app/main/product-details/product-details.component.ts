@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   Content = "";
   list_review: any;
   soLuong: number;
+  Rating: any;
   constructor(private cartService: CartService, public userService: UserService, public http: HttpClient, public route: ActivatedRoute, private sanitized: DomSanitizer) {
     this.route.params.subscribe(params => {
       this.id_product = params['id']; // get id to params
@@ -74,6 +75,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       userId: clicks,
       prodId: this.product.id,
       content: this.Content,
+      rating: this.Rating
     };
     this.http.post(environment.URL_API + "reviews", val).subscribe(
       res => {

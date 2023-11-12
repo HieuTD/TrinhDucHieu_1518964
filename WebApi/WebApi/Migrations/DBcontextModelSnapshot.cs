@@ -1017,6 +1017,9 @@ namespace WebApi.Migrations
                     b.Property<int?>("ProdId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
