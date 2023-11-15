@@ -42,7 +42,7 @@
 	border-bottom-color: #28d;
 }
 .login-header {
-  background: #33b5e5;
+  background: #303179;
   padding: 20px;
   font-size: 1.4em;
   font-weight: normal;
@@ -93,7 +93,7 @@
   cursor: pointer;
 }
 .login input[type="submit"]:hover {
-  background:#28d;
+  background:#f5cac2;
 }
 /* Buttons' focus effect */
 .login input[type="submit"]:focus {
@@ -162,7 +162,7 @@
 }
 .login-container input[type="submit"] {
     width: 100%;
-    background-color:#ef4d4d;
+    background-color:#ed7966;
     color: white;
     padding: 12px 20px;
     border: none;

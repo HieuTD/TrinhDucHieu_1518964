@@ -175,14 +175,14 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ Top bar ]*/
 .top-bar {
   height: 40px;
-  background-color: #222;
+  background-color: #f5cac2;
 }
 /*---------------------------------------------*/
 .left-top-bar {
   font-family: Poppins-Regular;
   font-size: 12px;
   line-height: 1.8;
-  color: #b2b2b2;
+  color: #222;
 }
 /*---------------------------------------------*/
 .right-top-bar a {
@@ -190,11 +190,11 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   font-size: 12px;
   line-height: 1.8;
   height: 100%;
-  color: #b2b2b2;
-  border-right: 1px solid rgba(255,255,255,0.3);
+  color: #222;
+  border-right: 1px solid rgba(1,1,1,0.1);
 }
 .right-top-bar a:first-child {
-  border-left: 1px solid rgba(255,255,255,0.3);
+  border-left: 1px solid rgba(1,1,1,0.1);
 }
 .right-top-bar a:hover {
   color: #6c7ae0;
@@ -203,7 +203,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .topbar-mobile li {
   padding: 8px 20px;
   border-top: 1px solid rgba(255,255,255,0.05);
-  background-color: #222;
+  background-color: #f5cac2;
 }
 /*==================================================================
 [ Menu ]*/
@@ -500,7 +500,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   height: 70px;
 }
 .header-v3 .fix-menu-desktop .wrap-menu-desktop {
-  background-color: #222;
+  background-color: #f5cac2;
   border-color: #222;
 }
 .header-v4 .fix-menu-desktop.container-menu-desktop {
@@ -2147,7 +2147,7 @@ input.num-product::-webkit-inner-spin-button {
 .bg0 {background-color: #fff;}
 .bg1 {background-color: #717fe0;}
 .bg2 {background-color: #e6e6e6;}
-.bg3 {background-color: #222;}
+.bg3 {background-color: #f5cac2;}
 .bg5 {background-color: rgba(0,0,0,0.5);}
 .bg6 {background-color: #f2f2f2;}
 .bg7 {background-color: #333;}
@@ -2307,7 +2307,7 @@ input.num-product::-webkit-inner-spin-button {
 /*---------------------------------------------*/
 .wrap-input1 {
   position: relative;
-  border-bottom: 2px solid rgba(204,204,204, 0.1);
+  border-bottom: 2px solid rgba(1,1,1, 0.1);
 }
 .input1 {
   background-color: transparent;
@@ -2501,7 +2501,7 @@ input.num-product::-webkit-inner-spin-button {
 /*---------------------------------------------*/
 .hov-btn1:hover {
   border-color: #222;
-  background-color: #222;
+  background-color: #f5cac2;
   color: #fff;
 }
 .hov-btn1:hover i {
