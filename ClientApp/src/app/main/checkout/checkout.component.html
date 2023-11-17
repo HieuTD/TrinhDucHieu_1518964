@@ -115,7 +115,7 @@
                                 <span class="stext-110 cl2">
                                     Thông tin giao hàng:
                                 </span>
-                                <mat-checkbox [checked]="checkdiachi" (click)="changeValue(checkdiachi)"
+                                <mat-checkbox [checked]="checkdiachi" (change)="changeValue(checkdiachi)"
                                     class="example-margin">Sử dụng địa chỉ mặc định</mat-checkbox>
                             </div>
                             <div class="size0000 p-r-18 p-r-0-sm w-full-ssm" style="width:100% !important">
@@ -141,7 +141,7 @@
                               </select>
                                         </div>
                                     </div> -->
-                                    <div *ngIf="!checkdiachi">
+                                    <!-- <div *ngIf="!checkdiachi">
                                         <span>Tỉnh/thành Phố</span>
                                         <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
                                             <select class="js-select2" (ngModelChange)="changTinhThanh($event)"
@@ -166,13 +166,13 @@
                                                     {{xa.name}}</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <span>Địa chỉ</span>
                                     <div class="bor8 bg0 m-b-22">
                                         <textarea style="height: 80px !important;"
                                             class="stext-111 cl8 plh3 size-111 p-lr-15" [(ngModel)]="DiaChi" type="text"
                                             name="postcode"
-                                            placeholder="Ví dụ : 25T2 , Hoàng Đạo Thuỷ , Cầu Giấy , Hà Nội">
+                                            placeholder="Điền địa chỉ nhận hàng của bạn">
                                     </textarea>
                                     </div>
                                     <span>Ghi chú:</span>

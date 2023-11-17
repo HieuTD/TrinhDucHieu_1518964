@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
   }
   changeValue(value) {
     this.checkdiachi = !value;
-    if (this.check) {
+    if (this.checkdiachi) {
       this.DiaChi = this.DiaChiDefaul;
     }
     else {
