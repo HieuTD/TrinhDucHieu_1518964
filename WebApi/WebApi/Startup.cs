@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApi.EF;
 using WebApi.Helper.AutoMapper;
+using WebApi.Helper.Common;
 using WebApi.Helper.FileStorage;
 using WebApi.Helper.JwtConfigure;
 using WebApi.Models;
@@ -84,7 +85,10 @@ namespace WebApi
 
             services.AddTransient<IFileStorageService, FileStorageService>();
 
+            services.AddTransient<IEmailService, EmailService>();
+
             services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

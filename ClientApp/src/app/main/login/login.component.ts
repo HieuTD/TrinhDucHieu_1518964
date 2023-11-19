@@ -21,28 +21,30 @@ export class LoginComponent implements OnInit {
   errors: string;
   isRequesting: boolean;
   submitted: boolean = false;
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean
   credentials: Credentials = { email: '', password: '' };
-  constructor(public authService: SocialAuthService,public router : Router,private activatedRoute: ActivatedRoute , public http : HttpClient,public userService : UserService){
+  constructor(public authService: SocialAuthService, public router: Router, private activatedRoute: ActivatedRoute, public http: HttpClient, public userService: UserService) {
   }
   private loggedIn = false;
   isLoggedIn() {
     return this.loggedIn;
   }
   public newForm: FormGroup;
-  ngOnInit(){
+  ngOnInit() {
     this.newForm = new FormGroup({
-      userName : new FormControl(null),
-      passWord : new FormControl(null),
+      userName: new FormControl(null),
+      passWord: new FormControl(null),
     })
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
-         this.brandNew = param['brandNew'];
-         this.credentials.email = param['email'];
+        this.brandNew = param['brandNew'];
+        this.credentials.email = param['email'];
       });
-      this.authService.authState.subscribe(user => {
-        this.user = user;
-        console.log(user);
-      });
+    this.authService.authState.subscribe(user => {
+      this.user = user;
+      console.log(user);
+    });
   }
   public signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -50,22 +52,46 @@ export class LoginComponent implements OnInit {
   public signOut(): void {
     this.authService.signOut();
   }
-  onLogOut(){
+  onLogOut() {
     localStorage.removeItem('auth_token');
     this.loggedIn = false
   }
-  onLogin(){
+  onLogin() {
     this.router.navigate(['/register']);
   }
-onSubmit = (data) =>{
-  let form = new FormData();
-  form.append('UserName', data.userName);
-  form.append('Password',data.passWord);
+  onSubmit = (data) => {
+    let form = new FormData();
+    form.append('UserName', data.userName);
+    form.append('Password', data.passWord);
     this.submitted = true;
     this.isRequesting = true;
-    this.errors='';
-    this.userService.login(data.userName,data.passWord)
+    this.errors = '';
+    this.userService.login(data.userName, data.passWord)
+  }
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+  confirmToSend() {
+    if (this.checkValidEmail(this.resetPasswordEmail)) {
+      console.log(this.resetPasswordEmail);
+      
+      this.userService.sendResetPasswordLink(this.resetPasswordEmail)
+      .subscribe({
+        next:(res) => {
+          this.resetPasswordEmail = "";
+          const buttonRef = document.getElementById("closeBtn");
+          buttonRef.click();
+          Swal.fire("Gửi yêu cầu thiết lập lại mật khẩu thành công", '', 'success')
+        },
+        error:(err) => {
+
+        }
+      })
     }
+  }
 }
 export interface Credentials {
   email: string;

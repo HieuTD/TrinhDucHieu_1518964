@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,9 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
+using WebApi.DTOs;
 using WebApi.DTOs.Users;
 using WebApi.EF;
+using WebApi.Helper.Common;
 using WebApi.Helper.JwtConfigure;
 using WebApi.Models;
 
@@ -28,10 +32,12 @@ namespace WebApi.Controllers
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
+        private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
         static string id;
 
 
-        public UsersController(DBcontext context, UserManager<AppUser> userManager, IMapper mapper, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
+        public UsersController(DBcontext context, UserManager<AppUser> userManager, IMapper mapper, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions, IConfiguration configuration, IEmailService emailService)
         {
             _context = context;
             _mapper = mapper;
@@ -42,6 +48,8 @@ namespace WebApi.Controllers
             };
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
+            _configuration = configuration;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -178,6 +186,67 @@ namespace WebApi.Controllers
             await _context.SaveChangesAsync();
             //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
+        }
+
+        [HttpPost("send-reset-email/{email}")]
+        public async Task<IActionResult> SendEmail(string email)
+        {
+            var user = await _context.AppUsers.FirstOrDefaultAsync(a => a.Email == email);
+            if (user is null)
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "Email Doesn't Exist"
+                });
+            byte[] tokenBytes = new byte[64];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(tokenBytes);
+            }
+
+            var emailToken = Convert.ToBase64String(tokenBytes);
+            user.ResetPasswordToken = emailToken;
+            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(5);
+            string from = _configuration["EmailSettings:From"];
+            var emailModel = new Email(email, "Reset Password!", EmailBody.EmailStringBody(email, emailToken));
+            _emailService.SendEmail(emailModel);
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok(new
+            {
+                StatusCode = 200,
+                Message = "Email sent!"
+            });
+        }
+
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
+            var user = await _context.AppUsers.AsNoTracking().FirstOrDefaultAsync(a => resetPasswordDto.Email == a.Email);
+            if (user is null)
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "No user found with this email!"
+                });
+            var tokenCode = user.ResetPasswordToken;
+            DateTime emailTokenExpiry = user.ResetPasswordExpiry;
+            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
+                return NotFound(new
+                {
+                    StatusCode = 400,
+                    Message = "Invalid reset link!"
+                });
+            await _userManager.ChangePasswordAsync(user, user.PasswordHash, resetPasswordDto.NewPassword);
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok(new
+            {
+                StatusCode = 200,
+                Message = "Password Reset Successfully!"
+            });
         }
     }
 }

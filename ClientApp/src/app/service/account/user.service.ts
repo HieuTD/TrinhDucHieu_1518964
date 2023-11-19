@@ -80,6 +80,14 @@ export class UserService extends BaseService  {
       return false
     }
   }
+  sendResetPasswordLink(email:string) {
+    return this.http.post<any>(environment.URL_API + 'users/send-reset-email/' + email, {})
+  }
+
+  resetPassword(resetPasswordObj : ResetPassowrd)
+  {
+    return this.http.post<any>(environment.URL_API + 'users/reset-password', resetPasswordObj);
+  }
 }
 export interface UserRegistration {
   email: string;
@@ -87,4 +95,12 @@ export interface UserRegistration {
   firstName: string;
   lastName:  string;
   location: string;
+}
+
+export class ResetPassowrd
+{
+  public email!: string;
+  public emailToken!: string;
+  public newPassword!: string;
+  public confirmPassowrd!: string;
 }
