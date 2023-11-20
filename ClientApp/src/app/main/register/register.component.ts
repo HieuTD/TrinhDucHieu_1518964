@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ConfirmPasswordValidator } from 'src/app/helpers/confirm-password.validator';
 import { BaseService } from 'src/app/service/base.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -24,7 +25,7 @@ export class RegisterComponent extends BaseService implements OnInit {
     this._unsubscribeAll = new Subject();
    }
    check(){
-    if(this.userFormGroup.value.Password!=this.userFormGroup.value.RePassword)
+    if(this.userFormGroup.value.Password!=this.userFormGroup.value.confirmPassword)
     {
      Swal.fire("Mật khẩu không trùng nhau", '', 'warning').then(function () {
      }
@@ -62,12 +63,15 @@ export class RegisterComponent extends BaseService implements OnInit {
       SDT: ['', Validators.required],
       DiaChi: ['', Validators.required],
       Password: ['', Validators.required],
-      RePassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    {
+      validator: ConfirmPasswordValidator("Password", "confirmPassword")
     });
     this.userFormGroup.get('Password').valueChanges
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(() => {
-                this.userFormGroup.get('RePassword').updateValueAndValidity();
+                this.userFormGroup.get('confirmPassword').updateValueAndValidity();
             });
   }
   ngOnDestroy(): void {

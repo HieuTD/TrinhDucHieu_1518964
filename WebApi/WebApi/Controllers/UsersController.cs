@@ -224,7 +224,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
-            var user = await _context.AppUsers.AsNoTracking().FirstOrDefaultAsync(a => resetPasswordDto.Email == a.Email);
+            var user = await _context.AppUsers.FirstOrDefaultAsync(a => resetPasswordDto.Email == a.Email);
             if (user is null)
                 return NotFound(new
                 {
@@ -239,8 +239,8 @@ namespace WebApi.Controllers
                     StatusCode = 400,
                     Message = "Invalid reset link!"
                 });
-            await _userManager.ChangePasswordAsync(user, user.PasswordHash, resetPasswordDto.NewPassword);
-            _context.Entry(user).State = EntityState.Modified;
+            user.PasswordHash = null;
+            await _userManager.AddPasswordAsync(user, resetPasswordDto.NewPassword);
             await _context.SaveChangesAsync();
             return Ok(new
             {

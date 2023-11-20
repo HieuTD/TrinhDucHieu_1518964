@@ -14,6 +14,7 @@ import { LikeComponent } from './main/like/like.component';
 import { RegisterComponent } from './main/register/register.component';
 import { InfoUserComponent } from './main/info-user/info-user.component';
 import { BlogComponent } from './main/blog/blog.component';
+import { ResetPasswordComponent } from './main/reset-password/reset-password.component';
 const routes: Routes = [
   {
     path: 'info_user',
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path: 'bill/:id',
     component: BillDetailsComponent
+  },
+  {
+    path: 'reset',
+    component: ResetPasswordComponent
   }
 ];
 @NgModule({

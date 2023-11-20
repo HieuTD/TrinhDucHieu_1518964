@@ -84,7 +84,7 @@ export class UserService extends BaseService  {
     return this.http.post<any>(environment.URL_API + 'users/send-reset-email/' + email, {})
   }
 
-  resetPassword(resetPasswordObj : ResetPassowrd)
+  resetPassword(resetPasswordObj : ResetPassword)
   {
     return this.http.post<any>(environment.URL_API + 'users/reset-password', resetPasswordObj);
   }
@@ -97,10 +97,10 @@ export interface UserRegistration {
   location: string;
 }
 
-export class ResetPassowrd
+export class ResetPassword
 {
   public email!: string;
   public emailToken!: string;
   public newPassword!: string;
-  public confirmPassowrd!: string;
+  public confirmPassword!: string;
 }

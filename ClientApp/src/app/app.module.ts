@@ -42,6 +42,7 @@ import { FacebookModule } from 'ngx-facebook';;
 import { SocialLoginModule,SocialAuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { environment } from 'src/environments/environment';
+import { ResetPasswordComponent } from './main/reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +69,8 @@ import { environment } from 'src/environments/environment';
     BillDetailsComponent,
     RegisterComponent,
     InfoUserComponent,
-    LoginfacebookComponent
+    LoginfacebookComponent,
+    ResetPasswordComponent
   ],
   imports: [
     FacebookModule.forRoot(),
