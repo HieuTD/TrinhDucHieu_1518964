@@ -4,13 +4,14 @@
       <br>
       <div class="form-group">
           <label for="MaMau">Tên màu</label>
-          <select class="form-control" formControlName="MaMau" [(ngModel)]="this.service.mausac.colorName">
+          <!-- <select class="form-control" formControlName="MaMau" [(ngModel)]="this.service.mausac.colorName">
               <option value="Đen">Đen</option>
               <option value="Trắng">Trắng</option>
               <option value="Vàng">Vàng</option>
               <option value="Tím">Tím</option>
               <option value="Đỏ">Đỏ</option>
-          </select>
+          </select> -->
+          <input class="form-control" formControlName="MaMau" [(ngModel)]="service.mausac.colorName" required>
           <div *ngIf="MaMau.invalid && (MaMau.dirty || MaMau.touched)" class="alert alert-danger">
               <div *ngIf="MaMau.errors.required">
                   Mã màu không được bỏ trống

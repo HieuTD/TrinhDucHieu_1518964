@@ -100,10 +100,10 @@ export const routes: Routes = [
         path: 'admin/dashboard',
         component: DashboardComponent, canActivate: [AuthGuard],
       },
-      {
-        path: 'admin/profile',
-        component: UserdetailComponent, canActivate: [AuthGuard],
-      },
+      // {
+      //   path: 'admin/profile',
+      //   component: UserdetailComponent, canActivate: [AuthGuard],
+      // },
       // {
       //   path: 'admin/chartjs',
       //   component: ChartJSComponent, canActivate: [AuthGuard],

@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit {
       xAxisName: 'Tháng',
       yAxisName: 'Số tiền bán được',
       numberSuffix: '',
-      theme: 'umber'
+      theme: 'fusion'
     },
     data: [
       { label: "", value: "" },
@@ -51,7 +51,7 @@ export class StatisticsComponent implements OnInit {
       xAxisName: 'Tên sản phẩm',
       yAxisName: 'Số lượng đã bán',
       numberSuffix: '',
-      theme: 'umber'
+      theme: 'fusion'
     },
     data: [
       { label: "", value: "" },
@@ -74,7 +74,7 @@ export class StatisticsComponent implements OnInit {
       xAxisName: 'Tên sản phẩm',
       yAxisName: 'Doanh thu',
       numberSuffix: '',
-      theme: 'umber'
+      theme: 'fusion'
     },
     data: [
       { label: "", value: "" },

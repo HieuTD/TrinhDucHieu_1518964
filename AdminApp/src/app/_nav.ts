@@ -12,7 +12,7 @@ export const navItems: INavData[] = [
       {
         name: 'Bán hàng',
         url: '/admin/chartsecond',
-        icon: 'cil-chart-pie',
+        icon: 'cil-bar-chart',
       },
       // {
       //   name: 'Nhập hàng',
@@ -38,7 +38,7 @@ export const navItems: INavData[] = [
       {
         name: 'Nhà cung cấp',
         url: '/admin/suppliers',
-        icon: 'cil-library-building',
+        icon: 'cil-factory',
       },
       {
         name: 'Nhãn hiệu',
@@ -53,7 +53,7 @@ export const navItems: INavData[] = [
       {
         name: 'Màu sắc',
         url: '/admin/colors',
-        icon: 'cil-burn',
+        icon: 'cil-drop',
       },
       {
         name: 'Sản phẩm biến thể',
@@ -63,12 +63,12 @@ export const navItems: INavData[] = [
       {
         name:'Người dùng',
         url:'/admin/usermanagers',
-        icon:'cil-address-book'
+        icon:'cil-group'
       },
       {
         name: 'Mã giảm giá',
         url: '/admin/coupons',
-        icon: 'cil-puzzle',
+        icon: 'cil-tags',
       },
       {
         name:'Blog',
@@ -94,7 +94,7 @@ export const navItems: INavData[] = [
       {
         name:'Phiếu nhập hàng',
         url:'admin/taophieunhap',
-        icon:'cil-list-rich'
+        icon:'cil-clipboard'
       },
     ]
   },
