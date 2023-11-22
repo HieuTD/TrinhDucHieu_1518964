@@ -99,10 +99,16 @@ import { ResetPasswordComponent } from './main/reset-password/reset-password.com
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              environment.GG_CLIENT_ID
+              environment.GG_CLIENT_ID, {
+                scope: 'email',
+                plugin_name: 'login-app'
+              }
             )
           }
-        ]
+        ], 
+        onError: (err: any) => {
+          console.error(err);
+        },
       } as SocialAuthServiceConfig
     }
   ],
