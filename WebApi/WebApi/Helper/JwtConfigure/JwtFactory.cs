@@ -16,12 +16,12 @@ namespace WebApi.Helper.JwtConfigure
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
         }
-        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string role)
         {
             return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
             {
                 new Claim(Constants.Strings.JwtClaimIdentifiers.Id, id),
-                new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess)
+                new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, role)
             });
         }
 

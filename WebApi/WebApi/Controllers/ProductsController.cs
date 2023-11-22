@@ -154,7 +154,7 @@ namespace WebApi.Controllers
                 else
                 {
                     _context.ProductImages.Remove(image);
-                    _storageService.DeleteFileProductAsync(image.Name);
+                    await _storageService.DeleteFileProductAsync(image.Name);
                     await _context.SaveChangesAsync();
                     product.ProductImages = new List<ProductImage>()
                     {

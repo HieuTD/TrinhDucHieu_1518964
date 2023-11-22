@@ -119,7 +119,7 @@ namespace WebApi.Controllers
                 else
                 {
                     _context.BlogImages.Remove(image);
-                    _storageService.DeleteFileBlogAsync(image.Name);
+                    await _storageService.DeleteFileBlogAsync(image.Name);
                     await _context.SaveChangesAsync();
                     blog.BlogImages = new List<BlogImage>()
                     {
@@ -148,8 +148,8 @@ namespace WebApi.Controllers
             var image = await _context.BlogImages.FirstOrDefaultAsync(s => s.BlogId == id);
             if (image != null)
             {
-            _context.BlogImages.Remove(image);
-            _storageService.DeleteFileBlogAsync(image.Name);
+                _context.BlogImages.Remove(image);
+                await _storageService.DeleteFileBlogAsync(image.Name);
             }
 
             var blog = await _context.Blogs.FindAsync(id);

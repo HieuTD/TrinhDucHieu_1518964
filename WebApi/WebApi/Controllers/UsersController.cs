@@ -117,7 +117,7 @@ namespace WebApi.Controllers
                         _context.AuthHistories.Add(auth);
                         await _context.SaveChangesAsync();
                         id = userToVerify.Id;
-                        return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
+                        return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id, userToVerify.Role));
                     }
                 }
             }
@@ -180,7 +180,7 @@ namespace WebApi.Controllers
             }
             foreach(var item in userAuth)
             {
-            _context.AuthHistories.Remove(item);
+                _context.AuthHistories.Remove(item);
             }
             _context.AppUsers.Remove(user);
             await _context.SaveChangesAsync();
