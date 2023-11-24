@@ -69,7 +69,6 @@ namespace WebApi.Controllers
             var userIdentity = _mapper.Map<AppUser>(request);
             var result = await _userManager.CreateAsync(userIdentity, request.Password);
             _context.AppUsers.Update(userIdentity);
-            //if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -127,7 +126,6 @@ namespace WebApi.Controllers
         [HttpGet("getUserAddress/{id}")]
         public async Task<IActionResult> GetUerAddress(string id)
         {
-            //var id = json.GetValue("id_user").ToString();
             var result = await _context.AppUsers.Where(d => d.Id == id).Select(d => d.Address).SingleOrDefaultAsync();
             return Ok(result);
         }
@@ -151,7 +149,6 @@ namespace WebApi.Controllers
         [HttpPut("updateUser/{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromForm] UserUpdateRequest request)
         {
-            //var id = json.GetValue("id_user").ToString();
             var result = await _context.AppUsers.Where(d => d.Id == id).SingleOrDefaultAsync();
             result.FirstName = request.FirstName;
             result.LastName = request.LastName;
@@ -184,7 +181,6 @@ namespace WebApi.Controllers
             }
             _context.AppUsers.Remove(user);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -208,7 +204,7 @@ namespace WebApi.Controllers
             user.ResetPasswordToken = emailToken;
             user.ResetPasswordExpiry = DateTime.Now.AddMinutes(5);
             string from = _configuration["EmailSettings:From"];
-            var emailModel = new Email(email, "Reset Password!", EmailBody.EmailStringBody(email, emailToken));
+            var emailModel = new Email(email, "Đặt lại mật khẩu!", EmailBody.EmailStringBody(email, emailToken));
             _emailService.SendEmail(emailModel);
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();

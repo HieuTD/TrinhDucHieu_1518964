@@ -63,12 +63,6 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ColorViewModel>> AddColor([FromForm] ColorCreateRequest request)
         {
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.MaMau,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             Color color = new Color()
             {
                 Name = request.ColorName,
@@ -77,7 +71,6 @@ namespace WebApi.Controllers
             };
             _context.Colors.Add(color);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(color);
         }
 
@@ -89,14 +82,7 @@ namespace WebApi.Controllers
             color.CategoryId = request.CategoryId;
             color.UpdatedAt = DateTime.Now;
             _context.Colors.Update(color);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.MaMau,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(color);
         }
 
@@ -104,19 +90,12 @@ namespace WebApi.Controllers
         public async Task<IActionResult> DeleteColor(int id)
         {
             var color = await _context.Colors.FindAsync(id);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = mauSac.MaMau,
-            //    TranType = "Delete"
-            //};
-            //_context.Notifications.Add(notification);
             if (color == null)
             {
                 return NotFound();
             }
             _context.Colors.Remove(color);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 

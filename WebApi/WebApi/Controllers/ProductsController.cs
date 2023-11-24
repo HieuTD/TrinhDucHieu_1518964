@@ -35,7 +35,6 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductViewModel>>> GetAllProducts()
         {
-            //var listIdSanPhamliked = await _context.UserLikes.Select(s => s.IdSanPham).ToListAsync();
             var query = await _context.Products.Select(
                    s => new ProductViewModel()
                    {
@@ -53,8 +52,6 @@ namespace WebApi.Controllers
                        CategoryId = s.CategoryId,
                        BrandId = s.BrandId,
                        SupplierId = s.SupplierId,
-                       //SoLuongComment = _context.UserComments.Where(x => x.IdSanPham == s.Id).Count(),
-                       //SoLuongLike = _context.UserComments.Where(x => x.IdSanPham == s.Id).Count(),
                        CategoryName = _context.Categories.Where(d => d.Id == s.CategoryId).Select(d => d.Name).FirstOrDefault(),
                        BrandName = _context.Brands.Where(d => d.Id == s.BrandId).Select(d => d.Name).FirstOrDefault(),
                        Image = _context.ProductImages.Where(q => q.ProdId == s.Id).Select(q => q.Name).FirstOrDefault(),
@@ -87,7 +84,6 @@ namespace WebApi.Controllers
             sanpham = await _context.Products.FirstOrDefaultAsync(s => s.Id == id);
             sanpham.IsFeatured = !sp.IsFeatured;
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -127,12 +123,6 @@ namespace WebApi.Controllers
             {
                 product.SupplierId = product.SupplierId;
             }
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = request.Ten,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
 
             //update ảnh
             if (request.files != null)
@@ -174,7 +164,6 @@ namespace WebApi.Controllers
             };
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -199,12 +188,6 @@ namespace WebApi.Controllers
                 BrandId = (int)request.BrandId,
                 SupplierId = (int)request.SupplierId,
             };
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = request.Ten,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             _context.Products.Add(product);
             if (request.files != null)
             {
@@ -218,7 +201,6 @@ namespace WebApi.Controllers
                 };
             };
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -262,14 +244,7 @@ namespace WebApi.Controllers
             {
                 _context.Products.Remove(sanPham);
             }
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = sanPham.Ten,
-            //    TranType = "Delete"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 

@@ -58,14 +58,7 @@ namespace WebApi.Controllers
             category.Name = request.CategoryName;
             category.CreatedAt = DateTime.Now;
             _context.Categories.Add(category);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.Name,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(category);
         }
 
@@ -76,14 +69,7 @@ namespace WebApi.Controllers
             category.Name = request.CategoryName;
             category.UpdatedAt = DateTime.Now;
             _context.Categories.Update(category);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.Name,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(category);
         }
 
@@ -98,17 +84,10 @@ namespace WebApi.Controllers
             colors = await _context.Colors.Where(s => s.CategoryId == id).ToArrayAsync();
             var category = await _context.Categories.FindAsync(id);
 
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = category.Ten,
-            //    TranType = "Delete"
-            //};
-            //_context.Notifications.Add(notification);
             if (product == null)
             {
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
-                //await _hubContext.Clients.All.BroadcastMessage();
             }
             else
             {
@@ -118,9 +97,7 @@ namespace WebApi.Controllers
                 await _context.SaveChangesAsync();
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
-                //await _hubContext.Clients.All.BroadcastMessage();
             }
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
     }

@@ -74,11 +74,6 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductVariantViewModel>> AddProductVariant([FromForm] ProductVariantCreateRequest request)
         {
-            //Notification notification = new Notification()
-            //{
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             ProductVariant prodVariant = new ProductVariant();
             prodVariant.Stock = request.Stock;
             prodVariant.ProdId = request.ProdId;
@@ -88,7 +83,6 @@ namespace WebApi.Controllers
 
             _context.ProductVariants.Add(prodVariant);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(prodVariant);
         }
 
@@ -96,7 +90,6 @@ namespace WebApi.Controllers
         public async Task<IActionResult> UpdateProductVariant(int id, [FromForm] ProductVariantCreateRequest request)
         {
             ProductVariant prodVariant = await _context.ProductVariants.FindAsync(id);
-            //prodVariant.Stock = request.Stock;
             prodVariant.ProdId = request.ProdId;
             prodVariant.ColorId = request.ColorId;
             prodVariant.SizeId = request.SizeId;
@@ -104,12 +97,6 @@ namespace WebApi.Controllers
 
             _context.ProductVariants.Update(prodVariant);
 
-            //Notification notification = new Notification()
-            //{
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
-            //await _hubContext.Clients.All.BroadcastMessage();
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -119,13 +106,6 @@ namespace WebApi.Controllers
         {
             ProductVariant prodVariant = await _context.ProductVariants.FindAsync(id);
             _context.ProductVariants.Remove(prodVariant);
-            //Notification notification = new Notification()
-            //{
-            //    //TenSanPham = spbt.ImagePath,
-            //    TranType = "Delete",
-            //};
-            //_context.Notifications.Add(notification);
-            //await _hubContext.Clients.All.BroadcastMessage();
             await _context.SaveChangesAsync();
             return Ok();
         }

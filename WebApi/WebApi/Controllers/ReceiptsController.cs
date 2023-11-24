@@ -79,9 +79,7 @@ namespace WebApi.Controllers
                 _context.ReceiptDetails.Add(ctpn);
                 await _context.SaveChangesAsync();
             }
-            //_context.Receipts.Update(phieuNhap);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 

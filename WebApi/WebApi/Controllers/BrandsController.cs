@@ -57,14 +57,7 @@ namespace WebApi.Controllers
             brand.Name = request.BrandName;
             brand.CreatedAt = DateTime.Now;
             _context.Brands.Add(brand);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.Name,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(brand);
         }
 
@@ -75,14 +68,7 @@ namespace WebApi.Controllers
             brand.Name = request.BrandName;
             brand.UpdatedAt = DateTime.Now;
             _context.Brands.Update(brand);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.Name,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(brand);
         }
 
@@ -95,13 +81,6 @@ namespace WebApi.Controllers
             if (product == null)
             {
                 _context.Brands.Remove(brand);
-                //Notification notification = new Notification()
-                //{
-                //    TenSanPham = brand.Ten,
-                //    TranType = "Delete"
-                //};
-                //_context.Notifications.Add(notification);
-                //await _hubContext.Clients.All.BroadcastMessage();
                 await _context.SaveChangesAsync();
             }
             else
@@ -109,13 +88,6 @@ namespace WebApi.Controllers
                 _context.Products.RemoveRange(product);
                 await _context.SaveChangesAsync();
                 _context.Brands.Remove(brand);
-                //Notification notification = new Notification()
-                //{
-                //    TenSanPham = brand.Ten,
-                //    TranType = "Delete"
-                //};
-                //_context.Notifications.Add(notification);
-                //await _hubContext.Clients.All.BroadcastMessage();
                 await _context.SaveChangesAsync();
             }
             return Ok();

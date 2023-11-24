@@ -87,7 +87,6 @@ namespace WebApi.Controllers
             var cart = _context.Carts.Where(d => d.ProdVariantId == delete.ProdVariantId && d.UserId == delete.UserId).SingleOrDefault();
             _context.Carts.Remove(cart);
             await _context.SaveChangesAsync();
-            //return Json("1");
             return Ok();
         }
 

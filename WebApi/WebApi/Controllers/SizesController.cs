@@ -65,14 +65,7 @@ namespace WebApi.Controllers
                 CreatedAt = DateTime.Now
             };
             _context.Sizes.Add(size);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.TenSize,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return CreatedAtAction("GetSizeById", new { id = size.Id }, size);
         }
 
@@ -84,14 +77,7 @@ namespace WebApi.Controllers
             size.CategoryId = request.CategoryId;
             size.UpdatedAt = DateTime.Now;
             _context.Sizes.Update(size);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.TenSize,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(size);
         }
 
@@ -104,14 +90,7 @@ namespace WebApi.Controllers
                 return NotFound();
             }
             _context.Sizes.Remove(size);
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = size.TenSize,
-            //    TranType = "Delete"
-            //};
-            //_context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 

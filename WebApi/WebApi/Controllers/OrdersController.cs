@@ -57,7 +57,6 @@ namespace WebApi.Controllers
             rs.Status = (int)hd.Status;
             _context.Orders.Update(rs);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -186,19 +185,11 @@ namespace WebApi.Controllers
                 Description = request.Description,
                 UserId = request.UserId,
                 CreatedAt = DateTime.Now,
-                //Tinh = hd.Tinh,
-                //Huyen = hd.Huyen,
-                //Xa = hd.Xa,
                 Address = request.Address,
                 TotalPrice = request.TotalPrice
             };
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-            //NotificationCheckout notification = new NotificationCheckout()
-            //{
-            //    ThongBaoMaDonHang = hoaDon.Id,
-            //};
-            //_context.NotificationCheckouts.Add(notification);
             var cart = _context.Carts.Where(d => d.UserId == request.UserId).ToList();
             for (int i = 0; i < cart.Count; i++)
             {
@@ -234,7 +225,6 @@ namespace WebApi.Controllers
             {
                 return Ok();
             }
-            //await _hubContext.Clients.All.BroadcastMessage();
         }
 
         private async Task<string> UrlPayment(int TypePayment, int orderId)
@@ -278,7 +268,6 @@ namespace WebApi.Controllers
             vnpay.AddRequestData("vnp_TxnRef", order.Id.ToString()); // Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
 
             urlPayment = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
-            //log.InfoFormat("VNPAY URL: {0}", paymentUrl);
             return urlPayment;
         }
     }

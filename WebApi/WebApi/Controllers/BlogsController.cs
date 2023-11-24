@@ -52,12 +52,6 @@ namespace WebApi.Controllers
             blog.Description = request.Description;
             blog.UserId = request.UserId;
             blog.CreatedAt = DateTime.Now;
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = request.TieuDe,
-            //    TranType = "Add"
-            //};
-            //_context.Notifications.Add(notification);
             if (request.files != null)
             {
                 blog.BlogImages = new List<BlogImage>()
@@ -71,7 +65,6 @@ namespace WebApi.Controllers
             }
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 
@@ -94,12 +87,6 @@ namespace WebApi.Controllers
             blog.UserId = upload.UserId;
             blog.UpdatedAt = DateTime.Now;
 
-            //Notification notification = new Notification()
-            //{
-            //    TenSanPham = upload.TieuDe,
-            //    TranType = "Edit"
-            //};
-            //_context.Notifications.Add(notification);
             if (upload.files != null)
             {
                 var image = await _context.BlogImages.FirstOrDefaultAsync(i => i.BlogId == id);
@@ -138,7 +125,6 @@ namespace WebApi.Controllers
             };
             _context.Blogs.Update(blog);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
 

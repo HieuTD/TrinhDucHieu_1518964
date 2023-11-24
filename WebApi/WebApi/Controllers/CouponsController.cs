@@ -45,7 +45,6 @@ namespace WebApi.Controllers
             coupon.CreatedAt = DateTime.Now;
             _context.Add(coupon);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(coupon);
         }
 
@@ -59,7 +58,6 @@ namespace WebApi.Controllers
 
             _context.Update(coupon);
             await _context.SaveChangesAsync();
-            //await _hubContext.Clients.All.BroadcastMessage();
             return Ok(coupon);
         }
 
@@ -68,7 +66,6 @@ namespace WebApi.Controllers
         {
             Coupon coupon = await _context.Coupons.FindAsync(id);
             _context.Coupons.Remove(coupon);
-            //await _hubContext.Clients.All.BroadcastMessage();
             await _context.SaveChangesAsync();
             return Ok();
         }
