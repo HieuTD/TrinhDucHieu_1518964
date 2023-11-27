@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ImagesmodelComponent } from './imagesmodel/imagesmodel.component';
+// import { ImagesmodelComponent } from './imagesmodel/imagesmodel.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { environment } from '../../../../../environments/environment';

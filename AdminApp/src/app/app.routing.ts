@@ -11,14 +11,14 @@ import { P500Component } from './admin/containers/views/error/500.component';
 import { LoginComponent } from './admin/containers/views/account/login/login.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
-import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
+// import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
 import { DashboardComponent } from './admin/containers/views/dashboard/dashboard.component';
 import { ChartJSComponent } from './admin/containers/views/chartjs/chartjs.component';
-import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
+// import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
 import { WidgetsComponent } from './admin/containers/views/widgets/widgets.component';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
-import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
-import { ChatsComponent } from './admin/containers/views/chats/chats.component';
+// import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
+// import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
 import { CouponsComponent } from './admin/containers/views/coupons/coupons.component';
@@ -184,10 +184,10 @@ export const routes: Routes = [
         path: 'admin/taophieunhap/detail/:id',
         component: ReceiptDetailComponent, canActivate: [AuthGuard],
       },
-      {
-        path: 'admin/chats',
-        component: ChatsComponent, canActivate: [AuthGuard],
-      },
+      // {
+      //   path: 'admin/chats',
+      //   component: ChatsComponent, canActivate: [AuthGuard],
+      // },
       {
         path: 'admin/blogs',
         component: BlogsComponent, canActivate: [AuthGuard],

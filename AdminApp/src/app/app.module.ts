@@ -39,18 +39,18 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { OrdersTableComponent } from './admin/containers/orders-table/orders-table.component';
+// import { OrdersTableComponent } from './admin/containers/orders-table/orders-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RegistrationFormComponent } from './admin/containers/views/account/registration-form/registration-form.component';
 import { UserService } from './admin/containers/views/account/user.service';
-import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
+// import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrandsComponent } from './admin/containers/views/brands/brands.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
-import { ImagesmodelComponent } from './admin/containers/views/products/imagesmodel/imagesmodel.component';
+// import { ImagesmodelComponent } from './admin/containers/views/products/imagesmodel/imagesmodel.component';
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
 import { AuthGuard } from './admin/containers/views/auth.guard';
 import { ModalComponent } from './admin/containers/modal/modal.component';
@@ -64,13 +64,13 @@ import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { FusionChartsModule } from 'angular-fusioncharts';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
+// import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
 // Report viewer
 import '@boldreports/javascript-reporting-controls/Scripts/bold.report-viewer.min';
 // data-visualization
 import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej.bulletgraph.min';
 import '@boldreports/javascript-reporting-controls/Scripts/data-visualization/ej.chart.min';
-import { ChatsComponent } from './admin/containers/views/chats/chats.component';
+// import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
 import { UsermanagersComponent } from './admin/containers/views/usermanagers/usermanagers.component';
 import { CreateOrEditCategoryComponent } from './admin/containers/views/categories/create-or-edit-category/create-or-edit-category.component';
@@ -155,8 +155,8 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     P404Component,
     P500Component,
     LoginComponent,
-    OrdersTableComponent,
-    UserdetailComponent,
+    // OrdersTableComponent,
+    // UserdetailComponent,
     BrandsComponent,
     ColorsComponent,
     CreateOrEditColorComponent,
@@ -168,7 +168,7 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     ProductsComponent,
     CreateOrEditProductComponent,
     RegistrationFormComponent,
-    ImagesmodelComponent,
+    // ImagesmodelComponent,
     CategoriesComponent,
     CreateOrEditSizeComponent,
     CreateOrEditProductVariantComponent,
@@ -186,9 +186,9 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     CreateReceiptComponent,
     ReceiptSuccessComponent,
     ReceiptDetailComponent,
-    ChartThirdComponent,
+    // ChartThirdComponent,
     EditOrderComponent,
-    ChatsComponent,
+    // ChatsComponent,
     BlogsComponent,
     CreateOrEditBlogComponent,
   ],
