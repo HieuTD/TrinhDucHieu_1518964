@@ -71,9 +71,11 @@ namespace WebApi.Controllers
                 ctpn.TotalPrice = chitietupload.ProdVariantPrice * chitietupload.Quantity;
                 ctpn.ReceiptId = phieuNhap.Id;
                 ctpn.Amonut = chitietupload.Quantity;
+                ctpn.CreatedAt = DateTime.Now;
                 ProductVariant spbt = await _context.ProductVariants.FindAsync(StringHelper.ProdVariantIdHandle(chitietupload.ProdVariantName));
                 //Cập nhật lại số lượng hàng trong kho
                 spbt.Stock = spbt.Stock + chitietupload.Quantity;
+                spbt.UpdatedAt = DateTime.Now;
                 _context.ProductVariants.Update(spbt);
                 listctpn.Add(ctpn);
                 _context.ReceiptDetails.Add(ctpn);

@@ -226,9 +226,11 @@ namespace WebApi.Controllers
 
             Models.ProductVariant[] spbts;
             spbts = _context.ProductVariants.Where(s => s.ProdId == id).ToArray();
+            if (spbts != null)
+            {
             _context.ProductVariants.RemoveRange(spbts);
+            }    
             
-            await _context.SaveChangesAsync();
             var sanPham = await _context.Products.FindAsync(id);
             if (sanPham == null)
             {
