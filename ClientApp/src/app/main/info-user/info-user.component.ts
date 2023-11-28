@@ -8,21 +8,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./info-user.component.scss']
 })
 export class InfoUserComponent implements OnInit {
-  user:any;
+  user: any;
   PasswordCurrent = "";
   PasswordNew = "";
-  constructor(public http:HttpClient) {
-    // this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
-    
-   }
+  constructor(public http: HttpClient) {
+
+  }
   ngOnInit(): void {
-    this.http.get(environment.URL_API+"users/AuthHistory").subscribe(
-      res=>{
+    this.http.get(environment.URL_API + "users/AuthHistory").subscribe(
+      res => {
         this.user = res;
       },
-      error=>{
+      error => {
       }
-      );
+    );
   }
 
   Submit() {
@@ -39,13 +38,13 @@ export class InfoUserComponent implements OnInit {
       res => {
         Swal.fire("Cập nhật thông tin thành công.", '', 'success')
       },
-      error =>  {
+      error => {
         Swal.fire({
-          title: 'Cập nhật thông tin thất bại' ,
-            text: "",
-            icon: 'error',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Đóng',
+          title: 'Cập nhật thông tin thất bại',
+          text: "",
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Đóng',
         })
       });
   }

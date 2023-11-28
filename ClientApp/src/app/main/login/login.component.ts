@@ -77,19 +77,19 @@ export class LoginComponent implements OnInit {
   confirmToSend() {
     if (this.checkValidEmail(this.resetPasswordEmail)) {
       console.log(this.resetPasswordEmail);
-      
-      this.userService.sendResetPasswordLink(this.resetPasswordEmail)
-      .subscribe({
-        next:(res) => {
-          this.resetPasswordEmail = "";
-          const buttonRef = document.getElementById("closeBtn");
-          buttonRef.click();
-          Swal.fire("Gửi yêu cầu thiết lập lại mật khẩu thành công", '', 'success')
-        },
-        error:(err) => {
 
-        }
-      })
+      this.userService.sendResetPasswordLink(this.resetPasswordEmail)
+        .subscribe({
+          next: (res) => {
+            this.resetPasswordEmail = "";
+            const buttonRef = document.getElementById("closeBtn");
+            buttonRef.click();
+            Swal.fire("Gửi yêu cầu thiết lập lại mật khẩu thành công", '', 'success')
+          },
+          error: (err) => {
+            Swal.fire("Gửi yêu cầu thiết lập lại mật khẩu thất bại", '', 'error')
+          }
+        })
     }
   }
 }

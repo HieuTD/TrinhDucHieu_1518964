@@ -1,4 +1,6 @@
-﻿namespace WebApi.DTOs.Blogs
+﻿using System;
+
+namespace WebApi.DTOs.Blogs
 {
     public class BlogViewModel
     {
@@ -7,5 +9,6 @@
         public string Description { get; set; }
         public string Image { get; set; }
         public string UserName { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

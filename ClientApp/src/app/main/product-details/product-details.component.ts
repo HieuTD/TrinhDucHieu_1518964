@@ -32,20 +32,17 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       this.id_product = params['id']; // get id to params
     });
     this.soLuong = 0;
-    // this.http.get(environment.URL_API+"sanphams/chitietsanpham/"+this.id_product
     this.http.get(environment.URL_API + "products/productdetail/" + this.id_product
     ).subscribe(resp => {
       this.product = resp as Product;
       this.list_san_pham_bien_the = this.product.sanPhamBienThes;
       this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.description);
-      // this.http.get(environment.URL_API+"mausacs/mau/"+this.id_product
       this.http.get(environment.URL_API + "colors/listcolorbyprodid/" + this.id_product
       ).subscribe(
         res => {
           this.mau = res;
         });
       this.size = {};
-      // this.http.post(environment.URL_API+"sanphams/listreview/",{
       var val = {
         prodId: this.id_product,
       };
@@ -62,7 +59,6 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       prodId: this.id_product,
       colorName: mau,
     };
-    // this.http.post(environment.URL_API+"sizes/sizetheomau/",val).subscribe(
     this.http.post(environment.URL_API + "sizes/listSizeByColor/", val).subscribe(
       res => {
         this.size = res;
@@ -70,7 +66,6 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   }
   Review() {
     const clicks = localStorage.getItem('idUser');
-    // this.http.post(environment.URL_API+"sanphams/review/",{
     var val = {
       userId: clicks,
       prodId: this.product.id,
@@ -90,6 +85,47 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     else {
     }
   }
+
+  maxQty() {
+    if (this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0] != null) {
+      let maxQty = this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0].stock
+      return maxQty
+    }
+    return 0
+  }
+  checkQty() {
+    if (this.maxQty() <= 0) {
+      return true
+    }
+  }
+  soLuongCong() {
+    if (this.soLuong < this.maxQty()) {
+      this.soLuong++;
+    }
+  }
+  addToCard(product) {
+    if (!this.userService.checkLogin()) {
+    }
+    else {
+      var SanPhamBienThe = this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0];
+      const clicks = localStorage.getItem('idUser');
+      var SanPhamId = SanPhamBienThe.id;
+      var val = {
+        prodVariantId: SanPhamId,
+        prodId: this.product.id,
+        color: this.selectMau,
+        size: this.selectSize,
+        userId: clicks,
+        quantity: this.soLuong,
+      };
+      this.http.post(environment.URL_API + "Carts", val
+      ).subscribe(resp => {
+        this.cartService.addToCart(product);
+      });
+    }
+  }
+  
+  //js only
   ngAfterViewInit(): void {
     $('.gallery-lb').each(function () { // the containers for all your galleries
       $(this).magnificPopup({
@@ -196,68 +232,4 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       $(nameTab).find('.slick2').slick('reinit');
     });
   }
-  maxQty() {
-    if (this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0] != null) {
-      let maxQty = this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0].stock
-      return maxQty
-    }
-    return 0
-  }
-  checkQty() {
-    if (this.maxQty() <= 0) {
-      return true
-    }
-  }
-  soLuongCong() {
-    if (this.soLuong < this.maxQty()) {
-      this.soLuong++;
-    }
-  }
-  addToCard(product) {
-    if (!this.userService.checkLogin()) {
-    }
-    else {
-      var SanPhamBienThe = this.list_san_pham_bien_the.filter(d => d.colorName == this.selectMau && d.sizeName == this.selectSize)[0];
-      const clicks = localStorage.getItem('idUser');
-      var SanPhamId = SanPhamBienThe.id;
-      // this.http.post(environment.URL_API+"Carts"
-      //  ,{
-      //     Id_SanPhamBienThe:SanPhamId,
-      //    SanPhamId:this.product.id,
-      //    Mau:this.selectMau,
-      //    Size:this.selectSize,
-      //    UserID:clicks,
-      //    Soluong:this.soLuong,
-      //  }
-      var val = {
-        prodVariantId: SanPhamId,
-        prodId: this.product.id,
-        color: this.selectMau,
-        size: this.selectSize,
-        userId: clicks,
-        quantity: this.soLuong,
-      };
-      //  this.http.post(environment.URL_API+"Carts", val
-      this.http.post(environment.URL_API + "Carts", val
-      ).subscribe(resp => {
-        this.cartService.addToCart(product);
-      });
-    }
-  }
-  // addToCard(){
-  //   var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.colorName==this.selectMau&&d.sizeName==this.selectSize)[0];
-  //   const clicks = localStorage.getItem('idUser');
-  //   var SanPhamId=SanPhamBienThe.id;
-  //   console.log(SanPhamId);
-  //   this.http.post(environment.URL_API+"Carts"
-  //    ,{
-  //       Id_SanPhamBienThe:SanPhamId,
-  //      SanPhamId:this.product.id,
-  //      Mau:this.selectMau,
-  //      Size:this.selectSize,
-  //      UserID:clicks,
-  //    }
-  //   ).subscribe(resp => {
-  //   });
-  // }
 }

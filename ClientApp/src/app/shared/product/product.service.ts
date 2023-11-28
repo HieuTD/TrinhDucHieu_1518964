@@ -7,13 +7,11 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService {
   constructor(public http: HttpClient) { }
-  getlaytatcasanpham():Observable<any> {
-    // return this.http.get<any>(environment.URL_API+"sanphams")
-    return this.http.get<any>(environment.URL_API+"products")
+  getlaytatcasanpham(): Observable<any> {
+    return this.http.get<any>(environment.URL_API + "products")
   }
-  getsanphammoi():Observable<any>{
-    // return this.http.get<any>(environment.URL_API+"sanphams/topsanphammoi")
-    return this.http.get<any>(environment.URL_API+"products/listnewproduct")
+  getsanphammoi(): Observable<any> {
+    return this.http.get<any>(environment.URL_API + "products/listnewproduct")
   }
-  public trangthaiDataProduct:boolean
+  public trangthaiDataProduct: boolean
 }

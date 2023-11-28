@@ -14,45 +14,42 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends BaseService implements OnInit {
-  public register:any;
+  public register: any;
   userFormGroup: FormGroup
   public hide: boolean = true;
-  username:any;
+  username: any;
   private _unsubscribeAll: Subject<any>;
-  constructor(public http : HttpClient, public router: Router,private _formBuilder: FormBuilder) {
+  constructor(public http: HttpClient, public router: Router, private _formBuilder: FormBuilder) {
     super();
-    this.register={};
+    this.register = {};
     this._unsubscribeAll = new Subject();
-   }
-   check(){
-    if(this.userFormGroup.value.Password!=this.userFormGroup.value.confirmPassword)
-    {
-     Swal.fire("Mật khẩu không trùng nhau", '', 'warning').then(function () {
-     }
-     )
+  }
+  check() {
+    if (this.userFormGroup.value.Password != this.userFormGroup.value.confirmPassword) {
+      Swal.fire("Mật khẩu không trùng nhau", '', 'warning').then(function () {
+      }
+      )
     }
-    else
-    {
+    else {
       this.registerAccount(this.userFormGroup.value)
     }
-   }
-   registerAccount(data){
+  }
+  registerAccount(data) {
     let form = new FormData();
     form.append('FirstName', data.FirstName);
-    form.append('LastName',data.LastName);
+    form.append('LastName', data.LastName);
     form.append('Email', data.Email);
     form.append('PhoneNumber', data.SDT);
-    form.append('Address',data.DiaChi);
-    form.append('Password',data.Password);
-    form.append('Role','User');
-    // this.http.post(environment.URL_API+"accounts",form).subscribe(resp => {
-    this.http.post(environment.URL_API+'users/register',form).subscribe(resp => {
-        Swal.fire("Đăng ký thành công", ' ', 'success').then(function () {
-          // this.router.navigate(['/login']);
-          window.location.href='/login'
-        }
-        )
+    form.append('Address', data.DiaChi);
+    form.append('Password', data.Password);
+    form.append('Role', 'User');
+    this.http.post(environment.URL_API + 'users/register', form).subscribe(resp => {
+      Swal.fire("Đăng ký thành công", ' ', 'success').then(function () {
+        // this.router.navigate(['/login']);
+        window.location.href = '/login'
       }
+      )
+    }
     )
   }
   ngOnInit(): void {
@@ -65,18 +62,18 @@ export class RegisterComponent extends BaseService implements OnInit {
       Password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     },
-    {
-      validator: ConfirmPasswordValidator("Password", "confirmPassword")
-    });
+      {
+        validator: ConfirmPasswordValidator("Password", "confirmPassword")
+      });
     this.userFormGroup.get('Password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(() => {
-                this.userFormGroup.get('confirmPassword').updateValueAndValidity();
-            });
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.userFormGroup.get('confirmPassword').updateValueAndValidity();
+      });
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
-}
+  }
 }

@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CartService {
-  public list_item_in_cart:any;
-  constructor(public http:HttpClient) {
+  public list_item_in_cart: any;
+  constructor(public http: HttpClient) {
     let existingCartItems = JSON.parse(localStorage.getItem('products'));
     if (!existingCartItems) {
       existingCartItems = [];
@@ -25,56 +25,55 @@ export class CartService {
   items1$ = this.itemsSubject1.asObservable();
   private itemsSubject = new BehaviorSubject<Product[]>([]);
   items$ = this.itemsSubject.asObservable();
-  addToCart(product:Product) {
+  addToCart(product: Product) {
     const clicks = localStorage.getItem('idUser');
-      this.items$.pipe(
-        take(1),
-        map((products) => {
-          products.push(product);
-          localStorage.setItem('products', JSON.stringify(products));
-        }),
-      ).subscribe();
+    this.items$.pipe(
+      take(1),
+      map((products) => {
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+      }),
+    ).subscribe();
   }
-  addToLove(product:Product) {
+  addToLove(product: Product) {
     const clicks = localStorage.getItem('idUser');
-      this.items1$.pipe(
-        take(1),
-        map((products) => {
-          products.push(product);
-          localStorage.setItem('loves', JSON.stringify(products));
-        }),
-      ).subscribe();
+    this.items1$.pipe(
+      take(1),
+      map((products) => {
+        products.push(product);
+        localStorage.setItem('loves', JSON.stringify(products));
+      }),
+    ).subscribe();
   }
-  DeleteProduct(product:Product) {
+  DeleteProduct(product: Product) {
     const clicks = localStorage.getItem('idUser');
-      this.items$.pipe(
-        take(1),
-        map((products) => {
-          const index = products.indexOf(product);
-          products.splice(index, 1);
-          localStorage.setItem("products", JSON.stringify(products));
-        }
-        ),
-      ).subscribe();
+    this.items$.pipe(
+      take(1),
+      map((products) => {
+        const index = products.indexOf(product);
+        products.splice(index, 1);
+        localStorage.setItem("products", JSON.stringify(products));
+      }
+      ),
+    ).subscribe();
   }
-  DeleteProductInLove(product:Product) {
-      this.items1$.pipe(
-        take(1),
-        map((products) => {
-          const index = products.indexOf(product);
-          products.splice(index, 1);
-          localStorage.setItem("loves", JSON.stringify(products));
-        }
-        ),
-      ).subscribe();
+  DeleteProductInLove(product: Product) {
+    this.items1$.pipe(
+      take(1),
+      map((products) => {
+        const index = products.indexOf(product);
+        products.splice(index, 1);
+        localStorage.setItem("loves", JSON.stringify(products));
+      }
+      ),
+    ).subscribe();
   }
-  LoadCard(){
+  LoadCard() {
     const clicks = localStorage.getItem('idUser');
-    // this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
-    this.http.get(environment.URL_API+"Carts/getcartbyuserid/"+clicks,{}).subscribe(
-      res=>{
+    this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
+      res => {
         var list_item = res;
-        localStorage.setItem('products',JSON.stringify(list_item));
+        localStorage.setItem('products', JSON.stringify(list_item));
       }
     );
   }

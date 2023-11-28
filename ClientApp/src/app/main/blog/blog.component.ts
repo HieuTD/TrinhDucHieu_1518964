@@ -7,14 +7,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  public listblog:any;
-  constructor(public http:HttpClient) {
-    // this.http.post(environment.URL_API+"blogs/getBlog/",{}
-    this.http.get(environment.URL_API+"blogs",{}
-  ).subscribe(
-    res=>{
-      this.listblog=res;
-  })
+  public listblog: any;
+  constructor(public http: HttpClient) {
+    this.http.get(environment.URL_API + "blogs", {}
+    ).subscribe(
+      res => {
+        this.listblog = res;
+      })
   }
   ngOnInit(): void {
   }

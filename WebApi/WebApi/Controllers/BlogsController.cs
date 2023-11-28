@@ -40,6 +40,7 @@ namespace WebApi.Controllers
                 Description = b.Description,
                 Image = _context.BlogImages.Where(s => s.BlogId == b.Id).Select(s => s.Name).FirstOrDefault(),
                 UserName = _context.AppUsers.Where(s => s.Id == b.UserId).Select(s => s.FirstName + " " + s.LastName).FirstOrDefault(),
+                CreatedAt = b.CreatedAt
             });
             return await blogs.ToListAsync();
         }

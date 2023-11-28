@@ -9,33 +9,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-  list_hoadon:any;
-  constructor(public http:HttpClient,private userService: UserService) {
+  list_hoadon: any;
+  constructor(public http: HttpClient, private userService: UserService) {
     userService.checkLogin();
-   }
+  }
   ngOnInit(): void {
     const clicks = localStorage.getItem('idUser');
-    // this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
-    this.http.get(environment.URL_API+"orders/listorderbyuserid/"+clicks).subscribe(
-      res=>{
-        this.list_hoadon=res;
+    this.http.get(environment.URL_API + "orders/listorderbyuserid/" + clicks).subscribe(
+      res => {
+        this.list_hoadon = res;
       });
-  //   const connection = new signalR.HubConnectionBuilder()
-  //   .configureLogging(signalR.LogLevel.Information)
-  //   .withUrl('https://localhost:44302/notify')
-  //   .build();
-  // connection.start().then(function () {
-  //   console.log('SignalR Connected!');
-  // }).catch(function (err) {
-  //   return console.error(err.toString());
-  // });
-  // connection.on("BroadcastMessage", () => {
-  //   // this.http.post(environment.URL_API+"hoadons/danhsachhoadon/",{
-  //     this.http.get(environment.URL_API+"orders/listorderbyuserid/"+clicks).subscribe(
-  //     res=>{
-  //       this.list_hoadon=res;
-  //     });
-  // }
-  // )
-}
+  }
 }

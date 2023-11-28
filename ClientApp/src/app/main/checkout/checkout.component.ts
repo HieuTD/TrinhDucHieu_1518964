@@ -41,7 +41,6 @@ export class CheckoutComponent implements OnInit {
     this.http.get("https://provinces.open-api.vn/api/?depth=3").subscribe(res => {
       this.list_tinh_thanh = res;
     });
-    // this.http.post(environment.URL_API+"Carts/getCart/"+this.id_user,{}).subscribe(
     this.http.get(environment.URL_API + "carts/getcartbyuserid/" + this.id_user, {}).subscribe(
       res => {
         this.list_item = res;
@@ -52,15 +51,13 @@ export class CheckoutComponent implements OnInit {
           this.tongThanhToan = this.tongtien + 25000;
         }
       });
-    // this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(res=>{
     this.http.get(environment.URL_API + "coupons").subscribe(res => {
       this.list_MGG = res;
     });
     //this.checkdiachi=true;
     this.list_MGGSD = [];
     this.check = null;
-    // this.http.post(environment.URL_API+"Auth/getDiaChi/",{
-    this.http.get(environment.URL_API + "users/getUserAddress/" + this.id_user, {responseType: 'text'}
+    this.http.get(environment.URL_API + "users/getUserAddress/" + this.id_user, { responseType: 'text' }
     ).subscribe(
       res => {
         this.DiaChiDefaul = <string>res;
@@ -84,12 +81,10 @@ export class CheckoutComponent implements OnInit {
     delproduct.prodVariantId = item.prodVariantId
     delproduct.userId = clicks
     console.log(delproduct)
-    // this.http.post(environment.URL_API+"Carts/delete",delproduct
     this.http.post(environment.URL_API + "Carts/delete", delproduct
     ).subscribe(
       res => {
         Swal.fire("Xoá sản phẩm thành công .", '', 'success')
-        // this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
         this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
           res => {
             this.list_item = res;
@@ -147,7 +142,7 @@ export class CheckoutComponent implements OnInit {
         Description: this.Description
       };
 
-      this.http.post<ApiResponse>(environment.URL_API+"orders", val).subscribe(
+      this.http.post<ApiResponse>(environment.URL_API + "orders", val).subscribe(
         (res: ApiResponse) => {
           console.log(res);
           if (res.urlVNPay) {
@@ -196,7 +191,6 @@ export class CheckoutComponent implements OnInit {
       quantity: this.soLuong,
       userId: clicks
     };
-    // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
     this.http.post(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
@@ -216,7 +210,6 @@ export class CheckoutComponent implements OnInit {
       quantity: soLuong + 1,
       userId: clicks
     };
-    // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
     this.http.put(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
@@ -242,7 +235,6 @@ export class CheckoutComponent implements OnInit {
       quantity: soLuong,
       userId: clicks
     };
-    // this.http.post(environment.URL_API+"Carts/update/",val).subscribe(
     this.http.put(environment.URL_API + "Carts/update/", val).subscribe(
       res => {
         this.list_item = res;
