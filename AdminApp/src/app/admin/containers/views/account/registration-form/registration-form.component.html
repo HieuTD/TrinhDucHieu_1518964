@@ -1,126 +1,76 @@
-<!-- <div class="main">
-    <div class="container">
-        <header>Đăng ký tài khoản</header>
-        <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
-            <div class="input-field">
-                <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
-            </div>
-            <div class="input-field">
-                <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password" required>
-            </div>
-            <div class="input-field">
-                <input class="form-control" placeholder="Họ" formControlName="firstName" required>
-            </div>
-            <div class="input-field">
-                <input class="form-control" placeholder="Tên" formControlName="lastName" required>
-            </div>
-            <div class="input-field">
-                <input class="form-control" placeholder="Địa chỉ" formControlName="location" required>
-            </div>
-            <div class="button">
-                <div class="inner">
-                </div>
-                <button type="submit">Đăng ký</button>
-            </div>
-        </form>
-        <div *ngIf="errors" class="alert alert-danger" role="alert">
-            <strong>Oops!</strong> {{errors}}
-        </div>
-        <div class="auth">
-            Hoặc đăng nhập bằng</div>
-        <div class="links">
-            <div class="facebook">
-                <i class="fab fa-facebook-square"><span>Facebook</span></i>
-            </div>
-            <div class="google">
-                <i class="fab fa-google-plus-square"><span>Google</span></i>
-            </div>
-        </div>
-        <div class="signup" style="cursor: pointer">
-            Bạn đã có tài khoản? Hãy <a (click)="onLogin()">đăng nhập</a>
-        </div>
-    </div>
-</div> -->
-
-
 <div class="main">
-    <div class="container">
-      <section class="vh-100">
-          <div class="row">
-            <div class="col-sm-6 px-0 d-none d-sm-block">
-                <img src="../../../../../../assets/img/shirt1.jpg" alt="Login image" class="w-100 vh-100"
-                  style="object-fit: cover; object-position: left;">
-              </div>
-            <div class="col-sm-6 text-black" style="padding-left: 100px;">
-  
-              <div class="logo" style="margin-top: 40px;">
-                <img src="../../../../../../assets/img/brand/logo-admin1.svg" alt="" width="372" height="147">
-              </div>
-  
-              <div class="d-flex align-items-center ">
-  
-                <form style="width: 23rem;" [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
-  
-                  <header class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-size: 28px;">Đăng ký</header>
-  
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Email</label>
-                    <input type="text" placeholder="Email" formControlName="email" required
-                      class="form-control form-control-lg" />
-                  </div>
-  
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Mật khẩu</label>
-                    <input type="password" placeholder="Mật khẩu" formControlName="password" required
-                      class="form-control form-control-lg" />
-                  </div>
-  
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Họ</label>
-                    <input type="text" placeholder="Họ" formControlName="firstName" required
-                      class="form-control form-control-lg" />
-                  </div>
+  <div class="container">
+    <section class="vh-100">
+      <div class="row">
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="../../../../../../assets/img/shirt1.jpg" alt="Login image" class="w-100 vh-100"
+            style="object-fit: cover; object-position: left;">
+        </div>
+        <div class="col-sm-6 text-black" style="padding-left: 100px;">
 
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Tên</label>
-                    <input type="text" placeholder="Tên" formControlName="lastName" required
-                      class="form-control form-control-lg" />
-                  </div>
-  
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Địa chỉ</label>
-                    <input type="text" placeholder="Địa chỉ" formControlName="location" required
-                      class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="pt-1 mb-4">
-                    <button class="btn btn-info btn-lg btn-block" type="submit" style="height: 48px;">Đăng ký</button>
-                  </div>
-  
-                  <div class="mb-4" style="text-align: center;">
-                    <div class="auth">
-                      Hoặc đăng nhập bằng</div>
-                    <div class="links">
-                      <div class="facebook">
-                          <i class="fab fa-facebook-square"><span>Facebook</span></i>
-                      </div>
-                      <div class="google">
-                          <i class="fab fa-google-plus-square"><span>Google</span></i>
-                      </div>
-                  </div>
-  
-                  <p class="signup" style="cursor: pointer">Bạn đã có tài khoản? Hãy <a (click)="onLogin()">đăng nhập</a></p>
-  
-                  </div>
-                  
-                </form>
-                
-              </div>
-  
-            </div>
-            
+          <div class="logo" style="margin-top: 40px;">
+            <img src="../../../../../../assets/img/brand/logo-admin1.svg" alt="" width="372" height="147">
           </div>
-      </section>
-    </div>
+
+          <div class="d-flex align-items-center ">
+
+            <form style="width: 23rem;" [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
+
+              <header class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-size: 28px;">Đăng ký</header>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Email</label>
+                <input type="text" placeholder="Email" formControlName="email" required
+                  class="form-control form-control-lg" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" placeholder="Mật khẩu" formControlName="password" required
+                  class="form-control form-control-lg" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Họ</label>
+                <input type="text" placeholder="Họ" formControlName="firstName" required
+                  class="form-control form-control-lg" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Tên</label>
+                <input type="text" placeholder="Tên" formControlName="lastName" required
+                  class="form-control form-control-lg" />
+              </div>
+
+              <div class="form-outline mb-4">
+                <label class="form-label">Địa chỉ</label>
+                <input type="text" placeholder="Địa chỉ" formControlName="location" required
+                  class="form-control form-control-lg" />
+              </div>
+
+              <div class="pt-1 mb-4">
+                <button class="btn btn-info btn-lg btn-block" type="submit" style="height: 48px;">Đăng ký</button>
+              </div>
+
+              <div class="mb-4" style="text-align: center;">
+                <div class="auth">
+                  Hoặc đăng nhập bằng</div>
+                <div class="links">
+                  <div class="facebook">
+                    <i class="fab fa-facebook-square"><span>Facebook</span></i>
+                  </div>
+                  <div class="google">
+                    <i class="fab fa-google-plus-square"><span>Google</span></i>
+                  </div>
+                </div>
+
+                <p class="signup" style="cursor: pointer">Bạn đã có tài khoản? Hãy <a (click)="onLogin()">đăng nhập</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-  
+</div>

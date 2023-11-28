@@ -16,11 +16,9 @@ export class CouponService {
     magiamgia: DiscountCode = new DiscountCode()
     constructor(public http: HttpClient) { }
     delete(id: number) {
-        //   return this.http.delete(`${environment.URL_API+"magiamgias"}/${id}`)
         return this.http.delete(`${environment.URL_API + "coupons"}/${id}`)
     }
     get(): Observable<any> {
-        //   return this.http.get<any>(environment.URL_API+"magiamgias")
         return this.http.get<any>(environment.URL_API + "coupons")
     }
     getAllMaGiamGias() {

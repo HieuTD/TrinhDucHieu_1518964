@@ -6,34 +6,31 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 @Injectable({
-    providedIn: 'root'
-  })
-export class BrandService{
-  @ViewChild(MatSort) sort: MatSort;  
+  providedIn: 'root'
+})
+export class BrandService {
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<Brand>();
-    brand:Brand = new Brand()
-    constructor(public http:HttpClient) { }
-    get():Observable<any>{
-      // return this.http.get(environment.URL_API+"nhanhieus")
-      return this.http.get(environment.URL_API+"brands")
-    }
-    delete(id:number){
-      // return this.http.delete(`${environment.URL_API+"nhanhieus"}/${id}`)
-      return this.http.delete(`${environment.URL_API+"brands"}/${id}`)
-    }
-    getAllBrands(){
-      this.get().subscribe(
-        res=>{
-          this.dataSource.data = res as Brand[];
-        }
-      )
-    }
+  brand: Brand = new Brand()
+  constructor(public http: HttpClient) { }
+  get(): Observable<any> {
+    return this.http.get(environment.URL_API + "brands")
   }
-  export class Brand{
-    id : number = 0
-    brandName : string
-    thongTin : string 
-    imagePath : string 
+  delete(id: number) {
+    return this.http.delete(`${environment.URL_API + "brands"}/${id}`)
   }
-  
+  getAllBrands() {
+    this.get().subscribe(
+      res => {
+        this.dataSource.data = res as Brand[];
+      }
+    )
+  }
+}
+export class Brand {
+  id: number = 0
+  brandName: string
+  thongTin: string
+  imagePath: string
+}

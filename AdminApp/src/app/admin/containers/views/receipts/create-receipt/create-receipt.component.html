@@ -102,8 +102,7 @@
                   <option [value]=250>
                     250 cái</option>
                 </select>
-                <div *ngIf="Quantity.invalid && (Quantity.dirty || Quantity.touched)"
-                  class="alert alert-danger">
+                <div *ngIf="Quantity.invalid && (Quantity.dirty || Quantity.touched)" class="alert alert-danger">
                   <div *ngIf="Quantity.errors.required">
                     Số lượng nhập không được bỏ trống
                   </div>
@@ -181,93 +180,4 @@
       </div>
     </form>
   </mat-step>
-  <!-- <mat-step>
-      <ng-template matStepLabel>Hoàn thành</ng-template>
-      <h1>Hoàn thành, vui lòng kiểm tra kho</h1>
-      <h2>Phiếu nhập của bạn: </h2>
-      <div style="margin-top: 400px;">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-  </mat-step> -->
 </mat-horizontal-stepper>
-<!-- 
-<div class="container">
-  <div class="row">
-      <div class="col">
-          <form [formGroup]="newFormGroupChiTiet" (ngSubmit)="onSubmitChiTiet(newFormGroupChiTiet.value)">
-              <div class="container" style="width: 30vw;">
-                  <div class="form-group">
-                      <span class="label label-default">Nhà cung cấp</span>
-                      <select class="form-control">
-                          <option *ngFor="let item of this.nhacungcaps" [value]="item.id">{{item.ten}}</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <span class="label label-default">Tên sản phẩm</span>
-                      <select class="form-control">
-                          <option *ngFor="let item of this.sanphams" [value]="item.id">{{item.ten}}</option>
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <span class="label label-default">Tên sản phẩm biến thể</span>
-                      <select class="form-control" formControlName="Id_SanPhamBienThe" >
-                          <option *ngFor="let item of this.sanphambienthes" [value]="item.id">{{item.tenSanPhamBienTheMauSize}}</option>
-                      </select>
-                      <div *ngIf="Id_SanPhamBienThe.invalid && (Id_SanPhamBienThe.dirty || Id_SanPhamBienThe.touched)"
-                          class="alert alert-danger">
-                          <div *ngIf="Id_SanPhamBienThe.errors.required">
-                              Tên sản phẩm biến thể không được bỏ trống
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <span class="label label-default">Số lượng cần nhập</span>
-                      <input class="form-control" formControlName="SoLuongNhap"
-                          [(ngModel)]="service.chitietphieunhap.soLuongNhap" required>
-                      <div *ngIf="SoLuongNhap.invalid && (SoLuongNhap.dirty || SoLuongNhap.touched)"
-                          class="alert alert-danger">
-                          <div *ngIf="SoLuongNhap.errors.required">
-                              Số lượng nhập không được bỏ trống
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group" style="justify-content:center;display: flex;">
-                      <button type="submit" class="btn btn-primary"
-                          [disabled]="this.newFormGroupChiTiet.invalid">Submit</button>
-                  </div>
-              </div>
-          </form>
-      </div>
-      <div class="col">
-      </div>
-  </div>
-  <div class="row">
-      <span>Chi tiết phiếu nhập</span>
-      <table class="table">
-          <thead>
-              <tr>
-                  <th>
-                      Sản phẩm biến thể
-                  </th>
-                  <th>
-                      Số lượng nhập
-                  </th>                 
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let item of chitiets">
-                  <td>
-                      {{item.Id_SanPhamBienThe}}
-                  </td>
-                  <td>
-                      {{item.SoLuongNhap}}
-                  </td>
-                  <td>
-                      <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
-</div> -->

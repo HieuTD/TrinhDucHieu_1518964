@@ -15,7 +15,7 @@ export class CreateOrEditSupplierComponent implements OnInit {
   constructor(public service: SupplierService,
     public http: HttpClient,
     public serviceToast: ToastServiceService,
-  ){
+  ) {
   }
   public newFormGroup: FormGroup;
   get Ten() { return this.newFormGroup.get('Ten'); }
@@ -53,7 +53,6 @@ export class CreateOrEditSupplierComponent implements OnInit {
       formData.append('Description', data.ThongTin);
       formData.append('Address', data.DiaChi);
       console.log(data)
-      // this.http.post(environment.URL_API + 'nhacungcaps', formData)
       this.http.post(environment.URL_API + 'suppliers', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
@@ -70,7 +69,6 @@ export class CreateOrEditSupplierComponent implements OnInit {
       formData.append('PhoneNumber', data.SDT);
       formData.append('Description', data.ThongTin);
       formData.append('Address', data.DiaChi);
-      // this.http.put(environment.URL_API + 'nhacungcaps/' + `${this.service.nhacungcap.id}`, formData)
       this.http.put(environment.URL_API + 'suppliers/' + `${this.service.nhacungcap.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()

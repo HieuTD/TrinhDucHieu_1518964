@@ -15,11 +15,9 @@ export class ProductService {
   constructor(public http: HttpClient) { }
   product: Product = new Product();
   delete(id: number): Observable<any> {
-    // return this.http.delete<any>(`${environment.URL_API + "sanphams"}/${id}`)
     return this.http.delete<any>(`${environment.URL_API + "products"}/${id}`)
   }
   get(): Observable<any> {
-    // return this.http.get<any>(environment.URL_API + "sanphams")
     return this.http.get<any>(environment.URL_API + "products")
   }
   getAllProducts() {
@@ -29,27 +27,24 @@ export class ProductService {
   }
   //
   post(product: any): Observable<any> {
-    // return this.http.post<any>(environment.URL_API + 'sanphams', product)
     return this.http.post<any>(environment.URL_API + 'products', product)
   }
-  put( id: number,product: any): Observable<any> {
-    // return this.http.put<any>(environment.URL_API + 'sanphams/' + id, product)
+  put(id: number, product: any): Observable<any> {
     return this.http.put<any>(environment.URL_API + 'products/' + id, product)
   }
-  putHoatDong(id: number,element:Product):Observable<any>{
-    // return this.http.put<any>(environment.URL_API + 'sanphams/capnhattrangthaihoatdong/' + id,element)
-    return this.http.put<any>(environment.URL_API + 'products/updateproductfeature/' + id,element)
+  putHoatDong(id: number, element: Product): Observable<any> {
+    return this.http.put<any>(environment.URL_API + 'products/updateproductfeature/' + id, element)
   }
 }
 export class Product {
   id: number = 0
   name: string
-  discount: number =0
+  discount: number = 0
   description: string
   khoiLuong: number
   price: number
-  originalPrice:number
-  gender:number
+  originalPrice: number
+  gender: number
   tag: string
   huongDan: string
   material: string
@@ -58,12 +53,12 @@ export class Product {
   trangThaiSanPhamThietKe: string
   brandId: number
   categoryId: number
-  supplierId:number
+  supplierId: number
   giaSanPhams: number
   sanPhamThietKes: number
   sanPham_SanPhamThietKe: number
   brandName: string
   categoryName: string
-  soLuongLike:number
-  soLuongComment:number
+  soLuongLike: number
+  soLuongComment: number
 }

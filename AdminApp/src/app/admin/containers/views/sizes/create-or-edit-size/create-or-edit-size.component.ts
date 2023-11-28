@@ -53,7 +53,6 @@ export class CreateOrEditSizeComponent implements OnInit {
       formData.append('CategoryId', data.Id_Loai);
       formData.append('SizeName', data.TenSize);
       console.log(data)
-      // this.http.post(environment.URL_API + 'sizes', formData)
       this.http.post(environment.URL_API + 'sizes', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
@@ -68,7 +67,6 @@ export class CreateOrEditSizeComponent implements OnInit {
       const formData = new FormData();
       formData.append('CategoryId', data.Id_Loai);
       formData.append('SizeName', data.TenSize);
-      // this.http.put(environment.URL_API + 'sizes/' + `${this.service.size.id}`, formData)
       this.http.put(environment.URL_API + 'sizes/' + `${this.service.size.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()

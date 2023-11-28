@@ -6,34 +6,32 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 @Injectable({
-    providedIn: 'root'
-  })
-export class SupplierService{
+  providedIn: 'root'
+})
+export class SupplierService {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<NhaCungCap>();
-    nhacungcap:NhaCungCap = new NhaCungCap()
-    constructor(public http:HttpClient) { }
-    delete(id:number){
-    //   return this.http.delete(`${environment.URL_API}nhacungcaps/${id}`)
-      return this.http.delete(`${environment.URL_API}suppliers/${id}`)
-    }
-    gethttp():Observable<any>{
-    //   return this.http.get(environment.URL_API+"nhacungcaps")
-      return this.http.get(environment.URL_API+"suppliers")
-    }
-    getAllNhaCungCaps(){
-      this.gethttp().subscribe(
-        res=>{
-          this.dataSource.data = res as NhaCungCap[];
-        }
-      )
-    }
+  nhacungcap: NhaCungCap = new NhaCungCap()
+  constructor(public http: HttpClient) { }
+  delete(id: number) {
+    return this.http.delete(`${environment.URL_API}suppliers/${id}`)
   }
-  export class NhaCungCap{
-    id : number = 0
-    supplierName: string
-    phoneNumber : string 
-    description:string="	Chuyên cung cấp quần áo giày dép các loại, rất hân hạnh được phục vụ quý khách"
-    address:string
+  gethttp(): Observable<any> {
+    return this.http.get(environment.URL_API + "suppliers")
   }
+  getAllNhaCungCaps() {
+    this.gethttp().subscribe(
+      res => {
+        this.dataSource.data = res as NhaCungCap[];
+      }
+    )
+  }
+}
+export class NhaCungCap {
+  id: number = 0
+  supplierName: string
+  phoneNumber: string
+  description: string
+  address: string
+}

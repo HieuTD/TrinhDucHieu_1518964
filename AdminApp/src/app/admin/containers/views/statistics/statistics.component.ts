@@ -17,9 +17,9 @@ export class StatisticsComponent implements OnInit {
   doanhthucaonhat: any;
   nam2021soluong: any;
   soLuongTon: any;
-  constructor(public service:StatisticService,    public dialog: MatDialog,
+  constructor(public service: StatisticService, public dialog: MatDialog,
     public zone: NgZone) {
-    
+
   }
   public dataSourceYear: any = {
     chart: {
@@ -88,29 +88,11 @@ export class StatisticsComponent implements OnInit {
       { label: "", value: "" },
       { label: "", value: "" },
     ]
-   }
+  }
   ngOnInit(): void {
     this.getTop10SanPhamLoiNhats()
     this.getSoLanXuatHienTrongDonHang()
     this.getThongKeThang();
-  //   const connection = new signalR.HubConnectionBuilder()
-  //   .configureLogging(signalR.LogLevel.Information)
-  //   .withUrl('https://localhost:44302/notify')
-  //   .build();
-  // connection.start().then(function () {
-  //   console.log('SignalR Connected!');
-  // }).catch(function (err) {
-  //   return console.error(err.toString());
-  // });
-  //   connection.on("BroadcastMessage", () => {
-  //     this.getSoLanXuatHienTrongDonHang()
-  //   });
-  //   connection.on("BroadcastMessage", () => {
-  //     this.getThongKeThang();
-  //   });
-  //   connection.on("BroadcastMessage", () => {
-  //     this.getTop10SanPhamLoiNhats()
-  //   })
   }
 
   //quantrong

@@ -34,24 +34,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.userService.logout()
   }
   ngOnInit(): void {
-    this.fullname=localStorage.getItem("fullname")
-    // this.getNotificationCheckOutCount();
-    // this.getNotificationCount();
-    // const connection = new signalR.HubConnectionBuilder()
-    //   .configureLogging(signalR.LogLevel.Information)
-    //   .withUrl('https://localhost:44302/notify')
-    //   .build();
-    // connection.start().then(function () {
-    //   console.log('SignalR Connected!');
-    // }).catch(function (err) {
-    //   return console.error(err.toString());
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getNotificationCount();
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getNotificationCheckOutCount();
-    // });
+    this.fullname = localStorage.getItem("fullname")
   }
   collapse() {
     this.isExpanded = false;
@@ -120,7 +103,7 @@ export class DefaultLayoutComponent implements OnInit {
   closeModal() {
     this.modalService.close('custom-modal');
   }
- openModalCheckOut() {
+  openModalCheckOut() {
     this.getNotificationCheckOutMessage();
     this.modalService.open('custom-modal-checkout');
   }

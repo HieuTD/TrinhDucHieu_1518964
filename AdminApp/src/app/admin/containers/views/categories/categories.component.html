@@ -4,9 +4,9 @@
 </button>
 <div fxLayout fxLayoutAlign="center center" style="display: flex;justify-content: center;">
     <mat-form-field fxFlex="40%">
-      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Tìm kiếm">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Tìm kiếm">
     </mat-form-field>
-  </div>
+</div>
 <table mat-table [dataSource]="service.dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Id </th>

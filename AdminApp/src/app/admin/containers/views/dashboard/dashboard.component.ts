@@ -33,38 +33,13 @@ export class DashboardComponent implements OnInit {
     this.getCountOrder()
     this.getCountUser();
     this.getCountTotalMoney();
-    // this.getTopDataSetBanRaTonKho();
-    // const connection = new signalR.HubConnectionBuilder()
-    //   .configureLogging(signalR.LogLevel.Information)
-    //   .withUrl('https://localhost:44302/notify')
-    //   .build();
-    // connection.start().then(function () {
-    //   console.log('SignalR Connected!');
-    // }).catch(function (err) {
-    //   return console.error(err.toString());
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getCountProduct();
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getCountUser();
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getCountTotalMoney();
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getCountOrder();
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.getTopDataSetBanRaTonKho()
-    // })
   }
   dataSource: any;
   selectedSlice = 'none';
   chart: any;
   lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Giá trị sản phẩm tồn (giá mua * số lượng tồn)', backgroundColor: 'rgb(0,0,255)',borderWidth:0.2 },
-    { data: [], label: 'Giá trị sản phẩm bán ra (giá bán * số lượng trong chi tiết đơn hàng)', backgroundColor: 'rgb(250,255,65)',borderWidth:0.2 },
+    { data: [], label: 'Giá trị sản phẩm tồn (giá mua * số lượng tồn)', backgroundColor: 'rgb(0,0,255)', borderWidth: 0.2 },
+    { data: [], label: 'Giá trị sản phẩm bán ra (giá bán * số lượng trong chi tiết đơn hàng)', backgroundColor: 'rgb(250,255,65)', borderWidth: 0.2 },
   ];
   lineChartLabels: Label[] = [];
   lineChartOptions = {
@@ -138,5 +113,5 @@ export class DashboardComponent implements OnInit {
       error => {
         this.errorMessage = error as any
       })
-    }
   }
+}

@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-// import { ImagesmodelComponent } from './imagesmodel/imagesmodel.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { environment } from '../../../../../environments/environment';
@@ -42,40 +41,28 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     'tenLoai',
     'toggle',
     'actions'
-     ];
-  updateActiveStatus(element:Product) {
+  ];
+  updateActiveStatus(element: Product) {
     var checkFeatured;
     if (element.isFeatured == true) {
       checkFeatured = 'Tắt';
     } else {
       checkFeatured = 'Bật';
     }
-      this.service.putHoatDong(element.id,element).subscribe(
-        result=>{
-          this.service.getAllProducts()
-          this.toastr.success(`${checkFeatured + " trạng thái hoạt động của sản phẩm thành công"}`, 'Thông báo', { timeOut: 2000 });
-        },
-        error=>{
-          console.log(error);
-        }
-      )
-      console.log("element là: ",element);
-      console.log("element.trangThaiHoatDong là: ",element.isFeatured);
-    }
+    this.service.putHoatDong(element.id, element).subscribe(
+      result => {
+        this.service.getAllProducts()
+        this.toastr.success(`${checkFeatured + " trạng thái hoạt động của sản phẩm thành công"}`, 'Thông báo', { timeOut: 2000 });
+      },
+      error => {
+        console.log(error);
+      }
+    )
+    console.log("element là: ", element);
+    console.log("element.trangThaiHoatDong là: ", element.isFeatured);
+  }
   ngOnInit() {
     this.service.getAllProducts();
-    // const connection = new signalR.HubConnectionBuilder()
-    //   .configureLogging(signalR.LogLevel.Information)
-    //   .withUrl('https://localhost:44302/notify')
-    //   .build();
-    // connection.start().then(function () {
-    //   console.log('SignalR Connected!');
-    // }).catch(function (err) {
-    //   return console.error(err.toString());
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.service.getAllProducts();
-    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
@@ -91,9 +78,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   onselectedDetail() {
     this.router.navigate(['admin/product/detail/' + this.service.product.id]);
   }
-  // exportGeneratePdf() {
-  //   window.open("https://localhost:44302/api/GeneratePdf/allsanpham", "_blank");
-  // }
   onSelectedEdit() {
     this.router.navigate(['admin/product/edit/' + this.service.product.id]);
   }
@@ -106,7 +90,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     this.onSelectedEdit();
   }
   clickDelete(id) {
-    if (confirm('Bạn có chắc chắn xóa bản ghi này không ??')) {
+    if (confirm('Bạn có chắc chắn xóa bản ghi này không ?')) {
       this.service.delete(id).subscribe(
         res => {
           this.service.getAllProducts()

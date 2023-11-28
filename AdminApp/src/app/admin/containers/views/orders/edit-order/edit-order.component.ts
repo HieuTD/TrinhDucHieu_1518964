@@ -12,14 +12,14 @@ export class EditOrderComponent implements OnInit {
     public toastr: ToastrService) { }
   ngOnInit(): void {
   }
-  onSubmit(hd:any){
-    console.log("log ket qua la: ",hd);
+  onSubmit(hd: any) {
+    console.log("log ket qua la: ", hd);
     this.service.put(hd).subscribe(
-      result=>{
-         this.service.getAllHoaDons()
-         this.toastr.success('Cập nhật trạng thái đơn hàng thành công'); 
+      result => {
+        this.service.getAllHoaDons()
+        this.toastr.success('Cập nhật trạng thái đơn hàng thành công');
       },
-      error=>{
+      error => {
         this.toastr.error('Cập nhật trạng thái đơn hàng thất bại');
       })
   }

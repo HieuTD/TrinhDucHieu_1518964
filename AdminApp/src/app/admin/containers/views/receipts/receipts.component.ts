@@ -22,7 +22,7 @@ export class ReceiptsComponent implements OnInit, AfterViewInit {
     public http: HttpClient,
     public dialog: MatDialog,
     public serviceToast: ToastServiceService
-  ) {}
+  ) { }
   displayedColumns: string[] = [
     "id",
     "soChungTu",
@@ -34,21 +34,6 @@ export class ReceiptsComponent implements OnInit, AfterViewInit {
   ];
   ngOnInit(): void {
     this.service.getAllPhieuNhaps();
-    // const connection = new signalR.HubConnectionBuilder()
-    //   .configureLogging(signalR.LogLevel.Information)
-    //   .withUrl("https://localhost:44302/notify")
-    //   .build();
-    // connection
-    //   .start()
-    //   .then(function () {
-    //     console.log("SignalR Connected!");
-    //   })
-    //   .catch(function (err) {
-    //     return console.error(err.toString());
-    //   });
-    // connection.on("BroadcastMessage", () => {
-    //   this.service.getAllPhieuNhaps();
-    // });
   }
   doFilter = (value: string) => {
     this.service.dataSource.filter = value.trim().toLocaleLowerCase();
@@ -61,15 +46,12 @@ export class ReceiptsComponent implements OnInit, AfterViewInit {
     this.service.phieunhap = new PhieuNhap();
     this.router.navigate(["admin/taophieunhap/them"]);
   }
-  // exportGeneratePdf() {
-  //   window.open("https://localhost:44302/api/GeneratePdf/allphieunhap", "_blank");
-  // }
   populateForm(id: any) {
     this.service.idphieunhap = id;
     this.router.navigate(["admin/taophieunhap/detail/" + id]);
   }
   clickDelete(id) {
-    if (confirm("Bạn có chắc chắn xóa bản ghi này không ??")) {
+    if (confirm("Bạn có chắc chắn xóa bản ghi này không ?")) {
       this.service.delete(id).subscribe(
         (res) => {
           this.serviceToast.showToastXoaThanhCong();

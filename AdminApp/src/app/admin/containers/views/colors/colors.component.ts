@@ -18,53 +18,41 @@ export class ColorsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
-  constructor(public service:ColorService,
-              public router : Router,
-              public http: HttpClient,
-              public dialog: MatDialog,
-              public serviceToast : ToastServiceService,) { }
-displayedColumns: string[] = ['id', 'maMau','tenLoai',
-  'actions'];
+  constructor(public service: ColorService,
+    public router: Router,
+    public http: HttpClient,
+    public dialog: MatDialog,
+    public serviceToast: ToastServiceService,) { }
+  displayedColumns: string[] = ['id', 'maMau', 'tenLoai',
+    'actions'];
   ngOnInit(): void {
     this.service.getAllMauSacs();
-  //   const connection = new signalR.HubConnectionBuilder()
-  //   .configureLogging(signalR.LogLevel.Information)
-  //   .withUrl('https://localhost:44302/notify')
-  //   .build();
-  // connection.start().then(function () {
-  //   console.log('SignalR Connected!');
-  // }).catch(function (err) {
-  //   return console.error(err.toString());
-  // });
-  // connection.on("BroadcastMessage", () => {
-  //   this.service.getAllMauSacs();
-  // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;
   }
-  onModalDialog(){
+  onModalDialog() {
     this.service.mausac = new MauSac()
     this.dialog.open(CreateOrEditColorComponent)
   }
- doFilter = (value: string) => {
-  this.service.dataSource.filter = value.trim().toLocaleLowerCase();
-}
-  populateForm(selectedRecord:MauSac){
-    this.service.mausac = Object.assign({},selectedRecord)
+  doFilter = (value: string) => {
+    this.service.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+  populateForm(selectedRecord: MauSac) {
+    this.service.mausac = Object.assign({}, selectedRecord)
     this.dialog.open(CreateOrEditColorComponent)
+  }
+  clickDelete(id) {
+    if (confirm('Bạn có chắc chắn xóa bản ghi này không ?')) {
+      this.service.delete(id).subscribe(
+        res => {
+          this.service.getAllMauSacs()
+          this.serviceToast.showToastXoaThanhCong()
+        }, err => {
+          this.serviceToast.showToastXoaThatBai()
+        }
+      )
+    }
+  }
 }
-  clickDelete(id){
-  if(confirm('Bạn có chắc chắn xóa bản ghi này không ??'))
-  {
-    this.service.delete(id).subscribe(
-      res=>{
-        this.service.getAllMauSacs()
-        this.serviceToast.showToastXoaThanhCong()
-      },err=>{
-        this.serviceToast.showToastXoaThatBai()
-      }
-    )
-}
-}}

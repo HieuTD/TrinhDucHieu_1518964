@@ -30,7 +30,6 @@ export class CreateOrEditCouponComponent implements OnInit {
     if (this.service.magiamgia.id == 0) {
       const formData = new FormData()
       formData.append('Discount', data.SoTienGiam);
-      // this.http.post(environment.URL_API + 'magiamgias',formData)
       this.http.post(environment.URL_API + 'coupons', formData)
         .subscribe(res => {
           this.toastService.showToastThemThanhCong();
@@ -44,7 +43,6 @@ export class CreateOrEditCouponComponent implements OnInit {
     else {
       const formData = new FormData();
       formData.append('Discount', data.SoTienGiam);
-      // this.http.put(environment.URL_API + 'magiamgias/' + `${this.service.magiamgia.id}`, formData)
       this.http.put(environment.URL_API + 'coupons/' + `${this.service.magiamgia.id}`, formData)
         .subscribe(res => {
           this.toastService.showToastSuaThanhCong();

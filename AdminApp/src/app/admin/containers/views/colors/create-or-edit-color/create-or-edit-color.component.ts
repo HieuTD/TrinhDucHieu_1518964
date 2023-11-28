@@ -46,7 +46,6 @@ export class CreateOrEditColorComponent implements OnInit {
       const formData = new FormData();
       formData.append('ColorName', data.MaMau);
       formData.append('CategoryId', data.Id_Loai);
-      // this.http.post(environment.URL_API + 'mausacs', formData)
       this.http.post(environment.URL_API + 'colors', formData)
         .subscribe(res => {
           this.service.getAllMauSacs();
@@ -61,7 +60,6 @@ export class CreateOrEditColorComponent implements OnInit {
       const formData = new FormData();
       formData.append('ColorName', data.MaMau);
       formData.append('CategoryId', data.Id_Loai);
-      // this.http.put(environment.URL_API + 'mausacs/' + `${this.service.mausac.id}`, formData)
       this.http.put(environment.URL_API + 'colors/' + `${this.service.mausac.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()

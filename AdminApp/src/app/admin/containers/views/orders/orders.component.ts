@@ -26,21 +26,9 @@ export class OrdersComponent implements OnInit {
     public serviceToast: ToastServiceService,
     public datepipe: DatePipe
   ) { }
-  displayedColumns: string[] = ['id', 'id_User', 'ngayTao', 'ghiChi', 'tongTien','trangThai','actions'];
+  displayedColumns: string[] = ['id', 'id_User', 'ngayTao', 'ghiChi', 'tongTien', 'trangThai', 'actions'];
   ngOnInit(): void {
     this.service.getAllHoaDons();
-    // const connection = new signalR.HubConnectionBuilder()
-    //   .configureLogging(signalR.LogLevel.Information)
-    //   .withUrl('https://localhost:44302/notify')
-    //   .build();
-    // connection.start().then(function () {
-    //   console.log('SignalR Connected!');
-    // }).catch(function (err) {
-    //   return console.error(err.toString());
-    // });
-    // connection.on("BroadcastMessage", () => {
-    //   this.service.getAllHoaDons();
-    // });
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
@@ -61,12 +49,10 @@ export class OrdersComponent implements OnInit {
   populateForm(selectedRecord: HoaDonUser) {
     this.service.hoadon = Object.assign({}, selectedRecord)
     this.dialog.open(EditOrderComponent)
-  } 
-  // exportGeneratePdf() {
-  //   window.open("https://localhost:44302/api/GeneratePdf/allorder", "_blank");
-  // }
+  }
+
   clickDelete(id) {
-    if (confirm('Bạn có chắc chắn xóa bản ghi này không ??')) {
+    if (confirm('Bạn có chắc chắn xóa bản ghi này không ?')) {
       this.service.delete(id).subscribe(
         res => {
           this.service.getAllHoaDons()

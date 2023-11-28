@@ -19,22 +19,18 @@ export class OrderService {
   public dataSource = new MatTableDataSource<HoaDonUser>();
   hoadon: HoaDonUser = new HoaDonUser()
   cthdViewModel: CTHDViewModel = new CTHDViewModel()
-  constructor(public http: HttpClient,private datePipe: DatePipe) { }
-  get():Observable<any> {
-    // return this.http.get<any>(environment.URL_API + "hoadons")
+  constructor(public http: HttpClient, private datePipe: DatePipe) { }
+  get(): Observable<any> {
     return this.http.get<any>(environment.URL_API + "orders")
   }
   delete(id: number) {
-    // return this.http.delete(`environment.URL_API + "hoadons"/${id}`)
     return this.http.delete(`environment.URL_API + "orders"/${id}`)
   }
-  put(hd:any):Observable<any>{
-    // return this.http.put<any>(environment.URL_API+"hoadons/suatrangthai/"+this.hoadon.id,hd)
-    return this.http.put<any>(environment.URL_API+"orders/updatestatus/"+this.hoadon.id,hd)
+  put(hd: any): Observable<any> {
+    return this.http.put<any>(environment.URL_API + "orders/updatestatus/" + this.hoadon.id, hd)
   }
-  getMotHoaDonService(id:number):Observable<any>{
-    // return this.http.get<any>(environment.URL_API + "hoadons/admindetailorder/"+id)
-    return this.http.get<any>(environment.URL_API + "orders/adminorderdetail/"+id)
+  getMotHoaDonService(id: number): Observable<any> {
+    return this.http.get<any>(environment.URL_API + "orders/adminorderdetail/" + id)
   }
   getAllHoaDons() {
     this.get().subscribe(
@@ -45,15 +41,15 @@ export class OrderService {
     )
   }
 }
-export class HoaDonUser{
+export class HoaDonUser {
   id: number = 0
   id_User: string
-  ngayTao:string
+  ngayTao: string
   ghiChi: string //Ghi chú
   tongTien: number
   fullName: string
-  daLayTien:string
-  status:number
+  daLayTien: string
+  status: number
 }
 export class CTHDViewModel {
   idCTHD: number

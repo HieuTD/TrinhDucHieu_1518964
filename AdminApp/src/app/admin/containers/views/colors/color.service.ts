@@ -16,12 +16,10 @@ export class ColorService {
     tensizeloai: any
     constructor(public http: HttpClient) { }
     delete(id: number): Observable<any> {
-        //   return this.http.delete<any>(`${environment.URL_API+"mausacs"}/${id}`)
         return this.http.delete<any>(`${environment.URL_API + "colors"}/${id}`)
     }
     getMauSac(): Observable<any> {
-        // return this.http.get<any>(environment.URL_API + "mausacs")
-        return this.http.get<any>(environment.URL_API+"colors")
+        return this.http.get<any>(environment.URL_API + "colors")
     }
     /* Dùng cho component Product sau khi thêm hoặc sửa xong */
     getAllMauSacs() {

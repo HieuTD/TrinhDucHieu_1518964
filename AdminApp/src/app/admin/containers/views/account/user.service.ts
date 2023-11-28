@@ -6,6 +6,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { environment } from '../../../../../environments/environment';
+import { error } from 'console';
 //import * as _ from 'lodash';
 // Add the RxJS Observable operators we need in this app.
 @Injectable()
@@ -47,6 +48,9 @@ export class UserService extends BaseService {
             this.loggedIn = true;
             this._authNavStatusSource.next(true);
             return true;
+          },
+          (error: any) => {
+            this.toast.showToastDangNhapThatBai();
           })
   }
   logout() {

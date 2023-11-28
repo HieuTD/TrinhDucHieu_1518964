@@ -30,7 +30,6 @@ export class CreateOrEditCategoryComponent implements OnInit {
     if (this.service.category.id == 0) {
       const formData = new FormData();
       formData.append('CategoryName', data.Name);
-      // this.http.post(environment.URL_API+'loais', formData)
       this.http.post(environment.URL_API + 'categories', formData)
         .subscribe(res => {
           this.toastService.showToastThemThanhCong();
@@ -44,7 +43,6 @@ export class CreateOrEditCategoryComponent implements OnInit {
     else {
       const formData = new FormData();
       formData.append('CategoryName', data.Name);
-      // this.http.put(environment.URL_API+'loais/'+`${this.service.category.id}`, formData)
       this.http.put(environment.URL_API + 'categories/' + `${this.service.category.id}`, formData)
         .subscribe(res => {
           this.toastService.showToastSuaThanhCong();
