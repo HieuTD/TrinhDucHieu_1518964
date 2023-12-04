@@ -90,7 +90,7 @@ export const routes: Routes = [
         component: WidgetsComponent
       },
       {
-        path: 'admin/chartsecond',
+        path: 'admin/statistic',
         component: StatisticsComponent
       },
       // {

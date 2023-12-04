@@ -49,6 +49,8 @@ export class RegisterComponent extends BaseService implements OnInit {
         window.location.href = '/login'
       }
       )
+    }, error => {
+      Swal.fire("Đăng ký không thành công, email đã tồn tại", '', 'error');
     }
     )
   }

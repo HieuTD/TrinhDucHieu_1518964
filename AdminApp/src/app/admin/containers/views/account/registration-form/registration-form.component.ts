@@ -64,7 +64,11 @@ export class RegistrationFormComponent implements OnInit {
         this.router.navigate(['/login'], { queryParams: { brandNew: true, email: data.email } });
         this.toastr.success('Đăng ký thành công', 'Thông báo', { timeOut: 2000 });
       },
-        errors => this.errors = errors
+        errors => 
+        {
+          this.errors = errors;
+          this.toastr.error('Đăng ký không thành công, email đã tồn tại', 'Thông báo', { timeOut: 2000 });
+        }
       )
   }
 }

@@ -66,6 +66,11 @@ namespace WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var isEmailExist = _context.AppUsers.Where(e => e.Email == request.Email).SingleOrDefault();
+            if (isEmailExist != null)
+            {
+                return BadRequest();
+            }
             var userIdentity = _mapper.Map<AppUser>(request);
             var result = await _userManager.CreateAsync(userIdentity, request.Password);
             _context.AppUsers.Update(userIdentity);

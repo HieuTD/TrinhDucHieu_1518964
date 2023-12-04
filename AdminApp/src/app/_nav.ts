@@ -11,7 +11,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Bán hàng',
-        url: '/admin/chartsecond',
+        url: '/admin/statistic',
         icon: 'cil-bar-chart',
       },
       // {
