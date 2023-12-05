@@ -84,7 +84,7 @@ export class CheckoutComponent implements OnInit {
     this.http.post(environment.URL_API + "Carts/delete", delproduct
     ).subscribe(
       res => {
-        Swal.fire("Xoá sản phẩm thành công .", '', 'success')
+        Swal.fire("Xoá sản phẩm khỏi giỏ hàng thành công .", '', 'success')
         this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
           res => {
             this.list_item = res;
