@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs.Products;
@@ -31,6 +32,7 @@ namespace WebApi.Controllers
                 {
                     ProdId = request.ProdId,
                     UserId = request.UserId,
+                    CreatedAt = DateTime.Now
                 };
                 _context.Add(resuft);
                 _context.SaveChanges();

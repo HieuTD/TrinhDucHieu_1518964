@@ -24,7 +24,7 @@ export class LikeComponent implements OnInit {
     this.http.delete(environment.URL_API + "productlikes/" + product.id, {
     }).subscribe(
       res => {
-        Swal.fire("Xoá sản phẩm khỏi danh sách yêu thích thành công .", '', 'success');
+        Swal.fire("Xoá sản phẩm khỏi danh sách yêu thích thành công.", '', 'success');
         const clicks = localStorage.getItem('idUser');
         this.http.get(environment.URL_API + "productlikes/listprodlikebyuserid/" + clicks).subscribe(
           res => {

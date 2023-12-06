@@ -116,11 +116,11 @@ export class CheckoutComponent implements OnInit {
       if (this.check != null && this.check_sudung == null) {
         this.list_MGGSD.push(this.couponName)
         this.tongThanhToan = this.tongtien + 25000 - this.check.discount;
-        Swal.fire("Áp dụng mã giảm giá thành công .", '', 'success')
+        Swal.fire("Sử dụng mã giảm giá thành công.", '', 'success')
       }
       else {
         if (this.check_sudung == this.couponName) {
-          Swal.fire("Bạn đã áp mã này rồi.", '', 'error')
+          Swal.fire("Bạn đã sử mã giảm giá này rồi !", '', 'error')
         }
         else {
           Swal.fire("Mã giảm giá không tồn tại .", '', 'error')
