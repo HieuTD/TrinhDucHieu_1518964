@@ -97,6 +97,9 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     if (this.maxQty() <= 0) {
       return true
     }
+    if (this.soLuong == 0) {
+      return true;
+    }
   }
   soLuongCong() {
     if (this.soLuong < this.maxQty()) {
