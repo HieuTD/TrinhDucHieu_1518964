@@ -134,5 +134,18 @@ namespace WebApi.Controllers
             }).Distinct().ToListAsync();
             return Ok(resuft);
         }
+
+        [HttpPost("listColorByProdId")]
+        public async Task<ActionResult> GetListColorByProdId(GetListSizeByColorRequest request)
+        {
+            var categoryId = _context.Products.Where(d => d.Id == request.ProdId).Select(d => d.CategoryId).SingleOrDefault();
+            var listColor = _context.Colors.Where(c => c.CategoryId == categoryId).Select(
+                d => new
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                }).ToList();
+            return Ok(listColor);
+        }
     }
 }

@@ -5,6 +5,8 @@
             <mat-icon>clear</mat-icon>
         </button>
         <br>
+        <h1 *ngIf="this.service.nhacungcap.id == 0">Thêm mới nhà cung cấp</h1>
+        <h1 *ngIf="this.service.nhacungcap.id != 0">Cập nhật nhà cung cấp</h1>
         <div class="form-group">
             <label for="label label-default">Tên nhà cung cấp</label>
             <input class="form-control" formControlName="Ten" [(ngModel)]="service.nhacungcap.supplierName">

@@ -5,6 +5,8 @@
             <mat-icon>clear</mat-icon>
         </button>
         <br>
+        <h1 *ngIf="this.service.brand.id == 0">Thêm mới nhãn hiệu</h1>
+        <h1 *ngIf="this.service.brand.id != 0">Cập nhật nhãn hiệu</h1>
         <div class="form-group">
             <label for="Name">Tên nhãn hiệu</label>
             <input class="form-control" formControlName="Name" [(ngModel)]="service.brand.brandName" required>

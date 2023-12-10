@@ -5,6 +5,8 @@
             <mat-icon>clear</mat-icon>
         </button>
         <br>
+        <h1 *ngIf="this.service.blog.id == 0">Thêm mới blog</h1>
+        <h1 *ngIf="this.service.blog.id != 0">Cập nhật blog</h1>
         <div class="form-group">
             <label for="TieuDe">Tiêu đề</label>
             <input class="form-control" formControlName="TieuDe" [(ngModel)]="service.blog.title" required>

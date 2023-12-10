@@ -77,17 +77,17 @@ export class CreateOrEditProductVariantComponent implements OnInit {
         Validators.required
       ])
     });
-    this.service.getAllTenMauLoai().subscribe(
-      data => {
-        Object.assign(this.loaitenmau, data)
-      }
-    )
-    this.service.getAllTenSizeLoai().subscribe(
-      data => {
-        Object.assign(this.loaitensize, data)
-        console.log(this.loaitensize);
-      }
-    )
+    // this.service.getAllTenMauLoai().subscribe(
+    //   data => {
+    //     Object.assign(this.loaitenmau, data)
+    //   }
+    // )
+    // this.service.getAllTenSizeLoai().subscribe(
+    //   data => {
+    //     Object.assign(this.loaitensize, data)
+    //     console.log(this.loaitensize);
+    //   }
+    // )
     this.service.getAllSanPhams().subscribe(
       data => {
         Object.assign(this.sanphams, data)
@@ -98,6 +98,20 @@ export class CreateOrEditProductVariantComponent implements OnInit {
         this.sizes = data as Size[]
       }
     )
+  }
+  onChangeProd(ProdId) {
+    var val = {
+      prodId: ProdId
+    }
+    this.http.post(environment.URL_API + "colors/listColorByProdId/", val).subscribe(
+      res => {
+        Object.assign(this.loaitenmau, res)
+      });
+
+    this.http.post(environment.URL_API + "sizes/listSizeByProdId/", val).subscribe(
+      res => {
+        Object.assign(this.loaitensize, res)
+      });
   }
   public newFormGroup: FormGroup;
   onSubmit = (data) => {

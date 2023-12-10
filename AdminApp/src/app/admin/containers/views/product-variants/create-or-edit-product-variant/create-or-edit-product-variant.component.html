@@ -3,9 +3,11 @@
         <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1"
             style="float: right;"><mat-icon>clear</mat-icon></button>
         <br>
+        <h1 *ngIf="this.service.sanphambienthe.id == undefined">Thêm mới sản phẩm biến thể</h1>
+        <h1 *ngIf="this.service.sanphambienthe.id != undefined">Cập nhật sản phẩm biến thể</h1>
         <div class="form-group">
             <span class="label label-default">Tên sản phẩm</span>
-            <select class="form-control" [(ngModel)]="service.sanphambienthe.prodId" formControlName="Id_SanPham">
+            <select class="form-control" [(ngModel)]="service.sanphambienthe.prodId" formControlName="Id_SanPham" (change)="onChangeProd($event.target.value)">
                 <option *ngFor="let sanpham of this.sanphams" [value]="sanpham.id">{{sanpham.name}}</option>
             </select>
             <div *ngIf="Id_SanPham.invalid && (Id_SanPham.dirty || Id_SanPham.touched)" class="alert alert-danger">

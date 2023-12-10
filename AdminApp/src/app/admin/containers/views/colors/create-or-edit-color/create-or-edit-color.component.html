@@ -3,6 +3,8 @@
         <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1"
             style="float: right;"><mat-icon>clear</mat-icon></button>
         <br>
+        <h1 *ngIf="this.service.mausac.id == 0">Thêm mới màu sắc</h1>
+        <h1 *ngIf="this.service.mausac.id != 0">Cập nhật màu sắc</h1>
         <div class="form-group">
             <label for="MaMau">Tên màu</label>
             <!-- <select class="form-control" formControlName="MaMau" [(ngModel)]="this.service.mausac.colorName">
