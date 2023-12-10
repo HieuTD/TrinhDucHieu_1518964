@@ -22,14 +22,25 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name:"QUẢN LÝ",
+    name:"HÓA ĐƠN / PHIẾU NHẬP",
     children:
     [
       {
-        name: 'Sản phẩm',
-        url: '/admin/products',
-        icon: 'cil-3d',
+        name: 'Hóa đơn bán hàng',
+        url: '/admin/hoadons',   
+        icon:'cil-notes'
       },
+      {
+        name:'Phiếu nhập hàng',
+        url:'admin/taophieunhap',
+        icon:'cil-clipboard'
+      },
+    ]
+  },
+  {
+    name:"QUẢN LÝ",
+    children:
+    [
       {
         name: 'Loại',
         url: '/admin/categories',
@@ -56,6 +67,11 @@ export const navItems: INavData[] = [
         icon: 'cil-drop',
       },
       {
+        name: 'Sản phẩm',
+        url: '/admin/products',
+        icon: 'cil-3d',
+      },
+      {
         name: 'Sản phẩm biến thể',
         url: '/admin/sanphambienthes',
         icon:'cil-dialpad'
@@ -80,22 +96,6 @@ export const navItems: INavData[] = [
       //   url:'admin/chats',
       //   icon:'cil-chat-bubble'
       // },
-    ]
-  },
-  {
-    name:"HÓA ĐƠN",
-    children:
-    [
-      {
-        name: 'Hóa đơn bán hàng',
-        url: '/admin/hoadons',   
-        icon:'cil-notes'
-      },
-      {
-        name:'Phiếu nhập hàng',
-        url:'admin/taophieunhap',
-        icon:'cil-clipboard'
-      },
     ]
   },
 ];

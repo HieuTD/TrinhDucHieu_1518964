@@ -41,7 +41,8 @@ export class StatisticsComponent implements OnInit {
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-      { label: "", value: "" }
+      { label: "", value: "" },
+      { label: "", value: "" },
     ]
   }
     ;
