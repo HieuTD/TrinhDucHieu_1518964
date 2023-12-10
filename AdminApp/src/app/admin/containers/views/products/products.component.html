@@ -13,17 +13,17 @@
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
     <ng-container matColumnDef="ten">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên sản phẩm </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
     <ng-container matColumnDef="hinh">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Hình </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Hình ảnh </th>
         <td mat-cell *matCellDef="let element">
             <img src="https://localhost:44391{{element.image}}" class="rounded mb-3" width="80">
         </td>
     </ng-container>
     <ng-container matColumnDef="trangThaiSanPham">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Trạng thái SP </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Trạng thái </th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
     <ng-container matColumnDef="gia">
