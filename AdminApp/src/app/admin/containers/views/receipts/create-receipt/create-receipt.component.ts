@@ -109,8 +109,8 @@ export class CreateReceiptComponent implements OnInit {
   public deleteDetail(item: any) {
     for (var index = 0; index < this.chitiets.length; index++) {
       let detail = this.chitiets[index];
-      if (detail.TenSanPhamBienThe == item.TenSanPhamBienThe
-        && detail.SoLuongNhap == item.SoLuongNhap) {
+      if (detail.ProdVariantName == item.ProdVariantName
+        && detail.Quantity == item.Quantity) {
         this.chitiets.splice(index, 1);
       }
     }

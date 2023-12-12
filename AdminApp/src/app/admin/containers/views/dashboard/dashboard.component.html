@@ -3,13 +3,13 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-sm-6 col-lg-3" style="cursor: pointer;">
-            <div class="card text-white bg-success" routerLink="/admin/products">
+            <div class="card text-white" routerLink="/admin/products" style="background-image: linear-gradient(to right, #00b09b, #96c93d);">
                 <div class="card-body pb-0">
                     <button type="button" class="btn btn-transparent p-0 float-right">
                         <i class="icon-location-pin"></i>
                     </button>
                     <div class="text-value">{{this.countProduct}}</div>
-                    <div>Số sản phẩm</div>
+                    <div>Sản phẩm</div>
                     <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
                     </div>
                 </div>
@@ -17,7 +17,7 @@
         </div>
         <!--/.col-->
         <div class="col-sm-6 col-lg-3">
-            <div class="card text-white bg-primary" routerLink="/admin/hoadons">
+            <div class="card text-white" routerLink="/admin/hoadons" style="background-image: linear-gradient(to right, #005aa7, #5976ac);">
                 <div class="card-body pb-0">
                     <div class="btn-group float-right" dropdown>
                         <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="text-value">{{this.countOrder}}</div>
-                    <div>Đơn hàng đã hoàn thành</div>
+                    <div>Đơn đặt hàng thành công</div>
                 </div>
                 <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
                 </div>
@@ -39,7 +39,7 @@
         </div>
         <!--/.col-->
         <div class="col-sm-6 col-lg-3">
-            <div class="card text-white bg-warning" routerLink="/admin/usermanagers">
+            <div class="card text-white" routerLink="/admin/usermanagers" style="background-image: linear-gradient(to right,  #D1913C, #FFD194);">
                 <div class="card-body pb-0">
                     <div class="btn-group float-right" dropdown>
                         <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="text-value">{{this.countUser}}</div>
-                    <div>Số lượng User</div>
+                    <div>Khách hàng thành viên</div>
                 </div>
                 <div class="chart-wrapper mt-3" style="height:70px;">
                 </div>
@@ -60,7 +60,7 @@
         </div>
         <!--/.col-->
         <div class="col-sm-6 col-lg-3">
-            <div class="card text-white bg-danger">
+            <div class="card text-white" style="background-image: linear-gradient(to right, #ff5e62, #ff9966);">
                 <div class="card-body pb-0">
                     <div class="btn-group float-right" dropdown>
                         <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="text-value">{{this.countTotalMoney|number}} VNĐ</div>
-                    <div>Tiền thu về</div>
+                    <div>Doanh thu</div>
                 </div>
                 <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
                 </div>
