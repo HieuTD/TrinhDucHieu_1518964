@@ -135,8 +135,8 @@ namespace WebApi.Controllers
             return Ok(resuft);
         }
 
-        [HttpPost("listColorByProdId")]
-        public async Task<ActionResult> GetListColorByProdId(GetListSizeByColorRequest request)
+        [HttpPost("listColorByProdIdAdmin")]
+        public async Task<ActionResult> GetListColorByProdIdAdmin(GetListSizeByColorRequest request)
         {
             var categoryId = _context.Products.Where(d => d.Id == request.ProdId).Select(d => d.CategoryId).SingleOrDefault();
             var listColor = _context.Colors.Where(c => c.CategoryId == categoryId).Select(

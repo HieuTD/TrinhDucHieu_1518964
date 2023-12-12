@@ -93,17 +93,25 @@ export class CreateOrEditProductVariantComponent implements OnInit {
         Object.assign(this.sanphams, data)
       }
     )
-    this.http.get(environment.URL_API + "sizes").subscribe(
-      data => {
-        this.sizes = data as Size[]
-      }
-    )
+
+    var val = {
+      prodId: this.service.sanphambienthe.prodId
+    }
+    this.http.post(environment.URL_API + "colors/listColorByProdIdAdmin/", val).subscribe(
+      res => {
+        Object.assign(this.loaitenmau, res)
+      });
+
+    this.http.post(environment.URL_API + "sizes/listSizeByProdId/", val).subscribe(
+      res => {
+        Object.assign(this.loaitensize, res)
+      });
   }
   onChangeProd(ProdId) {
     var val = {
       prodId: ProdId
     }
-    this.http.post(environment.URL_API + "colors/listColorByProdId/", val).subscribe(
+    this.http.post(environment.URL_API + "colors/listColorByProdIdAdmin/", val).subscribe(
       res => {
         Object.assign(this.loaitenmau, res)
       });
