@@ -108,22 +108,22 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 this.chose_mau = chose;
             });
     }
-    onSearchChange(searchValue: string): void {
-        this.list_product.filter(d => d.name)
-    }
-    check(idSanPham): number {
-        var kq;
-        const clicks = localStorage.getItem('idUser');
-        this.http
-            .post(environment.URL_API + 'sanphams/checklike/', {
-                IdSanPham: idSanPham,
-                IdUser: clicks,
-            }
-            ).subscribe(resp => {
-                kq = resp;
-            });
-        return kq;
-    }
+    // onSearchChange(searchValue: string): void {
+    //     this.list_product.filter(d => d.name)
+    // }
+    // check(idSanPham): number {
+    //     var kq;
+    //     const clicks = localStorage.getItem('idUser');
+    //     this.http
+    //         .post(environment.URL_API + 'sanphams/checklike/', {
+    //             IdSanPham: idSanPham,
+    //             IdUser: clicks,
+    //         }
+    //         ).subscribe(resp => {
+    //             kq = resp;
+    //         });
+    //     return kq;
+    // }
     ngAfterViewInit(): void {
         $('.js-show-filter').on('click', function () {
             $(this).toggleClass('show-filter');
