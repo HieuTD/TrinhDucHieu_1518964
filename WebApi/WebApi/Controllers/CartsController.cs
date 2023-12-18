@@ -61,7 +61,7 @@ namespace WebApi.Controllers
                 temp.Quantity = json.Quantity;
             }
             _context.SaveChanges();
-            var resuft = _context.Carts.Where(s => s.UserId == json.UserId)
+            var result = _context.Carts.Where(s => s.UserId == json.UserId)
                 .Select(d => new CartViewModel
                 {
                     CartID = d.Id,
@@ -78,7 +78,7 @@ namespace WebApi.Controllers
                             Discount = i.Discount
                         }).FirstOrDefault(),
                 }).ToList();
-            return Ok(resuft);
+            return Ok(result);
         }
 
         [HttpPost("delete")]

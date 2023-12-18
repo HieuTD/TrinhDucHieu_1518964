@@ -25,22 +25,22 @@ namespace WebApi.Controllers
         [HttpPost("like")]
         public async Task<ActionResult> AddLikeProduct(ProductLikeCreateRequest request)
         {
-            var resuft = await _context.ProductLikes.Where(d => d.ProdId == request.ProdId && d.UserId == request.UserId).FirstOrDefaultAsync();
-            if (resuft == null)
+            var result = await _context.ProductLikes.Where(d => d.ProdId == request.ProdId && d.UserId == request.UserId).FirstOrDefaultAsync();
+            if (result == null)
             {
-                resuft = new ProductLike
+                result = new ProductLike
                 {
                     ProdId = request.ProdId,
                     UserId = request.UserId,
                     CreatedAt = DateTime.Now
                 };
-                _context.Add(resuft);
+                _context.Add(result);
                 _context.SaveChanges();
                 return Ok(1);
             }
             else
             {
-                _context.Remove(resuft);
+                _context.Remove(result);
                 _context.SaveChanges();
                 return Ok(2);
             }
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
         [HttpGet("listprodlikebyuserid/{id}")]
         public async Task<ActionResult> GetListProdLikeByUserId(string id)
         {
-            var resuft = _context.ProductLikes.Where(d => d.UserId == id).Select(
+            var result = _context.ProductLikes.Where(d => d.UserId == id).Select(
                 d => new ProductLike
                 {
                     Id = d.Id,
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
                     Name = _context.Products.Where(s => s.Id == d.ProdId).Select(s => s.Name).FirstOrDefault(),
                     Price = (int)_context.Products.Where(s => s.Id == d.ProdId).Select(s => s.Price).FirstOrDefault(),
                 });
-            return Ok(await resuft.ToListAsync());
+            return Ok(await result.ToListAsync());
         }
 
         [HttpDelete("{id}")]

@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         [HttpPost()]
         public async Task<ActionResult> AddReview(ReviewCreateRequest request)
         {
-            var resuft = new Review
+            var result = new Review
             {
                 CreatedAt = DateTime.Now,
                 ProdId = request.ProdId,
@@ -32,7 +32,7 @@ namespace WebApi.Controllers
                 UserId = request.UserId,
                 Rating = request.Rating
             };
-            _context.Add(resuft);
+            _context.Add(result);
             _context.SaveChanges();
             var listcomment = _context.Reviews.Where(d => d.ProdId == request.ProdId).Select(
                 d => new 

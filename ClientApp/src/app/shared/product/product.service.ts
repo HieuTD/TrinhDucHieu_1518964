@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
   constructor(public http: HttpClient) { }
   getlaytatcasanpham(): Observable<any> {
-    return this.http.get<any>(environment.URL_API + "products")
+    return this.http.get<any>(environment.URL_API + "products/GetAllProductsClient")
   }
   getsanphammoi(): Observable<any> {
     return this.http.get<any>(environment.URL_API + "products/listnewproduct")

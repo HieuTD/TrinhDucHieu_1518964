@@ -128,11 +128,11 @@ namespace WebApi.Controllers
         [HttpGet("color")]
         public async Task<ActionResult> GetColorName()
         {
-            var resuft = await _context.Colors.Select(d => new
+            var result = await _context.Colors.Select(d => new
             {
                 colorName = d.Name
             }).Distinct().ToListAsync();
-            return Ok(resuft);
+            return Ok(result);
         }
 
         [HttpPost("listColorByProdIdAdmin")]

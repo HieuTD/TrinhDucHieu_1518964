@@ -388,5 +388,34 @@ namespace WebApi.Controllers
                    }).Take(20);
             return Ok(await kb.ToListAsync());
         }
+
+
+
+        [HttpGet("GetAllProductsClient")]
+        public async Task<ActionResult<IEnumerable<ProductViewModel>>> GetAllProductsClient()
+        {
+            var query = await _context.Products.Select(
+                   s => new ProductViewModel()
+                   {
+                       Id = s.Id,
+                       Name = s.Name,
+                       Price = s.Price,
+                       OriginalPrice = s.OriginalPrice,
+                       Tag = s.Tag,
+                       Discount = s.Discount,
+                       Description = s.Description,
+                       Gender = s.Gender,
+                       Material = s.Material,
+                       IsFeatured = s.IsFeatured,
+                       Status = s.Status,
+                       CategoryId = s.CategoryId,
+                       BrandId = s.BrandId,
+                       SupplierId = s.SupplierId,
+                       CategoryName = _context.Categories.Where(d => d.Id == s.CategoryId).Select(d => d.Name).FirstOrDefault(),
+                       BrandName = _context.Brands.Where(d => d.Id == s.BrandId).Select(d => d.Name).FirstOrDefault(),
+                       Image = _context.ProductImages.Where(q => q.ProdId == s.Id).Select(q => q.Name).FirstOrDefault(),
+                   }).Take(20).Where(s => s.IsFeatured == true).ToListAsync();
+            return query;
+        }
     }
 }
