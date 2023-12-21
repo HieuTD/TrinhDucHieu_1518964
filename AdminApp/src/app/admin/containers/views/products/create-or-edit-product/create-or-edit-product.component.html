@@ -4,8 +4,8 @@
     }
 </style>
 <br>
-<h1 *ngIf="this.service.product.id == 0">Thêm mới sản phẩm</h1>
-<h1 *ngIf="this.service.product.id != 0">Cập nhật sản phẩm</h1>
+<h1 *ngIf="this.service.product.id == 0" class="heading">Thêm mới sản phẩm</h1>
+<h1 *ngIf="this.service.product.id != 0" class="heading">Cập nhật sản phẩm</h1>
 <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" style="width: 100%;">
         <mat-label>Tên</mat-label>

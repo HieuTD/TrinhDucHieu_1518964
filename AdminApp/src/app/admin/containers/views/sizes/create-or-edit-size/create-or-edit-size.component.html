@@ -5,8 +5,8 @@
             <mat-icon>clear</mat-icon>
         </button>
         <br>
-        <h1 *ngIf="this.service.size.id == 0">Thêm mới size</h1>
-        <h1 *ngIf="this.service.size.id != 0">Cập nhật size</h1>
+        <h1 *ngIf="this.service.size.id == 0" class="heading">Thêm mới size</h1>
+        <h1 *ngIf="this.service.size.id != 0" class="heading">Cập nhật size</h1>
         <div class="form-group">
             <label for="TenSize">Tên Size</label>
             <!-- <select class="form-control" formControlName="TenSize" [(ngModel)]="service.size.sizeName" required>
