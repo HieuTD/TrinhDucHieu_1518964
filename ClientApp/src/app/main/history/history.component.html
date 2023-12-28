@@ -22,7 +22,8 @@
                             <td class="text-center">Ngày mua</td>
                             <td class="text-center">Tổng tiền</td>
                             <td class="text-center">Trạng thái</td>
-                            <td>Xem chi tiết</td>
+                            <td class="text-center">Hình thức thanh toán</td>
+                            <td class="text-center">Xem chi tiết</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +45,15 @@
                                     Đã huỷ
                                 </span>
                             </td>
-                            <td><a [routerLink]="'/bill/'+item.id"><mat-icon>visibility</mat-icon></a></td>
+                            <td class="text-center">
+                                <span *ngIf="item.typePayment==0">
+                                    Thanh toán COD
+                                </span>
+                                <span *ngIf="item.typePayment==1">
+                                    Thanh toán Online(VnPay)
+                                </span>
+                            </td>
+                            <td class="text-center"><a [routerLink]="'/bill/'+item.id"><mat-icon>visibility</mat-icon></a></td>
                         </tr>
                     </tbody>
                 </table>

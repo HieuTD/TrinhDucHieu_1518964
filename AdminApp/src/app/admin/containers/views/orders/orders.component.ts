@@ -26,7 +26,7 @@ export class OrdersComponent implements OnInit {
     public serviceToast: ToastServiceService,
     public datepipe: DatePipe
   ) { }
-  displayedColumns: string[] = ['id', 'id_User', 'ngayTao', 'ghiChi', 'tongTien', 'trangThai', 'actions'];
+  displayedColumns: string[] = ['id', 'id_User', 'ngayTao', 'ghiChi', 'tongTien', 'trangThai', 'thanhToan', 'actions'];
   ngOnInit(): void {
     this.service.getAllHoaDons();
   }

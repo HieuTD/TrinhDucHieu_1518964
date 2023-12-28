@@ -10,5 +10,6 @@ namespace WebApi.DTOs.Orders
         public string FullName { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public int TypePayment { get; set; } 
     }
 }

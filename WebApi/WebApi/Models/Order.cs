@@ -15,6 +15,7 @@ namespace WebApi.Models
         public int Status { get; set; } //0: chưa xác nhận, 1: đã xác nhận, 2: Hoàn thành, 3: Đã Hủy
         public decimal TotalPrice { get; set; }
         public string Address { get; set; }
+        public int TypePayment { get; set; } //0: thanh toán COD, 1: thanh toán online
 
         public string? UserId { get; set; }
         [ForeignKey("UserId")]

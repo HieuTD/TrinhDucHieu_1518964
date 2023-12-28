@@ -46,6 +46,17 @@
             </p>
         </td>
     </tr>
+    <tr>
+        <th>Hình thức thanh toán: </th>
+        <td>
+            <p *ngIf="this.hd.order.typePayment==0">
+                Thanh toán COD
+            </p>
+            <p *ngIf="this.hd.order.typePayment==1">
+                Thanh toán Online(VnPay)
+            </p>
+        </td>
+    </tr>
 </table>
 <table class="table">
     <thead>

@@ -46,6 +46,7 @@ namespace WebApi.Controllers
                          Status = order.Status,
                          TotalPrice = order.TotalPrice,
                          FullName = user.FirstName + ' ' + user.LastName,
+                         TypePayment = order.TypePayment
                      };
             return await rs.ToListAsync();
         }
@@ -145,7 +146,8 @@ namespace WebApi.Controllers
                         TotalPrice = h.TotalPrice,
                         Description = h.Description,
                         CreatedAt = h.CreatedAt,
-                        Status = h.Status
+                        Status = h.Status,
+                        TypePayment = h.TypePayment
                     },
                     listOrderDetails = list,
                 }
@@ -186,7 +188,8 @@ namespace WebApi.Controllers
                 UserId = request.UserId,
                 CreatedAt = DateTime.Now,
                 Address = request.Address,
-                TotalPrice = request.TotalPrice
+                TotalPrice = request.TotalPrice,
+                TypePayment = (int)request.TypePayment
             };
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
@@ -212,7 +215,7 @@ namespace WebApi.Controllers
             };
 
             string urlPayment = "";
-            if(request.TypePayment == 0)
+            if(request.TypePayment == 1)
             {
                 urlPayment = await UrlPayment(0, order.Id);
                 var url = new

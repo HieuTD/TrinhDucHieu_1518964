@@ -138,7 +138,7 @@ export class CheckoutComponent implements OnInit {
         address: this.DiaChi,
         totalPrice: this.tongThanhToan - 25000,
         userId: clicks,
-        typePayment: 0,
+        typePayment: 1,
         Description: this.Description
       };
 
@@ -171,6 +171,7 @@ export class CheckoutComponent implements OnInit {
         address: this.DiaChi,
         totalPrice: this.tongThanhToan - 25000,
         userId: clicks,
+        typePayment: 0,
         Description: this.Description
       };
       this.http.post(environment.URL_API + "orders", val).subscribe(

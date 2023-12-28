@@ -31,8 +31,9 @@
                             <br>
                             <b>Ngày mua:</b> {{bill.CreatedAt|date: 'dd/MM/yyyy HH:mm'}}
                         </td>
-                        <td style="width: 50%;" class="text-left"> <b>Phương thức thanh toán:</b> Thanh toán khi nhận
-                            hàng
+                        <td style="width: 50%;" class="text-left"> <b>Phương thức thanh toán: </b>
+                            <span *ngIf="bill.TypePayment == 0">Thanh toán COD</span>
+                            <span *ngIf="bill.TypePayment == 1">Thanh toán Online(VnPay)</span>
                             <br>
                             <b>Vận chuyển:</b>
                         </td>
