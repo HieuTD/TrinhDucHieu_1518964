@@ -89,13 +89,13 @@ export const navItems: INavData[] = [
       {
         name:'Blog',
         url:'admin/blogs',
+        icon:'cil-cloud'
+      },
+      {
+        name:'Trò chuyện',
+        url:'https://app.chatra.io/conversations/mychat',
         icon:'cil-chat-bubble'
       },
-      // {
-      //   name:'Trò chuyện',
-      //   url:'admin/chats',
-      //   icon:'cil-chat-bubble'
-      // },
     ]
   },
 ];

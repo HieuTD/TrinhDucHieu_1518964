@@ -31,6 +31,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\list-image-product\" />
     <Folder Include="wwwroot\Images\list-image-blog\" />
+    <Folder Include="wwwroot\Images\list-image-blog\" />
+    <Folder Include="wwwroot\Images\list-image-product\" />
   </ItemGroup>
 
 </Project>

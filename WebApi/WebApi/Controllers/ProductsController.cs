@@ -236,13 +236,7 @@ namespace WebApi.Controllers
             {
                 return NotFound();
             }
-            var CategoryConstraint = _context.Categories.Where(s => s.Id == id);
-            var BrandConstraint = _context.Brands.SingleOrDefaultAsync(s => s.Id == id);
-            if (CategoryConstraint != null)
-            {
-                _context.Products.Remove(sanPham);
-            }
-            if (BrandConstraint != null)
+            else
             {
                 _context.Products.Remove(sanPham);
             }

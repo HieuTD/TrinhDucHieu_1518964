@@ -117,6 +117,7 @@ $('.js-hide-cart').on('click',function(){
     );
     localStorage.removeItem('auth_token');
     localStorage.removeItem('products');
+    localStorage.removeItem('loves');
     localStorage.removeItem('idUser');
     window.location.href="/login";
   }

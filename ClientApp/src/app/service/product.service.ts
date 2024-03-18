@@ -19,7 +19,7 @@ export class CartService {
     if (!existingCartItems1) {
       existingCartItems1 = [];
     }
-    this.itemsSubject.next(existingCartItems);
+    this.itemsSubject1.next(existingCartItems1);
   }
   private itemsSubject1 = new BehaviorSubject<Product[]>([]);
   items1$ = this.itemsSubject1.asObservable();

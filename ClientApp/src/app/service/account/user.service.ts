@@ -36,18 +36,24 @@ export class UserService extends BaseService {
         (res: any) => {
           localStorage.setItem('auth_token', res.auth_token);
           localStorage.setItem('idUser', res.id);
+          const clicks = localStorage.getItem('idUser');
+          this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
+            res1 => {
+              var list_item = res1;
+              localStorage.setItem('products', JSON.stringify(list_item));
+            }
+          );
+          this.http.get(environment.URL_API + "productlikes/listprodlikebyuserid/" + clicks).subscribe(
+            res2 => {
+              var list_sanphamyeuthich = res2;
+              localStorage.setItem('loves', JSON.stringify(list_sanphamyeuthich));
+            }
+          );
           Swal.fire("Đăng nhập thành công .", '', 'success')
           window.location.href = "/";
           this.loggedIn = true;
           check = true;
           this._authNavStatusSource.next(true);
-          const clicks = localStorage.getItem('idUser');
-          this.http.get(environment.URL_API + "Carts/getcartbyuserid/" + clicks, {}).subscribe(
-            res => {
-              var list_item = res;
-              localStorage.setItem('products', JSON.stringify(list_item));
-            }
-          );
         },
         (error) => {                              //Error callback
           Swal.fire({

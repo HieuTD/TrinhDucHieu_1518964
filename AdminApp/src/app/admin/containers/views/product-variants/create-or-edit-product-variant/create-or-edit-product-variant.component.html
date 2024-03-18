@@ -7,6 +7,8 @@
         <h1 *ngIf="this.service.sanphambienthe.id != undefined" class="heading">Cập nhật sản phẩm biến thể</h1>
         <div class="form-group">
             <span class="label label-default">Tên sản phẩm</span>
+            <!-- Khi ấn sửa trong component cha sẽ lấy được [(ngModel)]="service.sanphambienthe.prodId.
+                Từ đó trong component con sẽ so sánh ngModel với [value]="sanpham.id để lấy ra <option> tương ứng -->
             <select class="form-control" [(ngModel)]="service.sanphambienthe.prodId" formControlName="Id_SanPham" (change)="onChangeProd($event.target.value)">
                 <option *ngFor="let sanpham of this.sanphams" [value]="sanpham.id">{{sanpham.name}}</option>
             </select>

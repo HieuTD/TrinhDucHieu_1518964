@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
         this.tongtien = 0;
         for (let i = 0; i < this.list_item.length; i++) {
           this.tongtien = this.tongtien + (this.list_item[i].productDetail.price * this.list_item[i].quantity);
-          this.tongThanhToan = this.tongtien + 25000;
+          this.tongThanhToan = this.tongtien;
         }
       });
     this.http.get(environment.URL_API + "coupons").subscribe(res => {
@@ -91,7 +91,7 @@ export class CheckoutComponent implements OnInit {
             this.tongtien = 0;
             for (let i = 0; i < this.list_item.length; i++) {
               this.tongtien = this.tongtien + (this.list_item[i].productDetail.price * this.list_item[i].quantity);
-              this.tongThanhToan = this.tongtien + 25000;
+              this.tongThanhToan = this.tongtien;
             }
             this.cartService.DeleteProduct(item.productDeatail);
           });
@@ -115,7 +115,7 @@ export class CheckoutComponent implements OnInit {
       //2.giảm tiền theo mã giảm giá
       if (this.check != null && this.check_sudung == null) {
         this.list_MGGSD.push(this.couponName)
-        this.tongThanhToan = this.tongtien + 25000 - this.check.discount;
+        this.tongThanhToan = this.tongtien - this.check.discount;
         Swal.fire("Sử dụng mã giảm giá thành công.", '', 'success')
       }
       else {
@@ -136,7 +136,7 @@ export class CheckoutComponent implements OnInit {
       const clicks = localStorage.getItem('idUser');
       const val = {
         address: this.DiaChi,
-        totalPrice: this.tongThanhToan - 25000,
+        totalPrice: this.tongThanhToan,
         userId: clicks,
         typePayment: 1,
         Description: this.Description
@@ -147,7 +147,7 @@ export class CheckoutComponent implements OnInit {
           console.log(res);
           if (res.urlVNPay) {
             // Chuyển hướng đến URL trả về từ backend.
-            Swal.fire("Đặt hàng thành công.", '', 'success').then(() => {
+            Swal.fire("Đặt hàng thành công, chuyển sang bước thanh toán.", '', 'success').then(() => {
               window.location.href = res.urlVNPay;
               localStorage.removeItem('products');
             });
@@ -169,7 +169,7 @@ export class CheckoutComponent implements OnInit {
       const clicks = localStorage.getItem('idUser');
       const val = {
         address: this.DiaChi,
-        totalPrice: this.tongThanhToan - 25000,
+        totalPrice: this.tongThanhToan,
         userId: clicks,
         typePayment: 0,
         Description: this.Description
@@ -198,11 +198,11 @@ export class CheckoutComponent implements OnInit {
         this.tongtien = 0;
         for (let i = 0; i < this.list_item.length; i++) {
           this.tongtien = this.tongtien + (this.list_item[i].productDetail.price * this.list_item[i].quantity);
-          this.tongThanhToan = this.tongtien + 25000;
+          this.tongThanhToan = this.tongtien;
         }
       }
     );
-    this.tongThanhToan = this.tongtien + 25000 - this.check.discount;
+    this.tongThanhToan = this.tongtien - this.check.discount;
   }
   updateCongSanPham(cartID, soLuong) {
     const clicks = localStorage.getItem('idUser');
@@ -217,11 +217,11 @@ export class CheckoutComponent implements OnInit {
         this.tongtien = 0;
         for (let i = 0; i < this.list_item.length; i++) {
           this.tongtien = this.tongtien + (this.list_item[i].productDetail.price * this.list_item[i].quantity);
-          this.tongThanhToan = this.tongtien + 25000;
+          this.tongThanhToan = this.tongtien;
         }
       }
     );
-    this.tongThanhToan = this.tongtien + 25000 - this.check.discount;
+    this.tongThanhToan = this.tongtien - this.check.discount;
   }
   updateTruSanPham(cartID, soLuong) {
     const clicks = localStorage.getItem('idUser');
@@ -242,11 +242,11 @@ export class CheckoutComponent implements OnInit {
         this.tongtien = 0;
         for (let i = 0; i < this.list_item.length; i++) {
           this.tongtien = this.tongtien + (this.list_item[i].productDetail.price * this.list_item[i].quantity);
-          this.tongThanhToan = this.tongtien + 25000;
+          this.tongThanhToan = this.tongtien;
         }
       }
     );
-    this.tongThanhToan = this.tongtien + 25000 - this.check.discount;
+    this.tongThanhToan = this.tongtien - this.check.discount;
   }
   changTinhThanh(event: any): void {
     this.Tinh = event;

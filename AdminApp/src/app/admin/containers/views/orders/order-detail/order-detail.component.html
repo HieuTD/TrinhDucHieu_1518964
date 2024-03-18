@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <th>Ngày tạo: </th>
-        <td *ngIf="this.hd.order.createdAt">{{this.hd.order.createdAt}}</td>
+        <td *ngIf="this.hd.order.createdAt">{{this.hd.order.createdAt | date: 'dd-MM-yyyy'}}</td>
     </tr>
     <tr>
         <th>Ghi chú: </th>
