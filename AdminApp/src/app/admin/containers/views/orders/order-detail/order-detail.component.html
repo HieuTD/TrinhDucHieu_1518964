@@ -1,0 +1,120 @@
+<br>
+<h1>Chi tiết hóa đơn</h1>
+<table class="table" style="width:100%">
+    <tr>
+        <th>Id </th>
+        <td *ngIf="this.hd.id">{{this.hd.id}}</td>
+    </tr>
+    <tr>
+        <th>Tên đầy đủ </th>
+        <td *ngIf="this.hd.fullName">{{this.hd.fullName}}</td>
+    </tr>
+    <tr>
+        <th>Số điện thoại: </th>
+        <td *ngIf="this.hd.phoneNumber">{{this.hd.phoneNumber}}</td>
+    </tr>
+    <tr>
+        <th>Email: </th>
+        <td *ngIf="this.hd.email">{{this.hd.email}}</td>
+    </tr>
+    <tr>
+        <th>Địa chỉ </th>
+        <td *ngIf="this.hd.address">{{this.hd.address}}</td>
+    </tr>
+    <tr>
+        <th>Ngày tạo: </th>
+        <td *ngIf="this.hd.order.createdAt">{{this.hd.order.createdAt | date: 'dd-MM-yyyy'}}</td>
+    </tr>
+    <tr>
+        <th>Ghi chú: </th>
+        <td *ngIf="this.hd.order.description">{{this.hd.order.description}}</td>
+    </tr>
+    <tr>
+        <th>Trạng thái: </th>
+        <td>
+            <p *ngIf="this.hd.order.status==0">
+                Chưa xác nhận
+            </p>
+            <p *ngIf="this.hd.order.status==1">
+                Đã xác nhận
+            </p>
+            <p *ngIf="this.hd.order.status==2">
+                Hoàn thành
+            </p>
+            <p *ngIf="this.hd.order.status==3">
+                Đã hủy
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <th>Hình thức thanh toán: </th>
+        <td>
+            <p *ngIf="this.hd.order.typePayment==0">
+                Thanh toán COD
+            </p>
+            <p *ngIf="this.hd.order.typePayment==1">
+                Thanh toán Online(VnPay)
+            </p>
+        </td>
+    </tr>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id chi tiết hóa đơn
+            </th>
+            <th>
+                Tên Sản phẩm
+            </th>
+            <!-- <th>
+              Hình ảnh đại diện
+          </th> -->
+            <th>
+                Size
+            </th>
+            <th>
+                Màu sắc
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá bán
+            </th>
+            <th>
+                Thành tiền (VNĐ)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.hd.listOrderDetails">
+            <td *ngIf="item.id">
+                {{item.id}}
+            </td>
+            <td *ngIf="item.productName">
+                {{item.productName}}
+            </td>
+            <!-- <td *ngIf="item.hinh">
+              <img src="https://localhost:44302/Images/list-image-product/{{item.hinh}}" class="rounded mb-3" width="80">
+          </td> -->
+            <td *ngIf="item.sizeName">
+                {{item.sizeName}}
+            </td>
+            <td *ngIf="item.colorName">
+                {{item.colorName}}
+            </td>
+            <td *ngIf="item.quantity">
+                {{item.quantity}}
+            </td>
+            <td *ngIf="item.price">
+                {{item.price}}
+            </td>
+            <td *ngIf="item.totalPrice">
+                {{item.totalPrice}}
+            </td>
+        </tr>
+        <h4 style="font-weight: bold; text-underline-position: auto;" *ngIf="this.hd.order.totalPrice">Tổng tiền:
+            {{this.hd.order.totalPrice}} VNĐ</h4>
+    </tbody>
+</table>

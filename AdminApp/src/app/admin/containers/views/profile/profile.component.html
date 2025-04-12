@@ -1,0 +1,37 @@
+<h1>Thông tin người dùng</h1>
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <div class="container" style="width: 30vw;">
+        <br>
+        <div class="form-group">
+            <label for="FirstName">Họ</label>
+            <input class="form-control" formControlName="FirstName" [(ngModel)]="this.user.firstName">
+        </div>
+        <div class="form-group">
+            <label for="LastName">Tên</label>
+            <input class="form-control" formControlName="LastName" [(ngModel)]="this.user.lastName">
+        </div>
+        <div class="form-group">
+            <label for="Name">Email</label>
+            <input class="form-control" formControlName="Email" [(ngModel)]="this.user.email">
+        </div>
+        <div class="form-group">
+            <label for="SDT">Số điện thoại</label>
+            <input class="form-control" formControlName="SDT" [(ngModel)]="this.user.phoneNumber">
+        </div>
+        <div class="form-group">
+            <label for="DiaChi">Địa chỉ</label>
+            <input class="form-control" formControlName="DiaChi" [(ngModel)]="this.user.address">
+        </div>
+        <div class="form-group">
+            <label for="Name">Mật khẩu hiện tại</label>
+            <input class="form-control" formControlName="Password">
+        </div>
+        <div class="form-group">
+            <label for="Name">Mật khẩu mới</label>
+            <input class="form-control" formControlName="PasswordNew">
+        </div>
+        <div class="form-group" style="justify-content:center;display: flex;">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
